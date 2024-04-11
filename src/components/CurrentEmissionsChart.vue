@@ -40,7 +40,8 @@ export default {
           pointBorderColor: 'rgba(0, 0, 0, 0)',
           pointHoverRadius: 6
         },
-      ]
+      ],
+      labels:["test1","test2","test3","test4"]
     }
   },
   props: {
@@ -55,14 +56,15 @@ export default {
   },
   methods: {
     filterData(){
-      
+      console.log(this.myData)
+      this.createChart()
     },
     createChart(){
       var self = this
       const ctx = document.getElementById("chart").getContext('2d')
       this.chart = new Chart(ctx, {
         data: {
-          labels: ["test1","test2","test3","test4"],
+          labels: self.labels,
           datasets: self.datasets
         },
         options: {
@@ -105,7 +107,7 @@ export default {
 
   watch:{
     dataImport:function(){
-      this.createChart()
+      this.filterData()
     }
   },
 

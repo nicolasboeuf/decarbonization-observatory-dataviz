@@ -39,18 +39,32 @@ export default {
 </script>
 
 <style lang="scss">
+
+@import "../css/variables.scss";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   h1{
     color:blue;
+    font-family: "barlow-bold";
+    font-size:21px;
+    background:$semiGradientDark;
+    display: inline-block;
+    padding: 5px 25px 5px 25px;
+    box-sizing: border-box;
+    color:white;
+    border-radius: 15px;
   }
   h2{
-
+    color:$mediumBlue;
+    font-family: "barlow-bold";
+    font-size:17px;
   }
   h3{
-    
+    font-family: "DMSans-Regular";
+    font-size:11px;
   }
   .chartComponent{
     width: 100%;
