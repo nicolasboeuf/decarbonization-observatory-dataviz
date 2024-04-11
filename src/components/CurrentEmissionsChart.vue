@@ -6,7 +6,86 @@
       <div class="chartSpace">
         <canvas id="chart"></canvas>
       </div>
-      <div class="controlsSpace"></div>
+      <div class="controlsSpace">
+        <div class="controlsWrapper">
+
+          <div class="controls_box">
+            <span class="controls_title">Country</span>
+            <div class="controls_dropdown">Global</div>
+          </div>
+
+          <div class="controls_box">
+
+            <span class="controls_title">Historical</span>
+
+            <div class="switch_controls_box">
+              <div class="switch_container">
+                <div class="switch switch_on">
+                  <svg viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+                </div>
+                <div class="switch switch_off inactive">
+                  <svg viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+                </div>
+              </div>
+              <span class="switch_label">Historical CO2eq</span>
+            </div>
+
+            <div class="switch_controls_box">
+              <div class="switch_container">
+                <div class="switch switch_on">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+                </div>
+                <div class="switch switch_off inactive">
+                  <svg viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+                </div>
+              </div>
+              <span class="switch_label">Historical CO2eq w/o LULUCF</span>
+            </div>
+
+          </div>
+
+          <div class="controls_box">
+
+            <span class="controls_title">Reference scenario</span>
+
+            <div class="controls_radio_container">
+              <div class="radio">
+                <div class="radio_inner"></div>
+              </div>
+              <span class="radio_label">Unconditionnal near-term target</span>
+            </div>
+
+            <div class="controls_radio_container inactive">
+              <div class="radio">
+                <div class="radio_inner"></div>
+              </div>
+              <span class="radio_label">Unconditionnal near-term target</span>
+            </div>
+
+          </div>
+
+          <div class="controls_box">
+
+            <span class="controls_title">Greenhouse gase</span>
+
+            <div class="controls_radio_container">
+              <div class="radio">
+                <div class="radio_inner"></div>
+              </div>
+              <span class="radio_label">CO2eq</span>
+            </div>
+
+            <div class="controls_radio_container inactive">
+              <div class="radio">
+                <div class="radio_inner"></div>
+              </div>
+              <span class="radio_label">CO2eq excl. LULUCF</span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -47,7 +47,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   h1{
-    color:blue;
     font-family: "barlow-bold";
     font-size:21px;
     background:$semiGradientDark;
@@ -68,22 +67,147 @@ export default {
   }
   .chartComponent{
     width: 100%;
-    height:500px;
+    height:700px;
     position: relative;
     .componentSpace{
       position: relative;
       .chartSpace{
         position: relative;
         width: 70%;
-        height: 500px;
+        height: 700px;
         display: inline-block;
         }
       .controlsSpace{
         position: relative;
         width: 30%;
-        height: 500px;
+        height: 700px;
         display: inline-block;
-        background-color: green;
+        border:1px solid black;
+        box-sizing: border-box;
+        .controlsWrapper{
+          position: absolute;
+          width: 90%;
+          left:50%;
+          transform:translate(-50%,0);
+          .controls_box{
+            width: 100%;
+            display: block;
+            margin-bottom: 15px;
+            .controls_title{
+              font-family: "barlow-semibold";
+              font-size:17px;
+              margin-bottom: 10px;
+              display: block;
+            }
+            .controls_dropdown{
+              width: 65%;
+              height: 28px;
+              border-radius: 20px;
+              background:$semiGradientLight;
+              padding-left: 20px;
+              padding-top: 7px;
+              position: relative;
+              cursor: pointer;
+              font-family: "DMSans-Regular";
+              font-size: 14px;
+              &:after{
+                content:"";
+                position: absolute;
+                right:20px;
+                top: 50%;
+                transform:translate(0,-5px);
+                width: 0;
+                height: 0;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
+                border-top: 10px solid black;
+                clear: both;
+              }
+            }
+            .switch_controls_box{
+              display: flex;
+              .switch_container{
+                width: 60px;
+                height: 20px;
+                border-radius: 20px;
+                background-color: $lightBlue;
+                margin-right: 10px;
+                margin-bottom: 5px;
+                display: flex;
+                justify-content: center;
+                align-items:center;
+              }
+              .switch{
+                width: 25px;
+                height: 16px;
+                border-radius: 20px;
+                background-color: $deepBlue;
+                position: relative;
+                cursor: pointer;
+                svg{
+                  fill:white;
+                  width: 11px;
+                  position: absolute;
+                  left:50%;
+                  top:50%;
+                  transform:translate(-50%,-50%);
+                }
+                &.inactive{
+                  background-color: transparent;
+                  svg{
+                    fill:$deepBlue;
+                  }
+                }
+              }
+              .switch_label{
+                font-family: "DMSans-Regular";
+                font-size: 14px;
+              }
+            }
+          }
+          .controls_radio_container{
+            display: flex;
+            .radio{
+              width: 20px;
+              height: 20px;
+              border-radius: 100%;
+              background-color: $lightBlue;
+              margin-right: 10px;
+              margin-bottom: 5px;
+              border:1px solid $deepBlue;
+              box-sizing: border-box;
+              position: relative;
+              cursor: normal;
+              .radio_inner{
+                width: 11px;
+                height: 11px;
+                border-radius: 100%;
+                background-color: $deepBlue;
+                position: absolute;
+                left:50%;
+                top:50%;
+                transform:translate(-50%,-50%);
+              }
+            }
+            .radio_label{
+              font-family: "DMSans-SemiBold";
+              font-size: 14px;
+              color:$deepBlue;
+            }
+            &.inactive{
+              .radio{
+                cursor: pointer;
+                .radio_inner{
+                  display: none;
+                }
+              }
+              .radio_label{
+                font-family: "DMSans-Regular";
+                color:black;
+              }
+            }
+          }
+        }
       }
     }
   }
