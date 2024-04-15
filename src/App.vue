@@ -80,7 +80,7 @@ export default {
       .controlsSpace{
         position: relative;
         width: 30%;
-        height: 700px;
+        min-height: 700px;
         display: inline-block;
         border:1px solid black;
         box-sizing: border-box;
@@ -162,6 +162,59 @@ export default {
               .switch_label{
                 font-family: "DMSans-Regular";
                 font-size: 14px;
+              }
+            }
+            &.boxed{
+              .controls_box_header{
+                width: 100%;
+                height: 36px;
+                background: $semiGradientDark;
+                border-radius: 36px;
+                margin:0 auto;
+                text-align: center;
+                position: relative;
+                svg{
+                  position: absolute;
+                  fill: white;
+                  width: 20px;
+                  left: 15px;
+                  top:50%;
+                  transform:translate(0,-50%);
+                }
+                .controls_box_header_title{
+                  position: relative;
+                  color:white;
+                  font-family: "barlow-semibold";
+                  font-size: 17px;
+                  top:4px;
+                  span{
+                    font-size: 12px;
+                  }
+                }
+              }
+              .controls_box_body{
+                width: 90%;
+                background-color: $extraLightBlue;
+                margin:0 auto;
+                padding-top:15px;
+                padding-left: 15px;
+                padding-bottom: 15px;
+                display:grid;
+                grid-template-columns: auto auto;
+                grid-column-gap: 0px;
+                grid-row-gap: 0px;
+                .controls_radio_container{
+                  width: 100%;
+                  .radio{
+                    border:none;
+                    .radio_inner{
+
+                    }
+                  }
+                  .radio_label{
+                    text-wrap: nowrap;
+                  }
+                }
               }
             }
           }
