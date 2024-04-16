@@ -48,18 +48,18 @@
 
             <span class="controls_title">Reference scenario</span>
 
-            <div class="controls_radio_container">
+            <div :class="['controls_radio_container',settings.scenario=='High'?'inactive':'']" @click="settings.scenario='Low'">
               <div class="radio">
                 <div class="radio_inner"></div>
               </div>
               <span class="radio_label">Unconditionnal near-term target</span>
             </div>
 
-            <div class="controls_radio_container inactive">
+            <div :class="['controls_radio_container',settings.scenario=='Low'?'inactive':'']" @click="settings.scenario='High'">
               <div class="radio">
                 <div class="radio_inner"></div>
               </div>
-              <span class="radio_label">Unconditionnal near-term target</span>
+              <span class="radio_label">Conditionnal near-term target</span>
             </div>
 
           </div>
@@ -100,7 +100,7 @@
                 <span class="radio_label">CO2eq LULUCF</span>
               </div>
 
-              <div class="controls_radio_container">
+              <div class="controls_radio_container inactive">
                 <div class="radio">
                   <div class="radio_inner"></div>
                 </div>
@@ -114,7 +114,7 @@
                 <span class="radio_label">CO2eq excl. LULUCF</span>
               </div>
 
-              <div class="controls_radio_container">
+              <div class="controls_radio_container inactive">
                 <div class="radio">
                   <div class="radio_inner"></div>
                 </div>
@@ -134,14 +134,14 @@
 
             <div class="controls_box_body">
 
-              <div class="controls_radio_container">
+              <div class="controls_radio_container inactive">
                 <div class="radio">
                   <div class="radio_inner"></div>
                 </div>
                 <span class="radio_label">Base year</span>
               </div>
 
-              <div class="controls_radio_container">
+              <div class="controls_radio_container inactive">
                 <div class="radio">
                   <div class="radio_inner"></div>
                 </div>
@@ -155,7 +155,7 @@
                 <span class="radio_label">BAU 2030</span>
               </div>
 
-              <div class="controls_radio_container">
+              <div class="controls_radio_container inactive">
                 <div class="radio">
                   <div class="radio_inner"></div>
                 </div>
@@ -167,8 +167,6 @@
           </div>
 
         </div>
-
-
 
       </div>
     </div>
@@ -183,29 +181,14 @@ export default {
   name: 'CurrentEmissionsChart',
   data(){
     return {
-      datasets:[
-        {
-          data: [1,2,3,1],
-          type: 'line',
-          backgroundColor: "#FF5733",
-          borderColor: "#FF5733",
-          pointRadius: 8,
-          pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-          pointBorderColor: 'rgba(0, 0, 0, 0)',
-          pointHoverRadius: 6
-        },
-        {
-          data: [2,3,1,2],
-          type: 'line',
-          backgroundColor: "#33FF62",
-          borderColor: "#33FF62",
-          pointRadius: 8,
-          pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-          pointBorderColor: 'rgba(0, 0, 0, 0)',
-          pointHoverRadius: 6
-        },
-      ],
-      labels:["test1","test2","test3","test4"]
+      datasets:[],
+      labels:[],
+      settings:{
+        "scenario":"High"
+      },
+      colors:["rgba(74,141,255,1)","rgba(102,151,255,1)","rgba(121,170,255,1)","rgba(137,187,255,1)","rgba(205,221,255,1)"],
+      bgColors:["rgba(74,141,255,0.3)","rgba(102,151,255,0.3)","rgba(121,170,255,0.3)","rgba(137,187,255,0.3)","rgba(205,221,255,0.3)"],
+      chart: undefined
     }
   },
   props: {
@@ -219,12 +202,59 @@ export default {
     }
   },
   methods: {
-    filterData(){
-      console.log(this.myData)
-      this.createChart()
+
+    updateData(){
+      
+      this.labels.length = 0
+      this.datasets.length = 0
+
+      var self = this
+      const byCond = Object.groupBy(self.myData, ({ Conditionality }) => Conditionality);
+      Object.keys(byCond).forEach(function(Conditionality){
+
+        byCond[Conditionality] = Object.groupBy(byCond[Conditionality], ({ Sector }) => Sector);
+
+        Object.keys(byCond[Conditionality]).forEach(function(Sector){
+          byCond[Conditionality][Sector] = Object.groupBy(byCond[Conditionality][Sector], ({ Pollutant }) => Pollutant);
+        })
+
+      })
+
+      console.log(byCond)
+
+      Object.keys(byCond[self.settings.scenario]).forEach(function(Sector){
+
+        Object.keys(byCond[self.settings.scenario][Sector]).forEach(function(Pollutant){
+
+          var dataset =
+            {
+              data: [],
+              type: 'line',
+              backgroundColor: self.bgColors[self.datasets.length],
+              borderColor: self.colors[self.datasets.length],
+              pointRadius: 8,
+              pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+              pointBorderColor: 'rgba(0, 0, 0, 0)',
+              pointHoverRadius: 6
+            }
+
+          byCond[self.settings.scenario][Sector][Pollutant].forEach(function(item){
+            if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
+            dataset["data"].push(parseFloat(item["Emissions"]))
+          })
+        
+          if(Pollutant == "CO2" || Pollutant == "CO2eq"){
+            self.datasets.push(dataset)
+          }
+
+        })
+      })
     },
     createChart(){
       var self = this
+
+      this.updateData()
+
       const ctx = document.getElementById("chart").getContext('2d')
       this.chart = new Chart(ctx, {
         data: {
@@ -253,11 +283,13 @@ export default {
             yAxes: [{
               gridLines: {
                 color: '#e5e5e5',
-                borderDash: [3]
+                borderDash: [0]
               },
               ticks: {
-                autoSkip: true,
-                maxTicksLimit: 5,
+                autoSkip: false,
+                maxTicksLimit: 20,
+                beginAtZero: false,
+                
               },
             }]
           },
@@ -266,12 +298,23 @@ export default {
           },
         }
       })
-    }
+    },
+
+    updateChart () {
+      this.updateData()
+      this.chart.update()
+    },
   },
 
   watch:{
     dataImport:function(){
-      this.filterData()
+      this.createChart()
+    },
+    settings: {
+       handler(){
+          this.updateChart()
+       },
+       deep: true
     }
   },
 

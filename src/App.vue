@@ -82,7 +82,6 @@ export default {
         width: 30%;
         min-height: 700px;
         display: inline-block;
-        border:1px solid black;
         box-sizing: border-box;
         .controlsWrapper{
           position: absolute;
@@ -220,6 +219,7 @@ export default {
           }
           .controls_radio_container{
             display: flex;
+            cursor: default;
             .radio{
               width: 20px;
               height: 20px;
@@ -248,8 +248,8 @@ export default {
               color:$deepBlue;
             }
             &.inactive{
+              cursor: pointer;
               .radio{
-                cursor: pointer;
                 .radio_inner{
                   display: none;
                 }

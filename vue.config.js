@@ -9,7 +9,7 @@ module.exports = {
   },
   filenameHashing: false,
   productionSourceMap: false,
-  //publicPath: '/myFolder/',
+  publicPath: '/carbon-pledges/',
   chainWebpack:
     config => {
       config.optimization.delete('splitChunks')
