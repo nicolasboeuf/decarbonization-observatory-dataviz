@@ -18,19 +18,19 @@
 
             <span class="controls_title">Historical</span>
 
-            <div class="switch_controls_box">
+            <div class="switch_controls_box" @click="switchHistorical()">
               <div class="switch_container">
-                <div class="switch switch_on">
+                <div :class="['switch switch_on',settings.historical?'':'inactive']">
                   <svg viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
                 </div>
-                <div class="switch switch_off inactive">
+                <div :class="['switch switch_on',settings.historical?'inactive':'']">
                   <svg viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
                 </div>
               </div>
-              <span class="switch_label">Historical CO2eq</span>
+              <span class="switch_label">Historical emissions</span>
             </div>
 
-            <div class="switch_controls_box">
+            <!-- <div class="switch_controls_box">
               <div class="switch_container">
                 <div class="switch switch_on">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
@@ -40,7 +40,7 @@
                 </div>
               </div>
               <span class="switch_label">Historical CO2eq excl. LULUCF</span>
-            </div>
+            </div> -->
 
           </div>
 
@@ -68,18 +68,18 @@
 
             <span class="controls_title">Greenhouse gase</span>
 
-            <div class="controls_radio_container">
-              <div class="radio">
-                <div class="radio_inner"></div>
+            <div :class="['controls_tick_container', settings.greenhouse['LULUCF']?'':'inactive']" @click="switchGreenhouse('LULUCF')">
+              <div class="tick">
+                <div class="tick_inner"></div>
               </div>
-              <span class="radio_label">CO2eq</span>
+              <span class="tick_label">CO2eq</span>
             </div>
 
-            <div class="controls_radio_container inactive">
-              <div class="radio">
-                <div class="radio_inner"></div>
+            <div :class="['controls_tick_container', settings.greenhouse['Non-LULUCF']?'':'inactive']" @click="switchGreenhouse('Non-LULUCF')">
+              <div class="tick">
+                <div class="tick_inner"></div>
               </div>
-              <span class="radio_label">CO2eq excl. LULUCF</span>
+              <span class="tick_label">CO2eq excl. LULUCF</span>
             </div>
 
           </div>
@@ -93,32 +93,32 @@
 
             <div class="controls_box_body">
 
-              <div class="controls_radio_container">
-                <div class="radio">
-                  <div class="radio_inner"></div>
+              <div :class="['controls_tick_container', settings.individual['CO2eq']?'':'inactive']" @click="switchIndividual('CO2eq')">
+                <div class="tick">
+                  <div class="tick_inner"></div>
                 </div>
-                <span class="radio_label">CO2eq LULUCF</span>
+                <span class="tick_label">CO2eq</span>
               </div>
 
-              <div class="controls_radio_container inactive">
-                <div class="radio">
-                  <div class="radio_inner"></div>
+              <div :class="['controls_tick_container', settings.individual['CH4']?'':'inactive']" @click="switchIndividual('CH4')">
+                <div class="tick">
+                  <div class="tick_inner"></div>
                 </div>
-                <span class="radio_label">CH4</span>
+                <span class="tick_label">CH4</span>
               </div>
 
-              <div class="controls_radio_container inactive">
-                <div class="radio">
-                  <div class="radio_inner"></div>
+              <div :class="['controls_tick_container', settings.individual['CO2']?'':'inactive']" @click="switchIndividual('CO2')">
+                <div class="tick">
+                  <div class="tick_inner"></div>
                 </div>
-                <span class="radio_label">CO2eq excl. LULUCF</span>
+                <span class="tick_label">CO2</span>
               </div>
 
-              <div class="controls_radio_container inactive">
-                <div class="radio">
-                  <div class="radio_inner"></div>
+              <div :class="['controls_tick_container', settings.individual['N2O']?'':'inactive']" @click="switchIndividual('N2O')">
+                <div class="tick">
+                  <div class="tick_inner"></div>
                 </div>
-                <span class="radio_label">N20</span>
+                <span class="tick_label">N2O</span>
               </div>
               
             </div>
@@ -134,32 +134,32 @@
 
             <div class="controls_box_body">
 
-              <div class="controls_radio_container inactive">
-                <div class="radio">
-                  <div class="radio_inner"></div>
+              <div class="controls_tick_container inactive">
+                <div class="tick">
+                  <div class="tick_inner"></div>
                 </div>
-                <span class="radio_label">Base year</span>
+                <span class="tick_label">Base year</span>
               </div>
 
-              <div class="controls_radio_container inactive">
-                <div class="radio">
-                  <div class="radio_inner"></div>
+              <div class="controls_tick_container inactive">
+                <div class="tick">
+                  <div class="tick_inner"></div>
                 </div>
-                <span class="radio_label">Near-term target</span>
+                <span class="tick_label">Near-term target</span>
               </div>
 
-              <div class="controls_radio_container inactive">
-                <div class="radio">
-                  <div class="radio_inner"></div>
+              <div class="controls_tick_container inactive">
+                <div class="tick">
+                  <div class="tick_inner"></div>
                 </div>
-                <span class="radio_label">BAU 2030</span>
+                <span class="tick_label">BAU 2030</span>
               </div>
 
-              <div class="controls_radio_container inactive">
-                <div class="radio">
-                  <div class="radio_inner"></div>
+              <div class="controls_tick_container inactive">
+                <div class="tick">
+                  <div class="tick_inner"></div>
                 </div>
-                <span class="radio_label">Long-term target</span>
+                <span class="tick_label">Long-term target</span>
               </div>
               
             </div>
@@ -184,7 +184,10 @@ export default {
       datasets:[],
       labels:[],
       settings:{
-        "scenario":"High"
+        "historical":true,
+        "scenario":"Low",
+        "greenhouse":{"LULUCF":true,"Non-LULUCF":true},
+        "individual":{"CO2eq":true,"CO2":true,"CH4":false,"N2O":false}
       },
       colors:["rgba(74,141,255,1)","rgba(102,151,255,1)","rgba(121,170,255,1)","rgba(137,187,255,1)","rgba(205,221,255,1)"],
       bgColors:["rgba(74,141,255,0.3)","rgba(102,151,255,0.3)","rgba(121,170,255,0.3)","rgba(137,187,255,0.3)","rgba(205,221,255,0.3)"],
@@ -209,6 +212,7 @@ export default {
       this.datasets.length = 0
 
       var self = this
+
       const byCond = Object.groupBy(self.myData, ({ Conditionality }) => Conditionality);
       Object.keys(byCond).forEach(function(Conditionality){
 
@@ -220,34 +224,41 @@ export default {
 
       })
 
-      console.log(byCond)
-
       Object.keys(byCond[self.settings.scenario]).forEach(function(Sector){
 
-        Object.keys(byCond[self.settings.scenario][Sector]).forEach(function(Pollutant){
+        if(Sector=="Total" || self.settings.greenhouse[Sector]){
 
-          var dataset =
-            {
-              data: [],
-              type: 'line',
-              backgroundColor: self.bgColors[self.datasets.length],
-              borderColor: self.colors[self.datasets.length],
-              pointRadius: 8,
-              pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-              pointBorderColor: 'rgba(0, 0, 0, 0)',
-              pointHoverRadius: 6
+          Object.keys(byCond[self.settings.scenario][Sector]).forEach(function(Pollutant){
+
+            var dataset =
+              {
+                data: [],
+                type: 'line',
+                backgroundColor: self.bgColors[self.datasets.length],
+                borderColor: self.colors[self.datasets.length],
+                pointRadius: 8,
+                pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                pointBorderColor: 'rgba(0, 0, 0, 0)',
+                pointHoverRadius: 6
+              }
+
+            byCond[self.settings.scenario][Sector][Pollutant].forEach(function(item){
+              if (self.settings.historical == false && item["Year"]<2023){
+                return false
+              }else{
+                if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
+                dataset["data"].push(parseFloat(item["Emissions"]))  
+              }
+              
+            })
+            
+            if(self.settings.individual[Pollutant]==true){
+              self.datasets.push(dataset)
             }
 
-          byCond[self.settings.scenario][Sector][Pollutant].forEach(function(item){
-            if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
-            dataset["data"].push(parseFloat(item["Emissions"]))
           })
-        
-          if(Pollutant == "CO2" || Pollutant == "CO2eq"){
-            self.datasets.push(dataset)
-          }
 
-        })
+        }
       })
     },
     createChart(){
@@ -272,11 +283,11 @@ export default {
               },
               ticks: {
                 autoSkip: true,
-                maxTicksLimit: 3,
+                maxTicksLimit: 100,
                 maxRotation: 0,
                 minRotation: 0,
                 callback: function (value) {
-                  return value
+                  return value % 10 === 0 ? value:''
                 }
               }
             }],
@@ -287,9 +298,11 @@ export default {
               },
               ticks: {
                 autoSkip: false,
-                maxTicksLimit: 20,
-                beginAtZero: false,
-                
+                maxTicksLimit: 15,
+                beginAtZero: true,
+                callback: function (value) {
+                  return value.toLocaleString()
+                }
               },
             }]
           },
@@ -303,6 +316,30 @@ export default {
     updateChart () {
       this.updateData()
       this.chart.update()
+    },
+
+    switchGreenhouse(gas){
+      if(this.settings.greenhouse[gas] == true){
+        this.settings.greenhouse[gas] = false
+      }else{
+        this.settings.greenhouse[gas] = true
+      }
+    },
+
+    switchHistorical(){
+      if(this.settings.historical==true){
+        this.settings.historical = false
+      }else{
+        this.settings.historical = true
+      }
+    },
+
+    switchIndividual(gas){
+      if(this.settings.individual[gas] == true){
+        this.settings.individual[gas] = false
+      }else{
+        this.settings.individual[gas] = true
+      }
     },
   },
 

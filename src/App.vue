@@ -202,15 +202,15 @@ export default {
                 grid-template-columns: auto auto;
                 grid-column-gap: 0px;
                 grid-row-gap: 0px;
-                .controls_radio_container{
+                .controls_tick_container{
                   width: 100%;
-                  .radio{
-                    border:none;
-                    .radio_inner{
+                  .tick{
+                    
+                    .tick_inner{
 
                     }
                   }
-                  .radio_label{
+                  .tick_label{
                     text-wrap: nowrap;
                   }
                 }
@@ -249,6 +249,17 @@ export default {
             }
             &.inactive{
               cursor: pointer;
+              &:hover{
+                .radio_label{
+                  color:$deepBlue;
+                }
+                .radio{
+                  .radio_inner{
+                    display: block;
+                    opacity: 0.3;
+                  }
+                }
+              }
               .radio{
                 .radio_inner{
                   display: none;
@@ -257,6 +268,68 @@ export default {
               .radio_label{
                 font-family: "DMSans-Regular";
                 color:black;
+              }
+            }
+          }
+          .controls_tick_container{
+            display: flex;
+            cursor: pointer;
+            .tick{
+              width: 20px;
+              height: 20px;
+              border-radius: 5px;
+              background-color: $deepBlue;
+              margin-right: 10px;
+              margin-bottom: 5px;
+              border:1px solid $deepBlue;
+              box-sizing: border-box;
+              position: relative;
+              .tick_inner{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                &:before{
+                  content: "";
+                  width: 2px;
+                  height: 12px;
+                  background-color: white;
+                  position: absolute;
+                  left:50%;
+                  top:50%;
+                  transform:translate(-50%,-50%) rotate(45deg);
+                }
+                &:after{
+                  content: "";
+                  width: 2px;
+                  height: 12px;
+                  background-color: white;
+                  position: absolute;
+                  left:50%;
+                  top:50%;
+                  transform:translate(-50%,-50%) rotate(-45deg);
+                }
+              }
+            }
+            .tick_label{
+              font-family: "DMSans-Regular";
+              font-size: 14px;
+              color:black;
+            }
+            &.inactive{
+              cursor: pointer;
+              &:hover{
+                .tick{
+                  background-color: $lightBlue;
+                }
+                .tick_label{
+                  color:$deepBlue;
+                }
+              }
+              .tick{
+                background-color: white;
+                .tick_inner{
+                  display: none;
+                }
               }
             }
           }
