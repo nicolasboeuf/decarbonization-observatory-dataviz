@@ -82,6 +82,13 @@
               <span class="tick_label">CO2eq excl. LULUCF</span>
             </div>
 
+            <div :class="['controls_tick_container', settings.greenhouse['Total']?'':'inactive']" @click="switchGreenhouse('Total')">
+              <div class="tick">
+                <div class="tick_inner"></div>
+              </div>
+              <span class="tick_label">Total</span>
+            </div>
+
           </div>
 
           <div class="controls_box boxed">
@@ -186,7 +193,7 @@ export default {
       settings:{
         "historical":true,
         "scenario":"Low",
-        "greenhouse":{"LULUCF":true,"Non-LULUCF":true},
+        "greenhouse":{"LULUCF":true,"Non-LULUCF":true,"Total":true},
         "individual":{"CO2eq":true,"CO2":true,"CH4":false,"N2O":false}
       },
       colors:["rgba(74,141,255,1)","rgba(102,151,255,1)","rgba(121,170,255,1)","rgba(137,187,255,1)","rgba(205,221,255,1)"],
@@ -226,7 +233,7 @@ export default {
 
       Object.keys(byCond[self.settings.scenario]).forEach(function(Sector){
 
-        if(Sector=="Total" || self.settings.greenhouse[Sector]){
+        if(self.settings.greenhouse[Sector]){
 
           Object.keys(byCond[self.settings.scenario][Sector]).forEach(function(Pollutant){
 
