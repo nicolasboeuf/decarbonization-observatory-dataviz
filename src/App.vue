@@ -27,13 +27,11 @@ export default {
   },
 
   watch:{
-    dataImport:function(){
-      
-    }
+
   },
   
   created(){
-    getData(store)
+    getData(store,"world")
   }
 }
 </script>
@@ -98,21 +96,14 @@ export default {
               margin-bottom: 10px;
               display: block;
             }
-            .controls_dropdown{
-              width: 65%;
-              height: 28px;
-              border-radius: 20px;
-              background:$semiGradientLight;
-              padding-left: 20px;
-              padding-top: 7px;
+            .controls_dropdown {
               position: relative;
               cursor: pointer;
-              font-family: "DMSans-Regular";
-              font-size: 14px;
+              height: 28px;
               &:after{
                 content:"";
                 position: absolute;
-                right:20px;
+                left:65%;
                 top: 50%;
                 transform:translate(0,-5px);
                 width: 0;
@@ -121,6 +112,47 @@ export default {
                 border-right: 7px solid transparent;
                 border-top: 10px solid black;
                 clear: both;
+              }
+              &:hover{
+                &:after{
+                  opacity: 0.8;
+                }
+              }
+              .dropdown-input {
+                width: 65%;
+                height: 28px;
+                border-radius: 20px;
+                font-family: "DMSans-Regular";
+                font-size: 14px;
+                background:$semiGradientLight;
+                border:none;
+                position: absolute;
+                border-radius: 20px;
+                padding-left: 20px;
+                cursor: pointer;
+                &:focus{
+                  outline: none!important;
+                }
+              }
+              .dropdown-menu {
+                position: absolute;
+                background-color: $extraLightBlue;
+                width: 65%;
+                z-index: 1;
+                max-height: 250px;
+                overflow: scroll;
+                top:32px;
+                padding-left:20px;
+                border-radius: 20px;
+                padding-bottom: 4px;
+                padding-top: 4px;
+              }
+              .dropdown-menu-item {
+                padding-top: 8px;
+                cursor: pointer;
+              }
+              .dropdown-menu-item:hover {
+                background-color: $lightBlue;
               }
             }
             .switch_controls_box{
@@ -191,6 +223,11 @@ export default {
                   }
                 }
               }
+              &.boxed.disable{
+                pointer-events: none;
+                opacity: 0.4;
+              }
+
               .controls_box_body{
                 width: 90%;
                 background-color: $extraLightBlue;
@@ -204,12 +241,6 @@ export default {
                 grid-row-gap: 0px;
                 .controls_tick_container{
                   width: 100%;
-                  .tick{
-                    
-                    .tick_inner{
-
-                    }
-                  }
                   .tick_label{
                     text-wrap: nowrap;
                   }
@@ -274,6 +305,10 @@ export default {
           .controls_tick_container{
             display: flex;
             cursor: pointer;
+            &.disable{
+              pointer-events: none;
+              opacity: 0.4;
+            }
             .tick{
               width: 20px;
               height: 20px;

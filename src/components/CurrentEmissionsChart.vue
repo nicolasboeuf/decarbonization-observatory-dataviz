@@ -11,7 +11,15 @@
 
           <div class="controls_box">
             <span class="controls_title">Country</span>
-            <div class="controls_dropdown">Global</div>
+
+            <div class="controls_dropdown">
+              <input type="text" class="dropdown-input" v-model="searchString" @input="filterOptions" placeholder="Type to search" @focus="focusInput()">
+              <div class="dropdown-menu" v-show="showDropdown">
+                <div class="dropdown-menu-item" v-for="option,index in filtredCountry" :key="index" @click="selectOption(option)">
+                  {{option}}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="controls_box">
@@ -29,18 +37,6 @@
               </div>
               <span class="switch_label">Historical emissions</span>
             </div>
-
-            <!-- <div class="switch_controls_box">
-              <div class="switch_container">
-                <div class="switch switch_on">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
-                </div>
-                <div class="switch switch_off inactive">
-                  <svg viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
-                </div>
-              </div>
-              <span class="switch_label">Historical CO2eq excl. LULUCF</span>
-            </div> -->
 
           </div>
 
@@ -68,7 +64,7 @@
 
             <span class="controls_title">Greenhouse gase</span>
 
-            <div :class="['controls_tick_container', settings.greenhouse['LULUCF']?'':'inactive']" @click="switchGreenhouse('LULUCF')">
+            <div :class="['controls_tick_container', settings.greenhouse['LULUCF']?'':'inactive', settings.data!='world'?'disable inactive':'']" @click="switchGreenhouse('LULUCF')">
               <div class="tick">
                 <div class="tick_inner"></div>
               </div>
@@ -132,7 +128,7 @@
 
           </div>
 
-          <div class="controls_box boxed">
+          <div :class="['controls_box','boxed',settings.data=='world'?'disable':'']">
 
             <div class="controls_box_header">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
@@ -183,6 +179,7 @@
 <script>
 import store from '@/store'
 import { Chart } from 'chart.js'
+import { getData } from '../import.js'
 
 export default {
   name: 'CurrentEmissionsChart',
@@ -190,7 +187,12 @@ export default {
     return {
       datasets:[],
       labels:[],
+      countriesList:["World","China"],
+      filtredCountry:[],
+      showDropdown: false,
+      searchString:'World',
       settings:{
+        "data":"world",
         "historical":true,
         "scenario":"Low",
         "greenhouse":{"LULUCF":true,"Non-LULUCF":true,"Total":true},
@@ -220,53 +222,58 @@ export default {
 
       var self = this
 
-      const byCond = Object.groupBy(self.myData, ({ Conditionality }) => Conditionality);
-      Object.keys(byCond).forEach(function(Conditionality){
+      if(self.myData[this.settings["data"]]){
 
-        byCond[Conditionality] = Object.groupBy(byCond[Conditionality], ({ Sector }) => Sector);
+        const byCond = Object.groupBy(self.myData[this.settings["data"]], ({ Conditionality }) => Conditionality);
+        Object.keys(byCond).forEach(function(Conditionality){
 
-        Object.keys(byCond[Conditionality]).forEach(function(Sector){
-          byCond[Conditionality][Sector] = Object.groupBy(byCond[Conditionality][Sector], ({ Pollutant }) => Pollutant);
-        })
+          byCond[Conditionality] = Object.groupBy(byCond[Conditionality], ({ Sector }) => Sector);
 
-      })
-
-      Object.keys(byCond[self.settings.scenario]).forEach(function(Sector){
-
-        if(self.settings.greenhouse[Sector]){
-
-          Object.keys(byCond[self.settings.scenario][Sector]).forEach(function(Pollutant){
-
-            var dataset =
-              {
-                data: [],
-                type: 'line',
-                backgroundColor: self.bgColors[self.datasets.length],
-                borderColor: self.colors[self.datasets.length],
-                pointRadius: 8,
-                pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-                pointBorderColor: 'rgba(0, 0, 0, 0)',
-                pointHoverRadius: 6
-              }
-
-            byCond[self.settings.scenario][Sector][Pollutant].forEach(function(item){
-              if (self.settings.historical == false && item["Year"]<2023){
-                return false
-              }else{
-                if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
-                dataset["data"].push(parseFloat(item["Emissions"]))  
-              }
-              
-            })
-            
-            if(self.settings.individual[Pollutant]==true){
-              self.datasets.push(dataset)
-            }
-
+          Object.keys(byCond[Conditionality]).forEach(function(Sector){
+            byCond[Conditionality][Sector] = Object.groupBy(byCond[Conditionality][Sector], ({ Pollutant }) => Pollutant);
           })
 
-        }
-      })
+        })
+
+        Object.keys(byCond[self.settings.scenario]).forEach(function(Sector){
+
+          if(self.settings.greenhouse[Sector]){
+
+            Object.keys(byCond[self.settings.scenario][Sector]).forEach(function(Pollutant){
+
+              var dataset =
+                {
+                  data: [],
+                  type: 'line',
+                  backgroundColor: self.bgColors[self.datasets.length],
+                  borderColor: self.colors[self.datasets.length],
+                  pointRadius: 8,
+                  pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                  pointBorderColor: 'rgba(0, 0, 0, 0)',
+                  pointHoverRadius: 6
+                }
+
+              byCond[self.settings.scenario][Sector][Pollutant].forEach(function(item){
+                if (self.settings.historical == false && item["Year"]<2023){
+                  return false
+                }else{
+                  if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
+                  dataset["data"].push(parseFloat(item["Emissions"]))  
+                }
+                
+              })
+              
+              if(self.settings.individual[Pollutant]==true){
+                self.datasets.push(dataset)
+              }
+
+            })
+
+          }
+        })
+      }else{
+        getData(store,"china")
+      }
     },
     createChart(){
       var self = this
@@ -348,11 +355,32 @@ export default {
         this.settings.individual[gas] = true
       }
     },
+
+    filterOptions() {
+      this.filtredCountry = this.countriesList.filter(option => {
+        return option.toLowerCase().includes(this.searchString.toLowerCase());
+      });
+      this.showDropdown = true;
+    },
+    selectOption(option) {
+      this.settings.data = option.toLowerCase();
+      this.searchString = option
+      this.showDropdown = false;
+    },
+    focusInput(){
+      this.searchString=""
+      this.showDropdown=true
+      this.filtredCountry = this.countriesList
+    }
   },
 
   watch:{
     dataImport:function(){
-      this.createChart()
+      if(this.chart){
+        this.updateChart()
+      }else{
+        this.createChart()
+      }
     },
     settings: {
        handler(){

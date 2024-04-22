@@ -5,15 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    myData:undefined,
-    endImport:false
+    myData:{},
+    endImport:0
   },
   mutations: {
     initializeData (state,data) {
-      state.myData = data
+      state.myData[data.param] = []
+      state.myData[data.param] = data.data
     },
     endImport(state,value){
-      state.endImport = value
+      state.endImport = state.endImport+value
     }
   }
 })
