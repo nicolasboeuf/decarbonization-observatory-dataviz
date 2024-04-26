@@ -4,7 +4,7 @@
     <h3>Visualize global and country-level emissions projections under current pledges</h3>
     <div class="componentSpace">
       <div class="chartSpace">
-        <canvas id="chart"></canvas>
+        <canvas id="currentEmissions_chart"></canvas>
       </div>
       <div class="controlsSpace">
         <div class="controlsWrapper">
@@ -179,7 +179,7 @@
 <script>
 import store from '@/store'
 import { Chart } from 'chart.js'
-import { getData } from '../import.js'
+import { getcurrentEmissionsData } from '../import.js'
 
 export default {
   name: 'CurrentEmissionsChart',
@@ -207,11 +207,11 @@ export default {
   props: {
   },
   computed: {
-    dataImport() {
-      return store.state.endImport
+    currentEmissionsDataEndImport() {
+      return store.state.currentEmissionsDataEndImport
     },
-    myData(){
-      return store.state.myData
+    currentEmissionsData(){
+      return store.state.currentEmissionsData
     }
   },
   methods: {
@@ -224,9 +224,9 @@ export default {
 
       var self = this
 
-      if(self.myData[this.settings["data"]]){
+      if(self.currentEmissionsData[this.settings["data"]]){
 
-        const byCond = Object.groupBy(self.myData[this.settings["data"]], ({ Conditionality }) => Conditionality);
+        const byCond = Object.groupBy(self.currentEmissionsData[this.settings["data"]], ({ Conditionality }) => Conditionality);
         Object.keys(byCond).forEach(function(Conditionality){
 
           byCond[Conditionality] = Object.groupBy(byCond[Conditionality], ({ Sector }) => Sector);
@@ -249,10 +249,10 @@ export default {
                   type: 'line',
                   backgroundColor: self.bgColors[self.datasets.length],
                   borderColor: self.colors[self.datasets.length],
-                  pointRadius: 8,
+                  pointRadius: 15,
                   pointBackgroundColor: 'rgba(0, 0, 0, 0)',
                   pointBorderColor: 'rgba(0, 0, 0, 0)',
-                  pointHoverRadius: 6
+                  pointHoverRadius: 15
                 }
 
               byCond[self.settings.scenario][Sector][Pollutant].forEach(function(item){
@@ -274,7 +274,7 @@ export default {
         })
         
       }else{
-        getData(store,this.settings["data"])
+        getcurrentEmissionsData(store,this.settings["data"])
       }
     },
     createChart(){
@@ -282,7 +282,7 @@ export default {
 
       this.updateData()
 
-      const ctx = document.getElementById("chart").getContext('2d')
+      const ctx = document.getElementById("currentEmissions_chart").getContext('2d')
       this.chart = new Chart(ctx, {
         data: {
           labels: self.labels,
@@ -397,7 +397,7 @@ export default {
   },
 
   watch:{
-    dataImport:function(){
+    currentEmissionsDataEndImport:function(){
       if(this.chart){
         this.updateChart()
       }else{
@@ -413,7 +413,7 @@ export default {
   },
 
   created(){
-    console.log("CurrentEmissionsChart created")
+    
   }
 
 }

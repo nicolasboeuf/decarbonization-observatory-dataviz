@@ -5,16 +5,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    myData:{},
-    endImport:0
+    currentEmissionsData:{},
+    currentEmissionsDataEndImport:0,
+    globalTempData:{},
+    globalTempDataEndImport:0
   },
   mutations: {
-    initializeData (state,data) {
-      state.myData[data.param] = []
-      state.myData[data.param] = data.data
+    initializeCurrentEmissionsData (state,data) {
+      state.currentEmissionsData[data.param] = []
+      state.currentEmissionsData[data.param] = data.data
     },
-    endImport(state,value){
-      state.endImport = state.endImport+value
+    currentEmissionsDataEndImport(state,value){
+      state.currentEmissionsDataEndImport = state.currentEmissionsDataEndImport+value
+    },
+    initializeglobalTempData(state,data){
+      state.globalTempData = data
+    },
+    globalTempDataEndImport(state,value){
+      state.globalTempDataEndImport = state.globalTempDataEndImport+value
     }
   }
 })

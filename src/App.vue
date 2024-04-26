@@ -2,28 +2,27 @@
   <div id="app">
     <h1>Observatory of the global and national decarbonization</h1>
     <CurrentEmissionsChart></CurrentEmissionsChart>
+    <GlobalTemperatureChart></GlobalTemperatureChart>
   </div>
 </template>
 
 <script>
 
 import CurrentEmissionsChart from './components/CurrentEmissionsChart.vue'
+import GlobalTemperatureChart from './components/GlobalTemperatureChart.vue'
 import store from '@/store'
-import { getData } from './import.js'
+import { getcurrentEmissionsData } from './import.js'
+import { getGlobalTempData } from './import.js'
 
 export default {
   name: 'App',
   components: {
-    CurrentEmissionsChart
+    CurrentEmissionsChart,
+    GlobalTemperatureChart
   },
 
   computed: {
-    dataImport() {
-      return store.state.endImport
-    },
-    myData(){
-      return store.state.myData
-    }
+    
   },
 
   watch:{
@@ -31,7 +30,8 @@ export default {
   },
   
   created(){
-    getData(store,"world")
+    getcurrentEmissionsData(store,"world")
+    getGlobalTempData(store)
   }
 }
 </script>
@@ -66,6 +66,7 @@ export default {
   .chartComponent{
     width: 100%;
     height:700px;
+    margin-bottom: 100px;
     position: relative;
     .componentSpace{
       position: relative;
