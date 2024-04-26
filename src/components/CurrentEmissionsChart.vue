@@ -186,6 +186,7 @@ export default {
   data(){
     return {
       datasets:[],
+      datasetsLabel:[],
       labels:[],
       countriesList:["World","China"],
       filtredCountry:[],
@@ -198,8 +199,8 @@ export default {
         "greenhouse":{"LULUCF":true,"Non-LULUCF":true,"Total":true},
         "individual":{"CO2eq":true,"CO2":true,"CH4":false,"N2O":false}
       },
-      colors:["rgba(74,141,255,1)","rgba(102,151,255,1)","rgba(121,170,255,1)","rgba(137,187,255,1)","rgba(205,221,255,1)"],
-      bgColors:["rgba(74,141,255,0.3)","rgba(102,151,255,0.3)","rgba(121,170,255,0.3)","rgba(137,187,255,0.3)","rgba(205,221,255,0.3)"],
+      colors:["rgba(0,76,109,1)","rgba(0,103,138,1)","rgba(0,131,166,1)","rgba(0,161,193,1)","rgba(0,192,216,1)","rgba(0,223,237,1)","rgba(0,255,255,1)"],
+      bgColors:["rgba(0,76,109,0.3)","rgba(0,103,138,0.3)","rgba(0,131,166,0.3)","rgba(0,161,193,0.3)","rgba(0,192,216,0.3)","rgba(0,223,237,0.3)","rgba(0,255,255,0.3)"],
       chart: undefined
     }
   },
@@ -219,6 +220,7 @@ export default {
       
       this.labels.length = 0
       this.datasets.length = 0
+      this.datasetsLabel.length = 0
 
       var self = this
 
@@ -265,14 +267,14 @@ export default {
               
               if(self.settings.individual[Pollutant]==true){
                 self.datasets.push(dataset)
+                self.datasetsLabel.push(Pollutant+" "+Sector)
               }
-
             })
-
           }
         })
+        
       }else{
-        getData(store,"china")
+        getData(store,this.settings["data"])
       }
     },
     createChart(){
@@ -323,6 +325,26 @@ export default {
           legend: {
             display: false
           },
+          tooltips:{
+            callbacks:{
+              title: function (tooltipItem) {
+                return(tooltipItem[0]["xLabel"])
+              },
+              label: function(tooltipItem){
+                var value = parseInt(tooltipItem["value"]).toLocaleString()+" tonnes CO2eq"
+                return(value)
+              },
+              labelColor: function(tooltipItem) {
+                return {
+                  borderColor: self.colors[tooltipItem["datasetIndex"]],
+                  backgroundColor: self.colors[tooltipItem["datasetIndex"]],
+                }
+              },
+              afterTitle:function(tooltipItem){
+                return(self.datasetsLabel[tooltipItem[0]["datasetIndex"]])
+              }
+            }
+          }
         }
       })
     },
