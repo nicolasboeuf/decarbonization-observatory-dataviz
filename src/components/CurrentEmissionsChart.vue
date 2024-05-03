@@ -179,7 +179,7 @@
 <script>
 import store from '@/store'
 import { Chart } from 'chart.js'
-import { getcurrentEmissionsData } from '../import.js'
+import { getCurrentEmissionsData } from '../import.js'
 
 export default {
   name: 'CurrentEmissionsChart',
@@ -281,8 +281,7 @@ export default {
         })
         
       }else{
-        console.log(store,this.settings["data"])
-        getcurrentEmissionsData(store,this.settings["data"])
+        getCurrentEmissionsData(store,this.settings["data"])
       }
     },
 

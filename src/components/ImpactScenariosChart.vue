@@ -238,7 +238,12 @@ export default {
                 return(tooltipItem[0]["xLabel"])
               },
               label: function(tooltipItem){
-                var value = parseInt(tooltipItem["value"]).toLocaleString()+" tonnes CO2eq"
+                var value
+                if(self.settings.value == "emissions"){
+                  value = parseInt(tooltipItem["value"]).toLocaleString()+" tonnes CO2eq"
+                }else{
+                  value = tooltipItem["value"]+" °C"
+                }
                 return(value)
               },
               labelColor: function(tooltipItem) {
