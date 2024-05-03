@@ -12,7 +12,7 @@
         <div class="controls_box">
           <span class="controls_title">See the impact on</span>
 
-          <div class="toggle_controls_wrapper" @click="toggleValue()">
+          <div class="toggle_controls_wrapper" @click="toggleVariable()">
             <span :class="['toggle_controls_label',settings.value=='emissions'?'active':'']">Emissions</span>
             <div :class="['toggle_controls_box',settings.value=='emissions'?'':'toggled']">
               <div class="toggle_controls_inner"></div>
@@ -99,11 +99,12 @@ export default {
       settings:{
         "data":"world",
         "value":"emissions",
+        "variable":"CO2eq_Total",
         "scenario":"Low",
-        "pledges":["NDC01","CH4++","GMP02","LTS01","LTS02","LTS03","LTS04","N2O++","MP01"],
-        "selectedPledges":["NDC01","CH4++","GMP02","LTS01","LTS02","LTS03","LTS04","N2O++","MP01"],
+        "pledges":["NDC01","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","CH4++","N2O++"],
+        "selectedPledges":["NDC01","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","CH4++","N2O++"],
       },
-      colors:["rgba(0,76,109,1)","rgba(0,103,138,1)","rgba(0,131,166,1)","rgba(0,161,193,1)","rgba(0,192,216,1)","rgba(0,223,237,1)","rgba(0,255,255,1)"],
+      colors:["rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)"],
     }
   },
   props: {
@@ -126,33 +127,53 @@ export default {
 
       var self = this
 
-      Object.keys(self.impactScenariosData[self.settings["data"]]).forEach(function(scenario){
+      const byVariable = Object.groupBy(self.impactScenariosData[self.settings["data"]], ({ Variable }) => Variable);
+      
+      Object.keys(byVariable).forEach(function(Variable){
 
-        var dataset =
-          {
-            data: [],
-            type: 'line',
-            backgroundColor:self.colors[self.datasets.length],
-            borderColor: self.colors[self.datasets.length],
-            pointRadius: 15,
-            pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-            pointBorderColor: 'rgba(0, 0, 0, 0)',
-            pointHoverRadius: 15
-          }
-
-        Object.keys(self.impactScenariosData[self.settings["data"]][scenario]).forEach(function(year){
-
-          if(!self.labels.includes(year)){ self.labels.push(year) }
-
-          dataset["data"].push(parseFloat(self.impactScenariosData[self.settings["data"]][scenario][year])) 
+          const byScenario = Object.groupBy(byVariable[Variable], ({ Scenario }) => Scenario);
+          byVariable[Variable] = byScenario
 
         })
 
-        if(self.settings.selectedPledges.includes(scenario)){
+      Object.keys(byVariable[self.settings.variable]).forEach(function(pledge){
+
+        if(self.settings.selectedPledges.includes(pledge)){
+
+          const ctx = document.getElementById("impactScenarios_chart").getContext('2d')
+
+          var gradientFill
+
+          gradientFill = ctx.createLinearGradient(0, 0, 0, 442)
+          gradientFill.addColorStop(0, self.colors[self.datasets.length])
+          gradientFill.addColorStop(1, 'rgba(245, 245, 255, 0)')
+
+          var dataset =
+            {
+              data: [],
+              type: 'line',
+              backgroundColor:gradientFill,
+              borderColor: self.colors[self.datasets.length],
+              pointRadius: 15,
+              pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+              pointBorderColor: 'rgba(0, 0, 0, 0)',
+              pointHoverRadius: 15
+            }
+
+          byVariable[self.settings.variable][pledge].forEach(function(item){
+            if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
+            if(self.settings.variable == "dT"){
+              dataset["data"].push(parseFloat(item["Value"].replace(",",".")))  
+            }else{
+              dataset["data"].push(parseFloat(item["Value"]))  
+            }
+          })
+
           self.datasets.push(dataset)
-          self.datasetsLabel.push(scenario)
+          self.datasetsLabel.push(pledge)          
+
         }
-      
+        
       })
 
     },
@@ -178,7 +199,7 @@ export default {
                 color: 'rgba(0, 0, 0, 0)'
               },
               ticks: {
-                autoSkip: true,
+                autoSkip: false,
                 maxTicksLimit: 100,
                 maxRotation: 0,
                 minRotation: 0,
@@ -229,11 +250,13 @@ export default {
       })
     },
 
-    toggleValue(){
+    toggleVariable(){
       if(this.settings.value == "emissions"){
         this.settings.value = "temperature"
+        this.settings.variable = "dT"
       }else{
         this.settings.value = "emissions"
+        this.settings.variable = "CO2eq_Total"
       }
     },
 
