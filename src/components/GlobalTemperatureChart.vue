@@ -9,25 +9,38 @@
       <div class="controlsSpace">
         <div class="controlsWrapper">
             
-            <div class="controls_box">
+          <div class="controls_box">
 
-              <span class="controls_title">Reference scenario</span>
+            <span class="controls_title">Reference scenario</span>
 
-              <div :class="['controls_tick_container', settings.scenarios['low']?'':'inactive']" @click="switchScenario('low')">
-                <div class="tick">
-                  <div class="tick_inner"></div>
-                </div>
-                <span class="tick_label">Unconditionnal near-term target</span>
+            <div :class="['controls_tick_container', settings.scenarios['low']?'':'inactive']" @click="switchScenario('low')">
+              <div class="tick">
+                <div class="tick_inner"></div>
               </div>
+              <span class="tick_label">Unconditionnal near-term target</span>
+            </div>
 
-              <div :class="['controls_tick_container', settings.scenarios['high']?'':'inactive']" @click="switchScenario('high')">
-                <div class="tick">
-                  <div class="tick_inner"></div>
-                </div>
-                <span class="tick_label">Conditionnal near-term target</span>
+            <div :class="['controls_tick_container', settings.scenarios['high']?'':'inactive']" @click="switchScenario('high')">
+              <div class="tick">
+                <div class="tick_inner"></div>
               </div>
+              <span class="tick_label">Conditionnal near-term target</span>
+            </div>
 
-          </div>
+        </div>
+
+        <div class="controls_filet"></div>
+
+        <div class="controls_box">
+
+            <div :class="['controls_tick_container controls_tick_container_yellow', settings['annotations']?'':'inactive']">
+              <div class="tick">
+                <div class="tick_inner"></div>
+              </div>
+              <span class="tick_label">Paris agreement targets</span>
+            </div>
+
+        </div>
 
 
         </div>
@@ -51,7 +64,8 @@ export default {
       datasets:[],
       datasetsLabel:[],
       settings:{
-        "scenarios":{"low":true,"high":true}
+        "scenarios":{"low":true,"high":true},
+        "annotations":true
       },
       colors:["rgba(0,76,109,1)","rgba(0,103,138,1)"],
       bgColors:["rgba(0,76,109,0)","rgba(0,103,138,0)"],
@@ -158,7 +172,7 @@ export default {
           legend: {
             display: false
           },
-           annotation: {
+          annotation: {
             annotations: [
               {
                 type: 'line',
@@ -227,6 +241,14 @@ export default {
         this.settings.scenarios[scenario] = true
       }
     },
+
+    switchAnnotation(){
+      if(this.settings["annotations"] == true){
+        this.settings["annotations"] = false
+      }else{
+        this.settings["annotations"] = true
+      }
+    }
     
     
   },

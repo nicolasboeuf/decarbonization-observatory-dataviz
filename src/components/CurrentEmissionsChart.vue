@@ -243,11 +243,18 @@ export default {
 
             Object.keys(byCond[self.settings.scenario][Sector]).forEach(function(Pollutant){
 
+              const ctx = document.getElementById("currentEmissions_chart").getContext('2d')
+              var gradientFill
+
+              gradientFill = ctx.createLinearGradient(0, 0, 0, 442)
+              gradientFill.addColorStop(0, self.colors[self.datasets.length])
+              gradientFill.addColorStop(1, 'rgba(245, 245, 255, 0)')
+
               var dataset =
                 {
                   data: [],
                   type: 'line',
-                  backgroundColor: self.bgColors[self.datasets.length],
+                  backgroundColor: gradientFill,
                   borderColor: self.colors[self.datasets.length],
                   pointRadius: 15,
                   pointBackgroundColor: 'rgba(0, 0, 0, 0)',

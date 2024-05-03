@@ -3,6 +3,7 @@
     <h1>Observatory of the global and national decarbonization</h1>
     <CurrentEmissionsChart></CurrentEmissionsChart>
     <GlobalTemperatureChart></GlobalTemperatureChart>
+    <ImpactScenariosChart></ImpactScenariosChart>
   </div>
 </template>
 
@@ -10,15 +11,18 @@
 
 import CurrentEmissionsChart from './components/CurrentEmissionsChart.vue'
 import GlobalTemperatureChart from './components/GlobalTemperatureChart.vue'
+import ImpactScenariosChart from './components/ImpactScenariosChart.vue'
 import store from '@/store'
-import { getcurrentEmissionsData } from './import.js'
+import { getCurrentEmissionsData } from './import.js'
 import { getGlobalTempData } from './import.js'
+import { getImpactScenariosData } from './import.js'
 
 export default {
   name: 'App',
   components: {
     CurrentEmissionsChart,
-    GlobalTemperatureChart
+    GlobalTemperatureChart,
+    ImpactScenariosChart
   },
 
   computed: {
@@ -30,8 +34,9 @@ export default {
   },
   
   created(){
-    getcurrentEmissionsData(store,"world")
+    getCurrentEmissionsData(store,"world")
     getGlobalTempData(store)
+    getImpactScenariosData(store,"world")
   }
 }
 </script>
@@ -196,6 +201,62 @@ export default {
                 font-size: 14px;
               }
             }
+            .toggle_controls_wrapper{
+              display: flex;
+              .toggle_controls_label{
+                font-family: "DMSans-Regular";
+                font-size: 14px;
+                cursor: pointer;
+                &.active{
+                  color:$deepBlue;
+                  pointer-events: none;
+                }
+                &:hover{
+                  color:$deepBlue;
+                }
+              }
+              .toggle_controls_box{
+                width: 50px;
+                height: 20px;
+                background-color: $lightBlue;
+                border-radius: 20px;
+                margin-left:5px;
+                margin-right:5px;
+                position: relative;
+                cursor: pointer;
+                &:hover{
+                  .toggle_controls_inner{
+                    background-color: $mediumBlue;
+                  }
+                }
+                .toggle_controls_inner{
+                  width: 25px;
+                  height: 15px;
+                  background-color: $deepBlue;
+                  border-radius: 15px;
+                  position: absolute;
+                  top:50%;
+                  transform: translate(0,-50%);
+                  left:2px;
+                  right:auto;
+                  transition:all 0.3s ease-in-out;
+                }
+                &.toggled{
+                  .toggle_controls_inner{
+                    left:auto;
+                    right: 2px;
+                  }
+                }
+              }
+            }
+            .controls_multiple_tick_container{
+              display: flex;
+              flex-wrap: wrap;
+              .controls_tick_container{
+                flex: 1 0 26%;
+                margin: 0px;
+              }
+            }
             &.boxed{
               .controls_box_header{
                 width: 100%;
@@ -248,6 +309,12 @@ export default {
                 }
               }
             }
+          }
+          .controls_filet{
+            width:80%;
+            height: 1px;
+            background-color: $extraLightBlue;
+            margin-bottom: 20px;
           }
           .controls_radio_container{
             display: flex;
@@ -309,6 +376,22 @@ export default {
             &.disable{
               pointer-events: none;
               opacity: 0.4;
+            }
+            &.controls_tick_container_yellow{
+              .tick{
+                background-color: $yellow;
+                border:1px solid $yellow;
+              }
+              &.inactive{
+                &:hover{
+                  .tick{
+                    background-color: rgba(249,174,21,0.3);
+                  }
+                  .tick_label{
+                    color:$yellow;
+                  }
+                }
+              }
             }
             .tick{
               width: 20px;
