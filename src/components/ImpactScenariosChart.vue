@@ -82,7 +82,7 @@
 <script>
 import store from '@/store'
 import { Chart } from 'chart.js'
-//import { getImpactScenariosData } from '../import.js'
+import { getImpactScenariosData } from '../import.js'
 
 export default {
   name: 'ImpactScenariosChart',
@@ -127,54 +127,60 @@ export default {
 
       var self = this
 
-      const byVariable = Object.groupBy(self.impactScenariosData[self.settings["data"]], ({ Variable }) => Variable);
-      
-      Object.keys(byVariable).forEach(function(Variable){
+      if(self.impactScenariosData[this.settings["data"]]){
 
-          const byScenario = Object.groupBy(byVariable[Variable], ({ Scenario }) => Scenario);
-          byVariable[Variable] = byScenario
+        const byVariable = Object.groupBy(self.impactScenariosData[self.settings["data"]], ({ Variable }) => Variable);
+        
+        Object.keys(byVariable).forEach(function(Variable){
 
-        })
+            const byScenario = Object.groupBy(byVariable[Variable], ({ Scenario }) => Scenario);
+            byVariable[Variable] = byScenario
 
-      Object.keys(byVariable[self.settings.variable]).forEach(function(pledge){
-
-        if(self.settings.selectedPledges.includes(pledge)){
-
-          const ctx = document.getElementById("impactScenarios_chart").getContext('2d')
-
-          var gradientFill
-
-          gradientFill = ctx.createLinearGradient(0, 0, 0, 442)
-          gradientFill.addColorStop(0, self.colors[self.datasets.length])
-          gradientFill.addColorStop(1, 'rgba(245, 245, 255, 0)')
-
-          var dataset =
-            {
-              data: [],
-              type: 'line',
-              backgroundColor:gradientFill,
-              borderColor: self.colors[self.datasets.length],
-              pointRadius: 15,
-              pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-              pointBorderColor: 'rgba(0, 0, 0, 0)',
-              pointHoverRadius: 15
-            }
-
-          byVariable[self.settings.variable][pledge].forEach(function(item){
-            if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
-            if(self.settings.variable == "dT"){
-              dataset["data"].push(parseFloat(item["Value"].replace(",",".")))  
-            }else{
-              dataset["data"].push(parseFloat(item["Value"]))  
-            }
           })
 
-          self.datasets.push(dataset)
-          self.datasetsLabel.push(pledge)          
+        Object.keys(byVariable[self.settings.variable]).forEach(function(pledge){
 
-        }
-        
-      })
+          if(self.settings.selectedPledges.includes(pledge)){
+
+            const ctx = document.getElementById("impactScenarios_chart").getContext('2d')
+
+            var gradientFill
+
+            gradientFill = ctx.createLinearGradient(0, 0, 0, 442)
+            gradientFill.addColorStop(0, self.colors[self.datasets.length])
+            gradientFill.addColorStop(1, 'rgba(245, 245, 255, 0)')
+
+            var dataset =
+              {
+                data: [],
+                type: 'line',
+                backgroundColor:gradientFill,
+                borderColor: self.colors[self.datasets.length],
+                pointRadius: 15,
+                pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                pointBorderColor: 'rgba(0, 0, 0, 0)',
+                pointHoverRadius: 15
+              }
+
+            byVariable[self.settings.variable][pledge].forEach(function(item){
+              if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
+              if(self.settings.variable == "dT"){
+                dataset["data"].push(parseFloat(item["Value"].replace(",",".")))  
+              }else{
+                dataset["data"].push(parseFloat(item["Value"]))  
+              }
+            })
+
+            self.datasets.push(dataset)
+            self.datasetsLabel.push(pledge)          
+
+          }
+          
+        })
+
+      }else{
+        getImpactScenariosData(store,this.settings["data"])
+      }
 
     },
 

@@ -281,9 +281,11 @@ export default {
         })
         
       }else{
+        console.log(store,this.settings["data"])
         getcurrentEmissionsData(store,this.settings["data"])
       }
     },
+
     createChart(){
       var self = this
 
@@ -412,10 +414,10 @@ export default {
       }
     },
     settings: {
-       handler(){
-          this.updateChart()
-       },
-       deep: true
+      handler(){
+        this.updateChart()
+      },
+      deep: true
     }
   },
 
