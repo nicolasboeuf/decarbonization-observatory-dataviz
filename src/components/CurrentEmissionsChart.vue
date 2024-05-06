@@ -254,7 +254,7 @@ export default {
                 {
                   data: [],
                   type: 'line',
-                  backgroundColor: gradientFill,
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
                   borderColor: self.colors[self.datasets.length],
                   pointRadius: 15,
                   pointBackgroundColor: 'rgba(0, 0, 0, 0)',

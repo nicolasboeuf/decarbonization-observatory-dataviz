@@ -55,11 +55,18 @@
 
         </div>
 
-        <!-- <div class="controls_box">
+        <div class="controls_box">
           
           <span class="controls_title">Select one or more pledge(s)</span>
 
-          <div class="controls_multiple_tick_container">
+          <div class="controls_multiple_tick_container sequential">
+
+            <div class="controls_tick_container non-selectable">
+              <div class="tick">
+                <div class="tick_inner"></div>
+              </div>
+              <span class="tick_label">Reference</span>
+            </div>
               
             <div v-for="s in settings.pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)">
               <div class="tick">
@@ -70,7 +77,7 @@
 
           </div>
 
-        </div> -->
+        </div>
 
       </div>
 
@@ -101,9 +108,10 @@ export default {
         "value":"emissions",
         "variable":"CO2eq_Total",
         "scenario":"Low",
+        "pledges":["NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"],
         "selectedPledges":["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"]
       },
-      colors:["rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)"],
+      colors:["rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)","rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)","rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)"],
     }
   },
   props: {
@@ -125,8 +133,6 @@ export default {
       this.datasetsLabel.length = 0
 
       var self = this
-
-      console.log(self.combinedImpactData[this.settings["data"]])
 
       if(self.combinedImpactData[this.settings["data"]]){
 
@@ -154,18 +160,15 @@ export default {
                 data: [],
                 type: 'line',
                 fill:true,
-                backgroundColor: 'rgba(0, 0, 0, 0)',
+                backgroundColor:  'rgba(0, 0, 0, 0)',
                 borderColor: self.colors[self.datasets.length],
                 pointRadius: 15,
                 pointBackgroundColor: 'rgba(0, 0, 0, 0)',
                 pointBorderColor: 'rgba(0, 0, 0, 0)',
-                pointHoverRadius: 15
+                pointHoverRadius: 15,
+                order:j
               }
 
-            if(p=="Low"){ dataset["backgroundColor"] = 'rgba(0, 0, 0, 0)';dataset["borderColor"] = 'rgba(0, 0, 0, 0)'  }
-
-            console.log(p,j)
-            console.log(self.datasets[j-1])
             byVariable[self.settings.variable].forEach(function(pledge,i){
 
               var d = parseFloat(pledge[p].replace(",","."))
@@ -175,47 +178,15 @@ export default {
             })
 
             self.datasets.push(dataset)
-            self.datasetsLabel.push(p)      
+            self.datasetsLabel.push(p)
+            
+        })       
 
-        })
+        if(this.settings.scenario == "High"){
+          self.datasets.shift()
+          self.datasetsLabel.shift()
+        }
 
-          /* if(self.settings.selectedPledges.includes(pledge)){
-
-            const ctx = document.getElementById("impactScenarios_chart").getContext('2d')
-
-            var gradientFill
-
-            gradientFill = ctx.createLinearGradient(0, 0, 0, 442)
-            gradientFill.addColorStop(0, self.colors[self.datasets.length])
-            gradientFill.addColorStop(1, 'rgba(245, 245, 255, 0)')
-
-            var dataset =
-              {
-                data: [],
-                type: 'line',
-                backgroundColor:gradientFill,
-                borderColor: self.colors[self.datasets.length],
-                pointRadius: 15,
-                pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-                pointBorderColor: 'rgba(0, 0, 0, 0)',
-                pointHoverRadius: 15
-              }
-
-            byVariable[self.settings.variable][pledge].forEach(function(item){
-              if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
-              if(self.settings.variable == "dT"){
-                dataset["data"].push(parseFloat(item["Value"].replace(",",".")))  
-              }else{
-                dataset["data"].push(parseFloat(item["Value"]))  
-              }
-            })
-
-            self.datasets.push(dataset)
-            self.datasetsLabel.push(pledge)          
-
-          } */
-          
-        
 
       }else{
         getCombinedImpactData(store,this.settings["data"])
@@ -329,14 +300,17 @@ export default {
     },
 
     togglePledge(s){
-      
-      if(this.settings.selectedPledges.includes(s)){
-        if(this.settings.selectedPledges.length > 1){
-          this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== s);
+
+      var index = this.settings.pledges.indexOf(s)
+
+      for(var i = 0;i<=index;i++){
+        if(this.settings.selectedPledges.includes(s)){
+          this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== this.settings.pledges[i]);
+        }else{
+          this.settings.selectedPledges.push(this.settings.pledges[i]);
         }
-      }else{
-        this.settings.selectedPledges.push(s)
       }
+      
     },
 
     updateChart () {

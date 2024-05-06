@@ -261,6 +261,32 @@ export default {
                 flex: 1 0 26%;
                 margin: 0px;
               }
+              &.sequential{
+                .controls_tick_container{
+                  &:nth-last-child(-n+3){
+                    .tick{
+                      &:after{
+                        display: none;
+                      }
+                    }
+                  }
+                  .tick{
+                    position: relative;
+
+                    &:after{
+                      content: "";
+                      width: 2px;
+                      height: 10px;
+                      background-color: red;
+                      position: absolute;
+                      bottom:-11px;
+                      left:50%;
+                      transform:translate(-50%,0);  
+                    }
+
+                  }
+                }
+              }
             }
             &.boxed{
               .controls_box_header{
@@ -382,6 +408,9 @@ export default {
               pointer-events: none;
               opacity: 0.4;
             }
+            &.non-selectable{
+              pointer-events: none;
+            }
             &.controls_tick_container_yellow{
               .tick{
                 background-color: $yellow;
@@ -404,7 +433,7 @@ export default {
               border-radius: 5px;
               background-color: $deepBlue;
               margin-right: 10px;
-              margin-bottom: 5px;
+              margin-bottom: 10px;
               border:1px solid $deepBlue;
               box-sizing: border-box;
               position: relative;
