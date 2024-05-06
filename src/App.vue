@@ -4,6 +4,7 @@
     <CurrentEmissionsChart></CurrentEmissionsChart>
     <GlobalTemperatureChart></GlobalTemperatureChart>
     <ImpactScenariosChart></ImpactScenariosChart>
+    <CombinedImpactChart></CombinedImpactChart>
   </div>
 </template>
 
@@ -12,17 +13,20 @@
 import CurrentEmissionsChart from './components/CurrentEmissionsChart.vue'
 import GlobalTemperatureChart from './components/GlobalTemperatureChart.vue'
 import ImpactScenariosChart from './components/ImpactScenariosChart.vue'
+import CombinedImpactChart from './components/CombinedImpactChart.vue'
 import store from '@/store'
 import { getCurrentEmissionsData } from './import.js'
 import { getGlobalTempData } from './import.js'
 import { getImpactScenariosData } from './import.js'
+import { getCombinedImpactData } from './import.js'
 
 export default {
   name: 'App',
   components: {
     CurrentEmissionsChart,
     GlobalTemperatureChart,
-    ImpactScenariosChart
+    ImpactScenariosChart,
+    CombinedImpactChart
   },
 
   computed: {
@@ -37,6 +41,7 @@ export default {
     getCurrentEmissionsData(store,"world")
     getGlobalTempData(store)
     getImpactScenariosData(store,"world")
+    getCombinedImpactData(store,"world")
   }
 }
 </script>

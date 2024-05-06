@@ -21,3 +21,11 @@ export const getImpactScenariosData = async function (store,param) {
 	store.commit("impactScenariosDataEndImport",1)
 	return true
 }
+
+export const getCombinedImpactData = async function (store,param) {
+	const dataRequest = await fetch("data/combined_impact/"+param+".json")
+	const data = await dataRequest.json()
+	store.commit('initializeCombinedImpactData',{data:data,param:param})
+	store.commit("combinedImpactDataEndImport",1)
+	return true
+}

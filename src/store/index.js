@@ -10,7 +10,9 @@ export default new Vuex.Store({
     globalTempData:{},
     globalTempDataEndImport:0,
     impactScenariosData:{},
-    impactScenariosDataEndImport:0
+    impactScenariosDataEndImport:0,
+    combinedImpactData:{},
+    combinedImpactDataEndImport:0
   },
   mutations: {
     initializeCurrentEmissionsData (state,data) {
@@ -32,6 +34,13 @@ export default new Vuex.Store({
     },
     impactScenariosDataEndImport(state,value){
       state.impactScenariosDataEndImport = state.impactScenariosDataEndImport+value
+    },
+    initializeCombinedImpactData (state,data) {
+      state.combinedImpactData[data.param] = []
+      state.combinedImpactData[data.param] = data.data
+    },
+    combinedImpactDataEndImport(state,value){
+      state.combinedImpactDataEndImport = state.combinedImpactDataEndImport+value
     }
   }
 })
