@@ -144,6 +144,10 @@ export default {
               gridLines: {
                 color: 'rgba(0, 0, 0, 0)'
               },
+              scaleLabel:{
+                display:true,
+                labelString:"Year",
+              },
               ticks: {
                 autoSkip: true,
                 maxTicksLimit: 100,
@@ -159,12 +163,16 @@ export default {
                 color: '#e5e5e5',
                 borderDash: [0]
               },
+              scaleLabel:{
+                display:true,
+                labelString:"°C",
+              },
               ticks: {
                 autoSkip: true,
                 maxTicksLimit: 15,
                 beginAtZero: false,
                 callback: function (value) {
-                  return value.toLocaleString()
+                  return value.toLocaleString()+"°C"
                 }
               },
             }]
@@ -193,12 +201,12 @@ export default {
                 type: 'line',
                 mode: 'horizontal',
                 scaleID: 'y-axis-0',
-                value: 1.3,
+                value: 1.5,
                 borderColor: 'rgb(249, 174, 21)',
                 borderWidth: 1,
                 label: {
                   enabled: true,
-                  content: '+ 1,3°C',
+                  content: '+ 1,5°C',
                   position:"right",
                   backgroundColor: 'rgba(999,999,999,1)',
                   fontColor:'rgb(249, 174, 21)'

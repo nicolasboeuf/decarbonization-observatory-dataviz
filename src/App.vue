@@ -85,7 +85,24 @@ export default {
         width: 70%;
         height: 700px;
         display: inline-block;
+        #nodataModale{
+          position: absolute;
+          width: 30%;
+          height: 30%;
+          top:50%;
+          left:50%;
+          transform:translate(-50%,-50%);
+          border:2px solid $deepBlue;
+          background-color: white;
+          border-radius: 5px;
+          text-align: center;
+          span{
+            font-size: 24px;
+            position: relative;
+            top:75px;
+          }
         }
+      }
       .controlsSpace{
         position: relative;
         width: 30%;
@@ -277,7 +294,7 @@ export default {
                       content: "";
                       width: 2px;
                       height: 10px;
-                      background-color: red;
+                      background-color: $lightBlue;
                       position: absolute;
                       bottom:-11px;
                       left:50%;
@@ -410,6 +427,17 @@ export default {
             }
             &.non-selectable{
               pointer-events: none;
+              .tick{
+                background-color: #fff;
+                .tick_inner{
+                  &:before{
+                    background-color: $deepBlue;
+                  }
+                  &:after{
+                    background-color: $deepBlue;
+                  }
+                }
+              }
             }
             &.controls_tick_container_yellow{
               .tick{

@@ -8854,5 +8854,989 @@
     "Scenario": "LUF03",
     "Year": 2100,
     "Value": "-0,0342920"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2019,
+    "Value": "0"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2020,
+    "Value": "0"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2021,
+    "Value": "0"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2022,
+    "Value": "0"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2023,
+    "Value": "-704346,9588"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2024,
+    "Value": "-1457659,87"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2025,
+    "Value": "-2247808,767"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2026,
+    "Value": "-3055403,913"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2027,
+    "Value": "-3769290,224"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2028,
+    "Value": "-4363778,765"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2029,
+    "Value": "-4885659,265"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2030,
+    "Value": "-5374302,365"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2031,
+    "Value": "-5722783,198"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2032,
+    "Value": "-6037350,156"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2033,
+    "Value": "-6314423,624"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2034,
+    "Value": "-6553383,274"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2035,
+    "Value": "-6753984,764"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2036,
+    "Value": "-6913081,756"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2037,
+    "Value": "-7028860,517"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2038,
+    "Value": "-7100818,283"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2039,
+    "Value": "-7131990,85"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2040,
+    "Value": "-7122128,028"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2041,
+    "Value": "-7068687,625"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2042,
+    "Value": "-6967753,301"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2043,
+    "Value": "-6827919,662"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2044,
+    "Value": "-6652462,621"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2045,
+    "Value": "-6442387,892"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2046,
+    "Value": "-6198517,887"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2047,
+    "Value": "-5921521,234"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2048,
+    "Value": "-5610359,356"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2049,
+    "Value": "-5246864,782"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2050,
+    "Value": "-4847627,357"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2051,
+    "Value": "-4538405,183"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2052,
+    "Value": "-4216407,467"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2053,
+    "Value": "-3880886,659"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2054,
+    "Value": "-3535935,039"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2055,
+    "Value": "-3176381,24"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2056,
+    "Value": "-2801586,265"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2057,
+    "Value": "-2411100,082"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2058,
+    "Value": "-2004646,968"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2059,
+    "Value": "-1581830,047"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2060,
+    "Value": "-1142291,957"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2061,
+    "Value": "-1116437,381"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2062,
+    "Value": "-1089769,172"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2063,
+    "Value": "-1062335,623"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2064,
+    "Value": "-1034240,162"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2065,
+    "Value": "-1005435,197"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2066,
+    "Value": "-978673,2967"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2067,
+    "Value": "-951376,9997"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2068,
+    "Value": "-923563,6697"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2069,
+    "Value": "-895244,6309"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2070,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2071,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2072,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2073,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2074,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2075,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2076,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2077,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2078,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2079,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2080,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2081,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2082,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2083,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2084,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2085,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2086,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2087,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2088,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2089,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2090,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2091,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2092,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2093,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2094,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2095,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2096,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2097,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2098,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2099,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "CO2eq_Total",
+    "Scenario": "NDC01",
+    "Year": 2100,
+    "Value": "-866425,543"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2019,
+    "Value": "0"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2020,
+    "Value": "0"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2021,
+    "Value": "0"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2022,
+    "Value": "0"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2023,
+    "Value": "-0,000436125"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2024,
+    "Value": "-0,001330411"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2025,
+    "Value": "-0,002699432"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2026,
+    "Value": "-0,004551041"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2027,
+    "Value": "-0,006843067"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2028,
+    "Value": "-0,009521783"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2029,
+    "Value": "-0,012554514"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2030,
+    "Value": "-0,015926304"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2031,
+    "Value": "-0,01945491"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2032,
+    "Value": "-0,023125071"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2033,
+    "Value": "-0,026919915"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2034,
+    "Value": "-0,030822291"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2035,
+    "Value": "-0,034814938"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2036,
+    "Value": "-0,038879178"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2037,
+    "Value": "-0,042995519"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2038,
+    "Value": "-0,047144241"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2039,
+    "Value": "-0,05130699"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2040,
+    "Value": "-0,055465302"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2041,
+    "Value": "-0,059599565"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2042,
+    "Value": "-0,063688407"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2043,
+    "Value": "-0,067570849"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2044,
+    "Value": "-0,071230859"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2045,
+    "Value": "-0,074652861"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2046,
+    "Value": "-0,077821644"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2047,
+    "Value": "-0,080722304"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2048,
+    "Value": "-0,083339466"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2049,
+    "Value": "-0,085649579"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2050,
+    "Value": "-0,087636559"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2051,
+    "Value": "-0,08948439"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2052,
+    "Value": "-0,091187322"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2053,
+    "Value": "-0,092739269"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2054,
+    "Value": "-0,094135988"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2055,
+    "Value": "-0,095370908"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2056,
+    "Value": "-0,09643717"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2057,
+    "Value": "-0,097327713"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2058,
+    "Value": "-0,098035353"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2059,
+    "Value": "-0,098552724"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2060,
+    "Value": "-0,098872304"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2061,
+    "Value": "-0,099180249"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2062,
+    "Value": "-0,099476193"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2063,
+    "Value": "-0,099759793"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2064,
+    "Value": "-0,100030749"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2065,
+    "Value": "-0,100288743"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2066,
+    "Value": "-0,100534695"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2067,
+    "Value": "-0,100768362"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2068,
+    "Value": "-0,100989514"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2069,
+    "Value": "-0,101197923"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2070,
+    "Value": "-0,101393363"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2071,
+    "Value": "-0,101588802"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2072,
+    "Value": "-0,101784242"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2073,
+    "Value": "-0,101979682"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2074,
+    "Value": "-0,102175122"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2075,
+    "Value": "-0,102370561"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2076,
+    "Value": "-0,102566001"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2077,
+    "Value": "-0,102761441"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2078,
+    "Value": "-0,102956881"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2079,
+    "Value": "-0,10315232"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2080,
+    "Value": "-0,10334776"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2081,
+    "Value": "-0,1035432"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2082,
+    "Value": "-0,10373864"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2083,
+    "Value": "-0,10393408"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2084,
+    "Value": "-0,104129519"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2085,
+    "Value": "-0,104324959"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2086,
+    "Value": "-0,104520399"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2087,
+    "Value": "-0,104715839"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2088,
+    "Value": "-0,104911278"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2089,
+    "Value": "-0,105106718"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2090,
+    "Value": "-0,105302158"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2091,
+    "Value": "-0,105497598"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2092,
+    "Value": "-0,105693037"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2093,
+    "Value": "-0,105888477"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2094,
+    "Value": "-0,106083917"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2095,
+    "Value": "-0,106279357"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2096,
+    "Value": "-0,106474797"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2097,
+    "Value": "-0,106670236"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2098,
+    "Value": "-0,106865676"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2099,
+    "Value": "-0,107061116"
+  },
+  {
+    "Variable": "dT",
+    "Scenario": "NDC01",
+    "Year": 2100,
+    "Value": "-0,107256556"
   }
 ]

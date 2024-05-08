@@ -68,8 +68,8 @@
               <span class="tick_label">Reference</span>
             </div>
               
-            <div v-for="s in settings.pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)">
-              <div class="tick">
+            <div v-for="s,i in settings.pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)"> 
+              <div class="tick" :style="settings.selectedPledges.includes(s)?{backgroundColor: colors[i+2]}:{backgroundColor:'#fff'}">
                 <div class="tick_inner"></div>
               </div>
               <span class="tick_label">{{s}}</span>
@@ -97,9 +97,10 @@ export default {
     return {
       chart: undefined,
       datasets:[],
+      preservedDatasets:[],
       datasetsLabel:[],
       labels:[],
-      countriesList:["World","China"],
+      countriesList:["World"],
       filtredCountry:[],
       showDropdown: false,
       searchString:'World',
@@ -131,6 +132,7 @@ export default {
       this.labels.length = 0
       this.datasets.length = 0
       this.datasetsLabel.length = 0
+      this.preservedDatasets.length = 0
 
       var self = this
 
@@ -155,11 +157,17 @@ export default {
             gradientFill.addColorStop(0, self.colors[self.datasets.length])
             gradientFill.addColorStop(1, 'rgba(245, 245, 255, 0)')
 
+            var bD = [0]
+            if(p === "Low" || p === "High"){
+              bD = [5]
+            }
+
             var dataset =
               {
                 data: [],
                 type: 'line',
                 fill:true,
+                borderDash: bD,
                 backgroundColor:  'rgba(0, 0, 0, 0)',
                 borderColor: self.colors[self.datasets.length],
                 pointRadius: 15,
@@ -169,9 +177,12 @@ export default {
                 order:j
               }
 
+            var preservedDataset = { data : [] }
+
             byVariable[self.settings.variable].forEach(function(pledge,i){
 
               var d = parseFloat(pledge[p].replace(",","."))
+              preservedDataset["data"].push(d)
               if(j!=0){d = d + self.datasets[j-1]["data"][i]}
               dataset["data"].push(d)
 
@@ -179,6 +190,7 @@ export default {
 
             self.datasets.push(dataset)
             self.datasetsLabel.push(p)
+            self.preservedDatasets.push(preservedDataset)
             
         })       
 
@@ -214,6 +226,10 @@ export default {
               gridLines: {
                 color: 'rgba(0, 0, 0, 0)'
               },
+              scaleLabel:{
+                display:true,
+                labelString:"Year",
+              },
               ticks: {
                 autoSkip: false,
                 maxTicksLimit: 100,
@@ -229,6 +245,10 @@ export default {
               gridLines: {
                 color: '#e5e5e5',
                 borderDash: [0]
+              },
+              scaleLabel:{
+                display:true,
+                labelString:"tons CO2eq",
               },
               ticks: {
                 autoSkip: true,
@@ -251,9 +271,9 @@ export default {
               label: function(tooltipItem){
                 var value
                 if(self.settings.value == "emissions"){
-                  value = parseInt(tooltipItem["value"]).toLocaleString()+" tonnes CO2eq"
+                  value = parseInt(self.preservedDatasets[tooltipItem.datasetIndex].data[tooltipItem.index]).toLocaleString()+" tonnes CO2eq"
                 }else{
-                  value = tooltipItem["value"]+" °C"
+                  value = parseFloat(self.preservedDatasets[tooltipItem.datasetIndex].data[tooltipItem.index]).toLocaleString()+" °C"
                 }
                 return(value)
               },
@@ -302,20 +322,29 @@ export default {
     togglePledge(s){
 
       var index = this.settings.pledges.indexOf(s)
+      var l = this.settings.pledges.length
 
-      for(var i = 0;i<=index;i++){
-        if(this.settings.selectedPledges.includes(s)){
+      if(this.settings.selectedPledges.includes(s)){
+        for(var i = l;i>=index;i--){
           this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== this.settings.pledges[i]);
-        }else{
-          this.settings.selectedPledges.push(this.settings.pledges[i]);
+        }
+      }else{
+        for(var j = 0;j<=index;j++){
+          if(!this.settings.selectedPledges.includes(this.settings.pledges[j])){
+            this.settings.selectedPledges.push(this.settings.pledges[j]);
+          }
         }
       }
-      
     },
 
     updateChart () {
       this.updateData()
       this.chart.update()
+      if(this.settings.variable == "CO2eq_Total"){
+        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "tons CO2eq"
+      }else{
+        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "°C"
+      }
     }
 
     

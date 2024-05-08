@@ -5,6 +5,9 @@
     <div class="componentSpace">
       <div class="chartSpace">
         <canvas id="currentEmissions_chart"></canvas>
+        <div id="nodataModale" v-if="chart&&datasets.length===0">
+          <span>No vizualisation available with this data selection</span>
+        </div>
       </div>
       <div class="controlsSpace">
         <div class="controlsWrapper">
@@ -62,20 +65,20 @@
 
           <div class="controls_box">
 
-            <span class="controls_title">Greenhouse gase</span>
+            <span class="controls_title">Sectors</span>
 
             <div :class="['controls_tick_container', settings.greenhouse['LULUCF']?'':'inactive', settings.data!='world'?'disable inactive':'']" @click="switchGreenhouse('LULUCF')">
               <div class="tick">
                 <div class="tick_inner"></div>
               </div>
-              <span class="tick_label">CO2eq</span>
+              <span class="tick_label">LULUCF</span>
             </div>
 
             <div :class="['controls_tick_container', settings.greenhouse['Non-LULUCF']?'':'inactive']" @click="switchGreenhouse('Non-LULUCF')">
               <div class="tick">
                 <div class="tick_inner"></div>
               </div>
-              <span class="tick_label">CO2eq excl. LULUCF</span>
+              <span class="tick_label">non-LULUCF</span>
             </div>
 
             <div :class="['controls_tick_container', settings.greenhouse['Total']?'':'inactive']" @click="switchGreenhouse('Total')">
@@ -305,6 +308,10 @@ export default {
               gridLines: {
                 color: 'rgba(0, 0, 0, 0)'
               },
+              scaleLabel:{
+                display:true,
+                labelString:"Year",
+              },
               ticks: {
                 autoSkip: true,
                 maxTicksLimit: 100,
@@ -320,12 +327,22 @@ export default {
                 color: '#e5e5e5',
                 borderDash: [0]
               },
+              scaleLabel:{
+                display:true,
+                labelString:"tons CO2eq",
+              },
               ticks: {
                 autoSkip: false,
                 maxTicksLimit: 15,
                 beginAtZero: true,
                 callback: function (value) {
-                  return value.toLocaleString()
+                  var v
+                  if(value>1000000||value<-1000000){
+                    v = value/1000000+"M"
+                  }else{
+                    v = value
+                  }
+                  return v
                 }
               },
             }]

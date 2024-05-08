@@ -188,7 +188,7 @@ export default {
       var self = this
 
       this.updateData()
-
+      
       const ctx = document.getElementById("impactScenarios_chart").getContext('2d')
       this.chart = new Chart(ctx, {
         data: {
@@ -203,6 +203,10 @@ export default {
             xAxes: [{
               gridLines: {
                 color: 'rgba(0, 0, 0, 0)'
+              },
+              scaleLabel:{
+                display:true,
+                labelString:"Year",
               },
               ticks: {
                 autoSkip: false,
@@ -219,12 +223,22 @@ export default {
                 color: '#e5e5e5',
                 borderDash: [0]
               },
+              scaleLabel:{
+                display:true,
+                labelString:"tons CO2eq",
+              },
               ticks: {
                 autoSkip: false,
                 maxTicksLimit: 15,
                 beginAtZero: true,
                 callback: function (value) {
-                  return value.toLocaleString()
+                  var v
+                  if(value>1000000||value<-1000000){
+                    v = value/1000000+"M"
+                  }else{
+                    v = value
+                  }
+                  return v
                 }
               },
             }]
@@ -242,7 +256,7 @@ export default {
                 if(self.settings.value == "emissions"){
                   value = parseInt(tooltipItem["value"]).toLocaleString()+" tonnes CO2eq"
                 }else{
-                  value = tooltipItem["value"]+" °C"
+                  value = parseFloat(tooltipItem["value"]).toLocaleString()+" °C"
                 }
                 return(value)
               },
@@ -302,6 +316,11 @@ export default {
     updateChart () {
       this.updateData()
       this.chart.update()
+      if(this.settings.variable == "CO2eq_Total"){
+        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "tons CO2eq"
+      }else{
+        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "°C"
+      }
     }
 
     
