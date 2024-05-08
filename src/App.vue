@@ -76,7 +76,7 @@ export default {
   .chartComponent{
     width: 100%;
     height:700px;
-    margin-bottom: 100px;
+    margin-bottom: 250px;
     position: relative;
     .componentSpace{
       position: relative;

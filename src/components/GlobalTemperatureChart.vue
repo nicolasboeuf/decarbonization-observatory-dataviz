@@ -160,7 +160,7 @@ export default {
             }],
             yAxes: [{
               gridLines: {
-                color: '#e5e5e5',
+                color: 'rgba(0, 0, 0, 0.05)',
                 borderDash: [0]
               },
               scaleLabel:{

@@ -105,6 +105,7 @@ export default {
         "selectedPledges":["NDC01","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","CH4++","N2O++"],
       },
       colors:["rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)","rgba(255, 159, 0, 1)"],
+      bgColors:["rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(126, 188, 174, 0.6)","rgba(0, 105, 128, 0.6)","rgba(162, 191, 206, 0.6)","rgba(255, 198, 119, 0.6)","rgba(71, 143, 129, 0.6)","rgba(255, 159, 0, 0.6)","rgba(255, 159, 0, 0.6)"],
     }
   },
   props: {
@@ -142,24 +143,17 @@ export default {
 
           if(self.settings.selectedPledges.includes(pledge)){
 
-            const ctx = document.getElementById("impactScenarios_chart").getContext('2d')
-
-            var gradientFill
-
-            gradientFill = ctx.createLinearGradient(0, 0, 0, 442)
-            gradientFill.addColorStop(0, self.colors[self.datasets.length])
-            gradientFill.addColorStop(1, 'rgba(245, 245, 255, 0)')
-
             var dataset =
               {
                 data: [],
                 type: 'line',
-                backgroundColor:'rgba(0, 0, 0, 0)',
+                backgroundColor: self.bgColors[self.settings.pledges.indexOf(pledge)],
                 borderColor: self.colors[self.settings.pledges.indexOf(pledge)],
                 pointRadius: 15,
                 pointBackgroundColor: 'rgba(0, 0, 0, 0)',
                 pointBorderColor: 'rgba(0, 0, 0, 0)',
-                pointHoverRadius: 15
+                pointHoverRadius: 15,
+                fill:"origin"
               }
 
             byVariable[self.settings.variable][pledge].forEach(function(item){
@@ -173,7 +167,8 @@ export default {
 
             self.datasets.push(dataset)
             self.datasetsLabel.push(pledge)          
-
+            
+            
           }
           
         })
@@ -220,8 +215,9 @@ export default {
             }],
             yAxes: [{
               gridLines: {
-                color: '#e5e5e5',
-                borderDash: [0]
+                color: 'rgba(0, 0, 0, 0.05)',
+                borderDash: [0],
+                z:-1
               },
               scaleLabel:{
                 display:true,

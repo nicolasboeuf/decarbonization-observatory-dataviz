@@ -203,7 +203,7 @@ export default {
         "individual":{"CO2eq":true,"CO2":true,"CH4":false,"N2O":false}
       },
       colors:["rgba(0,76,109,1)","rgba(0,103,138,1)","rgba(0,131,166,1)","rgba(0,161,193,1)","rgba(0,192,216,1)","rgba(0,223,237,1)","rgba(0,255,255,1)"],
-      bgColors:["rgba(0,76,109,0.3)","rgba(0,103,138,0.3)","rgba(0,131,166,0.3)","rgba(0,161,193,0.3)","rgba(0,192,216,0.3)","rgba(0,223,237,0.3)","rgba(0,255,255,0.3)"],
+      bgColors:["rgba(0,76,109,0.1)","rgba(0,103,138,0.1)","rgba(0,131,166,0.1)","rgba(0,161,193,0.1)","rgba(0,192,216,0.1)","rgba(0,223,237,0.1)","rgba(0,255,255,0.1)"],
       chart: undefined
     }
   },
@@ -257,7 +257,7 @@ export default {
                 {
                   data: [],
                   type: 'line',
-                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                  backgroundColor: self.bgColors[self.datasets.length],
                   borderColor: self.colors[self.datasets.length],
                   pointRadius: 15,
                   pointBackgroundColor: 'rgba(0, 0, 0, 0)',
@@ -323,8 +323,9 @@ export default {
               }
             }],
             yAxes: [{
+              
               gridLines: {
-                color: '#e5e5e5',
+                color: 'rgba(0, 0, 0, 0.05)',
                 borderDash: [0]
               },
               scaleLabel:{

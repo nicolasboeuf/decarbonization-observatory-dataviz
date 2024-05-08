@@ -113,6 +113,7 @@ export default {
         "selectedPledges":["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"]
       },
       colors:["rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)","rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)","rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)"],
+      bgColors:["rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(126, 188, 174, 0.6)","rgba(0, 105, 128, 0.6)","rgba(162, 191, 206, 0.6)","rgba(255, 198, 119, 0.6)","rgba(71, 143, 129, 0.6)","rgba(255, 159, 0, 0.6)","rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(126, 188, 174, 0.6)","rgba(0, 105, 128, 0.6)","rgba(162, 191, 206, 0.6)","rgba(255, 198, 119, 0.6)","rgba(71, 143, 129, 0.6)","rgba(255, 159, 0, 0.6)","rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(126, 188, 174, 0.6)","rgba(0, 105, 128, 0.6)","rgba(162, 191, 206, 0.6)","rgba(255, 198, 119, 0.6)","rgba(71, 143, 129, 0.6)","rgba(255, 159, 0, 0.6)"],
     }
   },
   props: {
@@ -157,24 +158,29 @@ export default {
             gradientFill.addColorStop(0, self.colors[self.datasets.length])
             gradientFill.addColorStop(1, 'rgba(245, 245, 255, 0)')
 
-            var bD = [0]
+            var dash = [0]
             if(p === "Low" || p === "High"){
-              bD = [5]
+              dash = [5]
+            }
+
+            var background = self.bgColors[self.datasets.length]
+            if(p === "Low" || p === "High"){
+              background = 'rgba(999, 999, 999, 1)'
             }
 
             var dataset =
               {
                 data: [],
                 type: 'line',
-                fill:true,
-                borderDash: bD,
-                backgroundColor:  'rgba(0, 0, 0, 0)',
+                borderDash: dash,
+                backgroundColor:  background,
                 borderColor: self.colors[self.datasets.length],
                 pointRadius: 15,
                 pointBackgroundColor: 'rgba(0, 0, 0, 0)',
                 pointBorderColor: 'rgba(0, 0, 0, 0)',
                 pointHoverRadius: 15,
-                order:j
+                order:j,
+                fill:"end",
               }
 
             var preservedDataset = { data : [] }
@@ -243,8 +249,9 @@ export default {
             yAxes: [{
               stacked: false,
               gridLines: {
-                color: '#e5e5e5',
-                borderDash: [0]
+                color: 'rgba(0, 0, 0, 0.05)',
+                borderDash: [0],
+                z:10
               },
               scaleLabel:{
                 display:true,
