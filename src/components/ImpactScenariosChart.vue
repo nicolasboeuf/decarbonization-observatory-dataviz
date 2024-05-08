@@ -61,8 +61,8 @@
 
           <div class="controls_multiple_tick_container">
               
-            <div v-for="s in settings.pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)">
-              <div class="tick">
+            <div v-for="s,i in settings.pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)">
+              <div class="tick" :style="settings.selectedPledges.includes(s)?{backgroundColor: colors[i]}:{backgroundColor:'#fff'}">
                 <div class="tick_inner"></div>
               </div>
               <span class="tick_label">{{s}}</span>
@@ -155,7 +155,7 @@ export default {
                 data: [],
                 type: 'line',
                 backgroundColor:'rgba(0, 0, 0, 0)',
-                borderColor: self.colors[self.datasets.length],
+                borderColor: self.colors[self.settings.pledges.indexOf(pledge)],
                 pointRadius: 15,
                 pointBackgroundColor: 'rgba(0, 0, 0, 0)',
                 pointBorderColor: 'rgba(0, 0, 0, 0)',
