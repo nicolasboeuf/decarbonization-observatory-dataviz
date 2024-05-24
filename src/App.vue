@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Observatory of the global and national decarbonization</h1>
+    <h1>Decarbonization Observatory: target-based global and national scenarios</h1>
     <CurrentEmissionsChart></CurrentEmissionsChart>
     <GlobalTemperatureChart></GlobalTemperatureChart>
     <ImpactScenariosChart></ImpactScenariosChart>
@@ -349,6 +349,21 @@ export default {
                 grid-template-columns: auto auto;
                 grid-column-gap: 0px;
                 grid-row-gap: 0px;
+                &.sectors_box{
+                  display: block;
+                  .controls_tick_container{
+                    margin-bottom: 15px;
+                    &:last-child{
+                      margin-bottom: 0px;
+                    }
+                    .tick_label{
+                      text-wrap: wrap;
+                      position: absolute;
+                      width: 80%;
+                      margin-left:30px;
+                    }
+                  }
+                }
                 .controls_tick_container{
                   width: 100%;
                   .tick_label{

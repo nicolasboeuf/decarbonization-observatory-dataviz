@@ -27,7 +27,7 @@
 
           <div class="controls_box">
 
-            <span class="controls_title">Historical</span>
+            <span class="controls_title">Historical emissions</span>
 
             <div class="switch_controls_box" @click="switchHistorical()">
               <div class="switch_container">
@@ -38,7 +38,7 @@
                   <svg viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
                 </div>
               </div>
-              <span class="switch_label">Historical emissions</span>
+              <span class="switch_label">Show historical emissions</span>
             </div>
 
           </div>
@@ -51,41 +51,14 @@
               <div class="radio">
                 <div class="radio_inner"></div>
               </div>
-              <span class="radio_label">Unconditionnal near-term target</span>
+              <span class="radio_label">Unconditional near-term targets and net-zero targets</span>
             </div>
 
             <div :class="['controls_radio_container',settings.scenario=='Low'?'inactive':'']" @click="settings.scenario='High'">
               <div class="radio">
                 <div class="radio_inner"></div>
               </div>
-              <span class="radio_label">Conditionnal near-term target</span>
-            </div>
-
-          </div>
-
-          <div class="controls_box">
-
-            <span class="controls_title">Sectors</span>
-
-            <div :class="['controls_tick_container', settings.greenhouse['LULUCF']?'':'inactive', settings.data!='world'?'disable inactive':'']" @click="switchGreenhouse('LULUCF')">
-              <div class="tick">
-                <div class="tick_inner"></div>
-              </div>
-              <span class="tick_label">LULUCF</span>
-            </div>
-
-            <div :class="['controls_tick_container', settings.greenhouse['Non-LULUCF']?'':'inactive']" @click="switchGreenhouse('Non-LULUCF')">
-              <div class="tick">
-                <div class="tick_inner"></div>
-              </div>
-              <span class="tick_label">non-LULUCF</span>
-            </div>
-
-            <div :class="['controls_tick_container', settings.greenhouse['Total']?'':'inactive']" @click="switchGreenhouse('Total')">
-              <div class="tick">
-                <div class="tick_inner"></div>
-              </div>
-              <span class="tick_label">Total</span>
+              <span class="radio_label">Conditional near-term targets and net-zero targets</span>
             </div>
 
           </div>
@@ -94,7 +67,41 @@
 
             <div class="controls_box_header">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
-              <span class="controls_box_header_title">Individual gases contribution</span>
+              <span class="controls_box_header_title">Sectors</span>
+            </div>
+
+            <div class="controls_box_body sectors_box">
+
+              <div :class="['controls_tick_container', settings.greenhouse['Non-LULUCF']?'':'inactive']" @click="switchGreenhouse('Non-LULUCF')">
+                <div class="tick">
+                  <div class="tick_inner"></div>
+                </div>
+                <span class="tick_label">Energy; Industrial Processes; Solvent and Other Product Use; Agriculture</span>
+              </div>
+
+              <div :class="['controls_tick_container', settings.greenhouse['LULUCF']?'':'inactive', settings.data!='world'?'disable inactive':'']" @click="switchGreenhouse('LULUCF')">
+                <div class="tick">
+                  <div class="tick_inner"></div>
+                </div>
+                <span class="tick_label">Land Use, Land-Use Change and Forestry (LULUCF)</span>
+              </div>
+
+              <div :class="['controls_tick_container', settings.greenhouse['Total']?'':'inactive']" @click="switchGreenhouse('Total')">
+                <div class="tick">
+                  <div class="tick_inner"></div>
+                </div>
+                <span class="tick_label">Total</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="controls_box boxed">
+
+            <div class="controls_box_header">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
+              <span class="controls_box_header_title">Greenhouse gases</span>
             </div>
 
             <div class="controls_box_body">
@@ -330,7 +337,7 @@ export default {
               },
               scaleLabel:{
                 display:true,
-                labelString:"tons CO2eq",
+                labelString:"CO2eq",
               },
               ticks: {
                 autoSkip: false,
@@ -339,7 +346,9 @@ export default {
                 callback: function (value) {
                   var v
                   if(value>1000000||value<-1000000){
-                    v = value/1000000+"M"
+                    v = value/1000000+" Gtons"
+                  }else if(value>1000||value<-1000){
+                    v = value/1000+" Mtons"
                   }else{
                     v = value
                   }

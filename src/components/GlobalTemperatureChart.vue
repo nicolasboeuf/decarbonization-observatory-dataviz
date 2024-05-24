@@ -17,14 +17,14 @@
               <div class="tick">
                 <div class="tick_inner"></div>
               </div>
-              <span class="tick_label">Unconditionnal near-term target</span>
+              <span class="tick_label">Unconditional near-term targets and net-zero targets</span>
             </div>
 
             <div :class="['controls_tick_container', settings.scenarios['high']?'':'inactive']" @click="switchScenario('high')">
               <div class="tick">
                 <div class="tick_inner"></div>
               </div>
-              <span class="tick_label">Conditionnal near-term target</span>
+              <span class="tick_label">Conditional near-term targets and net-zero targets</span>
             </div>
 
         </div>
@@ -67,7 +67,7 @@ export default {
         "scenarios":{"low":true,"high":true},
         "annotations":true
       },
-      colors:["rgba(0,76,109,1)","rgba(0,103,138,1)"],
+      colors:["rgba(0,76,109,1)","rgba(0,223,237,1)"],
       bgColors:["rgba(0,76,109,0)","rgba(0,103,138,0)"],
     }
   },
@@ -165,14 +165,14 @@ export default {
               },
               scaleLabel:{
                 display:true,
-                labelString:"°C",
+                labelString:"Global-mean temperature change relative to 1850-1900 (°C)",
               },
               ticks: {
                 autoSkip: true,
                 maxTicksLimit: 15,
                 beginAtZero: false,
                 callback: function (value) {
-                  return value.toLocaleString()+"°C"
+                  return value+"°C"
                 }
               },
             }]
@@ -206,7 +206,7 @@ export default {
                 borderWidth: 1,
                 label: {
                   enabled: true,
-                  content: '+ 1,5°C',
+                  content: '+ 1.5°C',
                   position:"right",
                   backgroundColor: 'rgba(999,999,999,1)',
                   fontColor:'rgb(249, 174, 21)'

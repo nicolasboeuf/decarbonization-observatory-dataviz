@@ -1,7 +1,7 @@
 <template>
   <div id="combinedImpactChart" class="chartComponent">
     <h2>Combined impact of enhanced or delayed pledges</h2>
-    <h3>Visualize the impact of combined impact of enhanced or delayed pledges comparing to base</h3>
+    <h3>Visualize the impact of combined impact of enhanced or delayed pledges on the reference scenario</h3>
     <div class="componentSpace">
       <div class="chartSpace">
         <canvas id="combinedImpact_chart"></canvas>
@@ -43,14 +43,14 @@
             <div class="radio">
               <div class="radio_inner"></div>
             </div>
-            <span class="radio_label">Unconditionnal near-term target</span>
+            <span class="radio_label">Unconditional near-term targets and net-zero targets</span>
           </div>
 
           <div :class="['controls_radio_container',settings.scenario=='Low'?'inactive':'']" @click="settings.scenario='High'">
             <div class="radio">
               <div class="radio_inner"></div>
             </div>
-            <span class="radio_label">Conditionnal near-term target</span>
+            <span class="radio_label">Conditional near-term targets and net-zero targets</span>
           </div>
 
         </div>
@@ -112,8 +112,8 @@ export default {
         "pledges":["NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"],
         "selectedPledges":["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"]
       },
-      colors:["rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)","rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)","rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(126, 188, 174, 1)","rgba(0, 105, 128, 1)","rgba(162, 191, 206, 1)","rgba(255, 198, 119, 1)","rgba(71, 143, 129, 1)","rgba(255, 159, 0, 1)"],
-      bgColors:["rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(126, 188, 174, 0.6)","rgba(0, 105, 128, 0.6)","rgba(162, 191, 206, 0.6)","rgba(255, 198, 119, 0.6)","rgba(71, 143, 129, 0.6)","rgba(255, 159, 0, 0.6)","rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(126, 188, 174, 0.6)","rgba(0, 105, 128, 0.6)","rgba(162, 191, 206, 0.6)","rgba(255, 198, 119, 0.6)","rgba(71, 143, 129, 0.6)","rgba(255, 159, 0, 0.6)","rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(126, 188, 174, 0.6)","rgba(0, 105, 128, 0.6)","rgba(162, 191, 206, 0.6)","rgba(255, 198, 119, 0.6)","rgba(71, 143, 129, 0.6)","rgba(255, 159, 0, 0.6)"],
+      colors:["rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(253,120,187,1)","rgba(252,43,157,1)","rgba(140,25,140,1)","rgba(183,22,58,1)","rgba(252,107,67,1)","rgba(254,179,91,1)","rgba(255,228,141,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(92,162,206,1)","rgba(93,183,113,1)","rgba(146, 221, 248, 1)"],
+      bgColors:["rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(253,120,187,0.6)","rgba(252,43,157,0.6)","rgba(140,25,140,0.6)","rgba(183,22,58,0.6)","rgba(252,107,67,0.6)","rgba(254,179,91,0.6)","rgba(255,228,141,0.6)","rgba(32,68,121,0.6)","rgba(46,115,179,0.6)","rgba(92,162,206,0.6)","rgba(93,183,113,0.6)","rgba(146, 221, 248, 0.6)"],
     }
   },
   props: {
@@ -187,7 +187,7 @@ export default {
 
             byVariable[self.settings.variable].forEach(function(pledge,i){
 
-              var d = parseFloat(pledge[p].replace(",","."))
+              var d = parseFloat(String(pledge[p]).replace(",","."))
               preservedDataset["data"].push(d)
               if(j!=0){d = d + self.datasets[j-1]["data"][i]}
               dataset["data"].push(d)
@@ -255,14 +255,22 @@ export default {
               },
               scaleLabel:{
                 display:true,
-                labelString:"tons CO2eq",
+                labelString:"CO2eq",
               },
               ticks: {
                 autoSkip: true,
                 maxTicksLimit: 15,
                 beginAtZero: true,
                 callback: function (value) {
-                  return value.toLocaleString()
+                  var v
+                  if(value>1000000||value<-1000000){
+                    v = value/1000000+" Gtons"
+                  }else if(value>1000||value<-1000){
+                    v = value/1000+" Mtons"
+                  }else{
+                    v = value
+                  }
+                  return v
                 }
               },
             }]
@@ -350,7 +358,7 @@ export default {
       if(this.settings.variable == "CO2eq_Total"){
         this.chart.options.scales.yAxes[0].scaleLabel.labelString = "tons CO2eq"
       }else{
-        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "°C"
+        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "Global-mean temperature change relative to 1850-1900 (°C)"
       }
     }
 
