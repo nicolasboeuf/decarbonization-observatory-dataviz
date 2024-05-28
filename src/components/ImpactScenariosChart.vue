@@ -92,14 +92,14 @@ export default {
       datasets:[],
       datasetsLabel:[],
       labels:[],
-      countriesList:["World","China"],
+      countriesList:["afghanistan","albania","algeria","andorra","angola","antigua and barbuda","argentina","armenia","australia","azerbaijan","bahamas","bahrain","bangladesh","barbados","belarus","belize","benin","bhutan","bolivia","bosnia and herzegovina","botswana","brazil","brunei darussalam","burkina faso","burundi","cambodia","cameroon","canada","cape verde","central african republic","chad","chile","china","colombia","comoros","congo","congo_the democratic republic of the","cook islands","costa rica","cote d'ivoire","cuba","djibouti","dominica","dominican republic","ecuador","egypt","el salvador","equatorial guinea","eritrea","eswatini","ethiopia","eu27","fiji","gabon","gambia","georgia","ghana","grenada","guatemala","guinea-bissau","guinea","guyana","haiti","honduras","iceland","india","indonesia","int. aviation","int. shipping","iran, islamic republic of","iraq","israel","jamaica","japan","jordan","kazakhstan","kenya","kiribati","korea, democratic people's republic of","korea, republic of","kuwait","kyrgyzstan","lao people's democratic republic","lebanon","lesotho","liberia","libyan arab jamahiriya","liechtenstein","macedonia, the former yugoslav republic of","madagascar","malawi","malaysia","maldives","mali","marshall islands","mauritania","mauritius","mexico","micronesia, federated states of","moldova, republic of","monaco","mongolia","montenegro","morocco","mozambique","myanmar","namibia","nauru","nepal","new zealand","nicaragua","niger","nigeria","niue","norway","oman","pakistan","palau","palestine","panama","papua new guinea","paraguay","peru","philippines","qatar","russian federation","rwanda","saint kitts and nevis","saint lucia","saint vincent and the grenadines","samoa","sao tome and principe","saudi arabia","senegal","serbia","seychelles","sierra leone","singapore","solomon islands","somalia","south africa","south sudan","sri lanka","sudan","suriname","switzerland","syrian arab republic","tajikistan","tanzania_united republic of","thailand","timor-leste","togo","tonga","trinidad and tobago","tunisia","turkey","turkmenistan","tuvalu","uganda","ukraine","united arab emirates","united kingdom","united states","uruguay","uzbekistan","vanuatu","venezuela","viet nam","world","yemen","zambia","zimbabwe"],
       filtredCountry:[],
       showDropdown: false,
       searchString:'World',
       settings:{
         "data":"world",
         "value":"emissions",
-        "variable":"CO2eq_Total",
+        "variable":"CO2eq_Non-LULUCF",
         "scenario":"Low",
         "pledges":["NDC01","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","CH4++","N2O++"],
         "selectedPledges":["NDC01","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","CH4++","N2O++"],
@@ -159,7 +159,7 @@ export default {
             byVariable[self.settings.variable][pledge].forEach(function(item){
               if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
               if(self.settings.variable == "dT"){
-                dataset["data"].push(parseFloat(item["Value"].replace(",",".")))  
+                dataset["data"].push(parseFloat(item["Value"]))  
               }else{
                 dataset["data"].push(parseFloat(item["Value"]))  
               }
@@ -279,7 +279,7 @@ export default {
         this.settings.variable = "dT"
       }else{
         this.settings.value = "emissions"
-        this.settings.variable = "CO2eq_Total"
+        this.settings.variable = "CO2eq_Non-LULUCF"
       }
     },
 

@@ -138,7 +138,7 @@
 
           </div>
 
-          <div :class="['controls_box','boxed',settings.data=='world'?'disable':'']">
+          <!-- <div :class="['controls_box','boxed','disable']">
 
             <div class="controls_box_header">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
@@ -177,7 +177,7 @@
               
             </div>
 
-          </div>
+          </div> -->
 
         </div>
 
@@ -198,7 +198,7 @@ export default {
       datasets:[],
       datasetsLabel:[],
       labels:[],
-      countriesList:["World","China","eu27"],
+      countriesList:["afghanistan","albania","algeria","andorra","angola","antigua and barbuda","argentina","armenia","australia","azerbaijan","bahamas","bahrain","bangladesh","barbados","belarus","belize","benin","bhutan","bolivia","bosnia and herzegovina","botswana","brazil","brunei darussalam","burkina faso","burundi","cambodia","cameroon","canada","cape verde","central african republic","chad","chile","china","colombia","comoros","congo","congo_the democratic republic of the","cook islands","costa rica","cote d'ivoire","cuba","djibouti","dominica","dominican republic","ecuador","egypt","el salvador","equatorial guinea","eritrea","eswatini","ethiopia","eu27","fiji","gabon","gambia","georgia","ghana","grenada","guatemala","guinea-bissau","guinea","guyana","haiti","honduras","iceland","india","indonesia","int. aviation","int. shipping","iran, islamic republic of","iraq","israel","jamaica","japan","jordan","kazakhstan","kenya","kiribati","korea, democratic people's republic of","korea, republic of","kuwait","kyrgyzstan","lao people's democratic republic","lebanon","lesotho","liberia","libyan arab jamahiriya","liechtenstein","macedonia, the former yugoslav republic of","madagascar","malawi","malaysia","maldives","mali","marshall islands","mauritania","mauritius","mexico","micronesia, federated states of","moldova, republic of","monaco","mongolia","montenegro","morocco","mozambique","myanmar","namibia","nauru","nepal","new zealand","nicaragua","niger","nigeria","niue","norway","oman","pakistan","palau","palestine","panama","papua new guinea","paraguay","peru","philippines","qatar","russian federation","rwanda","saint kitts and nevis","saint lucia","saint vincent and the grenadines","samoa","sao tome and principe","saudi arabia","senegal","serbia","seychelles","sierra leone","singapore","solomon islands","somalia","south africa","south sudan","sri lanka","sudan","suriname","switzerland","syrian arab republic","tajikistan","tanzania_united republic of","thailand","timor-leste","togo","tonga","trinidad and tobago","tunisia","turkey","turkmenistan","tuvalu","uganda","ukraine","united arab emirates","united kingdom","united states","uruguay","uzbekistan","vanuatu","venezuela","viet nam","world","yemen","zambia","zimbabwe"],
       filtredCountry:[],
       showDropdown: false,
       searchString:'World',
