@@ -107,7 +107,8 @@ export default {
             pointHoverRadius: 15
           }
         byCond[Conditionality].forEach(function(d){
-          var temp_float = parseFloat(d["dT"].replace(",","."))
+          //var temp_float = parseFloat(d["dT"].replace(",","."))
+          var temp_float = parseFloat(d["dT"])
           if(!self.labels.includes(d["Year"])){ self.labels.push(d["Year"]) }
           dataset["data"].push(temp_float)
         })

@@ -198,7 +198,7 @@ export default {
       datasets:[],
       datasetsLabel:[],
       labels:[],
-      countriesList:["World","China"],
+      countriesList:["World","China","eu27"],
       filtredCountry:[],
       showDropdown: false,
       searchString:'World',
