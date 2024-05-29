@@ -277,6 +277,9 @@ export default {
               .controls_tick_container{
                 flex: 1 0 26%;
                 margin: 0px;
+                &:last-child{
+                  flex: 1 0 59%;
+                }
               }
               &.sequential{
                 .controls_tick_container{

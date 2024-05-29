@@ -110,10 +110,10 @@ export default {
         "variable":"CO2eq_Total",
         "scenario":"Low",
         "pledges":["NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"],
-        "selectedPledges":["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"]
+        "selectedPledges":["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01"]
       },
-      colors:["rgba(146, 221, 248, 1)","rgba(246, 91, 68, 1)","rgba(253,120,187,1)","rgba(252,43,157,1)","rgba(140,25,140,1)","rgba(183,22,58,1)","rgba(252,107,67,1)","rgba(254,179,91,1)","rgba(255,228,141,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(92,162,206,1)","rgba(93,183,113,1)","rgba(146, 221, 248, 1)"],
-      bgColors:["rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(253,120,187,0.6)","rgba(252,43,157,0.6)","rgba(140,25,140,0.6)","rgba(183,22,58,0.6)","rgba(252,107,67,0.6)","rgba(254,179,91,0.6)","rgba(255,228,141,0.6)","rgba(32,68,121,0.6)","rgba(46,115,179,0.6)","rgba(92,162,206,0.6)","rgba(93,183,113,0.6)","rgba(146, 221, 248, 0.6)"],
+      colors:["rgba(107, 127, 130, 1)","rgba(107, 127, 130, 1)","rgba(134,18,134,1)","rgba(184,25,59,1)","rgba(252,100,58,1)","rgba(255,212,0,1)","rgba(217,3,104,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(93,162,206,1)","rgba(190,213,255,1)","rgba(93,183,113,1)","rgba(55,146,79,1)","rgba(0,111,48,1)"],
+      bgColors:["rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(134,18,134,0.6)","rgba(184,25,59,0.6)","rgba(252,100,58,0.6)","rgba(255,212,0,0.6)","rgba(217,3,104,0.6)","rgba(32,68,121,0.6)","rgba(46,115,179,0.6)","rgba(93,162,206,0.6)","rgba(190,213,255,0.6)","rgba(93,183,113,0.6)","rgba(55,146,79,0.6)","rgba(0,111,48,0.6)"],
     }
   },
   props: {
@@ -347,6 +347,18 @@ export default {
         for(var j = 0;j<=index;j++){
           if(!this.settings.selectedPledges.includes(this.settings.pledges[j])){
             this.settings.selectedPledges.push(this.settings.pledges[j]);
+            if(s == "LUF01"){
+              this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF02");
+              this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF03");
+            }
+            if(s == "LUF02"){
+              this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF01");
+              this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF03");
+            }
+            if(s == "LUF03"){
+              this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF01");
+              this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF02");
+            }
           }
         }
       }
@@ -356,7 +368,7 @@ export default {
       this.updateData()
       this.chart.update()
       if(this.settings.variable == "CO2eq_Total"){
-        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "tons CO2eq"
+        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "CO2eq"
       }else{
         this.chart.options.scales.yAxes[0].scaleLabel.labelString = "Global-mean temperature change relative to 1850-1900 (°C)"
       }

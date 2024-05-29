@@ -92,20 +92,20 @@ export default {
       datasets:[],
       datasetsLabel:[],
       labels:[],
-      countriesList:["afghanistan","albania","algeria","andorra","angola","antigua and barbuda","argentina","armenia","australia","azerbaijan","bahamas","bahrain","bangladesh","barbados","belarus","belize","benin","bhutan","bolivia","bosnia and herzegovina","botswana","brazil","brunei darussalam","burkina faso","burundi","cambodia","cameroon","canada","cape verde","central african republic","chad","chile","china","colombia","comoros","congo","congo_the democratic republic of the","cook islands","costa rica","cote d'ivoire","cuba","djibouti","dominica","dominican republic","ecuador","egypt","el salvador","equatorial guinea","eritrea","eswatini","ethiopia","eu27","fiji","gabon","gambia","georgia","ghana","grenada","guatemala","guinea-bissau","guinea","guyana","haiti","honduras","iceland","india","indonesia","int. aviation","int. shipping","iran, islamic republic of","iraq","israel","jamaica","japan","jordan","kazakhstan","kenya","kiribati","korea, democratic people's republic of","korea, republic of","kuwait","kyrgyzstan","lao people's democratic republic","lebanon","lesotho","liberia","libyan arab jamahiriya","liechtenstein","macedonia, the former yugoslav republic of","madagascar","malawi","malaysia","maldives","mali","marshall islands","mauritania","mauritius","mexico","micronesia, federated states of","moldova, republic of","monaco","mongolia","montenegro","morocco","mozambique","myanmar","namibia","nauru","nepal","new zealand","nicaragua","niger","nigeria","niue","norway","oman","pakistan","palau","palestine","panama","papua new guinea","paraguay","peru","philippines","qatar","russian federation","rwanda","saint kitts and nevis","saint lucia","saint vincent and the grenadines","samoa","sao tome and principe","saudi arabia","senegal","serbia","seychelles","sierra leone","singapore","solomon islands","somalia","south africa","south sudan","sri lanka","sudan","suriname","switzerland","syrian arab republic","tajikistan","tanzania_united republic of","thailand","timor-leste","togo","tonga","trinidad and tobago","tunisia","turkey","turkmenistan","tuvalu","uganda","ukraine","united arab emirates","united kingdom","united states","uruguay","uzbekistan","vanuatu","venezuela","viet nam","world","yemen","zambia","zimbabwe"],
+      countriesList:["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei Darussalam","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo","Congo_the Democratic Republic of the","Cook Islands","Costa Rica","Cote d'Ivoire","Cuba","Djibouti","Dominica","Dominican Republic","EU27","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Eswatini","Ethiopia","Fiji","Gabon","Gambia","Georgia","Ghana","Grenada","Guatemala","Guinea-Bissau","Guinea","Guyana","Haiti","Honduras","Iceland","India","Indonesia","Int. Aviation","Int. Shipping","Iran, Islamic Republic of","Iraq","Israel","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea, Democratic People's Republic of","Korea, Republic of","Kuwait","Kyrgyzstan","Lao People's Democratic Republic","Lebanon","Lesotho","Liberia","Libyan Arab Jamahiriya","Liechtenstein","Macedonia, the former Yugoslav Republic of","Madagascar","Malawi","Malaysia","Maldives","Mali","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia, Federated States of","Moldova, Republic of","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Qatar","Russian Federation","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Solomon Islands","Somalia","South Africa","South Sudan","Sri Lanka","Sudan","Suriname","Switzerland","Syrian Arab Republic","Tajikistan","Tanzania_United Republic of","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela","Viet Nam","World","Yemen","Zambia","Zimbabwe"],
       filtredCountry:[],
       showDropdown: false,
       searchString:'World',
       settings:{
-        "data":"world",
+        "data":"World",
         "value":"emissions",
         "variable":"CO2eq_Non-LULUCF",
         "scenario":"Low",
-        "pledges":["NDC01","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","CH4++","N2O++"],
-        "selectedPledges":["NDC01","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","CH4++","N2O++"],
+        "pledges":["NDC01","NDC02","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","LTS05","LTS06","LUF01","LUF02","LUF03","N2O++","CH4++","NoGMP","selMIT"],
+        "selectedPledges":["NDC01","NDC02","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","LTS05","LTS06","LUF01","LUF02","LUF03","N2O++","CH4++","NoGMP","selMIT"],
       },
-      colors:["rgba(252,43,157,1)","rgba(140,25,140,1)","rgba(183,22,58,1)","rgba(252,107,67,1)","rgba(254,179,91,1)","rgba(255,228,141,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(93,183,113,1)"],
-      bgColors:["rgba(252,43,157,0.6)","rgba(140,25,140,0.6)","rgba(183,22,58,0.6)","rgba(252,107,67,0.6)","rgba(254,179,91,0.6)","rgba(255,228,141,0.6)","rgba(32,68,121,0.6)","rgba(46,115,179,0.6)","rgba(93,183,113,0.6)"],
+      colors:["rgba(134,18,134,1)","rgba(252,43,157,1)","rgba(184,25,59,1)","rgba(252,100,58,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(93,162,206,1)","rgba(150,174,237,1)","rgba(190,213,255,1)","rgba(110,178,223,1)","rgba(93,183,113,1)","rgba(55,146,79,1)","rgba(0,111,48,1)","rgba(217,3,104,1)","rgba(255,212,0,1)","rgba(226,212,183,1)","rgba(238,99,82,1)"],
+      bgColors:["rgba(134,18,134,0.6)","rgba(252,43,157,0.6)","rgba(184,25,59,0.6)","rgba(252,100,58,0.6)","rgba(32,68,121,0.6)","rgba(46,115,179,0.6)","rgba(93,162,206,0.6)","rgba(150,174,237,0.6)","rgba(190,213,255,0.6)","rgba(110,178,223,0.6)","rgba(93,183,113,0.6)","rgba(55,146,79,0.6)","rgba(0,111,48,0.6)","rgba(217,3,104,0.6)","rgba(255,212,0,0.6)","rgba(226,212,183,0.6)","rgba(238,99,82,0.6)"],
     }
   },
   props: {
@@ -314,7 +314,8 @@ export default {
     updateChart () {
       this.updateData()
       this.chart.update()
-      if(this.settings.variable == "CO2eq_Total"){
+      console.log(this.settings.variable)
+      if(this.settings.variable == "CO2eq_Non-LULUCF"){
         this.chart.options.scales.yAxes[0].scaleLabel.labelString = "tons CO2eq"
       }else{
         this.chart.options.scales.yAxes[0].scaleLabel.labelString = "Global-mean temperature change relative to 1850-1900 (°C)"
