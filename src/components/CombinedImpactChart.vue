@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div class="controls_box">
+        <!-- <div class="controls_box">
 
           <span class="controls_title">Reference scenario</span>
 
@@ -53,6 +53,26 @@
             <span class="radio_label">Conditional near-term targets and net-zero targets</span>
           </div>
 
+        </div> -->
+
+        <div class="controls_box">
+
+          <span class="controls_title">Type of pledges</span>
+
+          <div :class="['controls_radio_container',settings.pledgesType=='delayed'?'inactive':'']" @click="togglePledgesType('enhanced')">
+            <div class="radio">
+              <div class="radio_inner"></div>
+            </div>
+            <span class="radio_label">Enhanced</span>
+          </div>
+
+          <div :class="['controls_radio_container',settings.pledgesType=='enhanced'?'inactive':'']" @click="togglePledgesType('delayed')">
+            <div class="radio">
+              <div class="radio_inner"></div>
+            </div>
+            <span class="radio_label">Delayed</span>
+          </div>
+
         </div>
 
         <div class="controls_box">
@@ -68,7 +88,7 @@
               <span class="tick_label">Reference</span>
             </div>
               
-            <div v-for="s,i in settings.pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)"> 
+            <div v-for="s,i in filtredPledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)"> 
               <div class="tick" :style="settings.selectedPledges.includes(s)?{backgroundColor: colors[i+2]}:{backgroundColor:'#fff'}">
                 <div class="tick_inner"></div>
               </div>
@@ -100,19 +120,22 @@ export default {
       preservedDatasets:[],
       datasetsLabel:[],
       labels:[],
-      countriesList:["World"],
+      countriesList:["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei Darussalam","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo","Congo_the Democratic Republic of the","Cook Islands","Costa Rica","Cote d'Ivoire","Cuba","Djibouti","Dominica","Dominican Republic","EU27","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Eswatini","Ethiopia","Fiji","Gabon","Gambia","Georgia","Ghana","Grenada","Guatemala","Guinea-Bissau","Guinea","Guyana","Haiti","Honduras","Iceland","India","Indonesia","Int. Aviation","Int. Shipping","Iran, Islamic Republic of","Iraq","Israel","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea, Democratic People's Republic of","Korea, Republic of","Kuwait","Kyrgyzstan","Lao People's Democratic Republic","Lebanon","Lesotho","Liberia","Libyan Arab Jamahiriya","Liechtenstein","Macedonia, the former Yugoslav Republic of","Madagascar","Malawi","Malaysia","Maldives","Mali","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia, Federated States of","Moldova, Republic of","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Qatar","Russian Federation","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Solomon Islands","Somalia","South Africa","South Sudan","Sri Lanka","Sudan","Suriname","Switzerland","Syrian Arab Republic","Tajikistan","Tanzania_United Republic of","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela","Viet Nam","World","Yemen","Zambia","Zimbabwe"],
       filtredCountry:[],
       showDropdown: false,
       searchString:'World',
       settings:{
         "data":"world",
         "value":"emissions",
-        "variable":"CO2eq_Total",
+        "variable":"CO2eq",
         "scenario":"Low",
         "pledges":["NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"],
-        "selectedPledges":["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01"]
+        "selectedPledges":["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01"],
+        "delayedPledges":["NDC02","LTS04","LTS06"],
+        "enhancedPledges":["NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"],
+        "pledgesType":"enhanced"
       },
-      colors:["rgba(107, 127, 130, 1)","rgba(107, 127, 130, 1)","rgba(134,18,134,1)","rgba(184,25,59,1)","rgba(252,100,58,1)","rgba(255,212,0,1)","rgba(217,3,104,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(93,162,206,1)","rgba(190,213,255,1)","rgba(93,183,113,1)","rgba(55,146,79,1)","rgba(0,111,48,1)"],
+      colors:["rgba(1, 1, 1, 1)","rgba(1, 1, 1, 1)","rgba(134,18,134,1)","rgba(184,25,59,1)","rgba(252,100,58,1)","rgba(255,212,0,1)","rgba(217,3,104,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(93,162,206,1)","rgba(190,213,255,1)","rgba(93,183,113,1)","rgba(55,146,79,1)","rgba(0,111,48,1)"],
       bgColors:["rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(134,18,134,0.6)","rgba(184,25,59,0.6)","rgba(252,100,58,0.6)","rgba(255,212,0,0.6)","rgba(217,3,104,0.6)","rgba(32,68,121,0.6)","rgba(46,115,179,0.6)","rgba(93,162,206,0.6)","rgba(190,213,255,0.6)","rgba(93,183,113,0.6)","rgba(55,146,79,0.6)","rgba(0,111,48,0.6)"],
     }
   },
@@ -124,6 +147,23 @@ export default {
     },
     combinedImpactData(){
       return store.state.combinedImpactData
+    },
+    filtredPledges(){
+      var pledges
+      if(this.settings.data == "world"){
+        if(this.settings.pledgesType == "enhanced"){
+          pledges = this.settings.enhancedPledges
+        }else{
+          pledges = this.settings.delayedPledges
+        }
+      }else{
+        if(this.settings.pledgesType == "enhanced"){
+          pledges = this.settings.pledges.filter(e => e !== 'LUF01').filter(e => e !== 'LUF02').filter(e => e !== 'LUF03')
+        }else{
+          pledges = this.settings.delayedPledges
+        }
+      }
+      return pledges
     }
   },
   methods: {
@@ -179,17 +219,29 @@ export default {
                 pointBackgroundColor: 'rgba(0, 0, 0, 0)',
                 pointBorderColor: 'rgba(0, 0, 0, 0)',
                 pointHoverRadius: 15,
-                order:j,
-                fill:"end",
+                order:j
               }
+
+            if(self.settings.pledgesType == "enhanced"){
+              dataset.fill = "end"
+            }else{
+              dataset.fill = "start"
+            }
 
             var preservedDataset = { data : [] }
 
             byVariable[self.settings.variable].forEach(function(pledge,i){
-
               var d = parseFloat(String(pledge[p]).replace(",","."))
               preservedDataset["data"].push(d)
-              if(j!=0){d = d + self.datasets[j-1]["data"][i]}
+              if(j==1)
+                {d = d + self.datasets[j-1]["data"][i]
+              }else if(j>1){
+                if(self.settings.pledgesType == "enhanced"){
+                  d = d + self.datasets[j-1]["data"][i]
+                }else{
+                  d = d + self.datasets[j-1]["data"][i] - self.preservedDatasets[1]["data"][i]
+                }
+              }
               dataset["data"].push(d)
 
             })
@@ -313,7 +365,7 @@ export default {
         this.settings.variable = "dT"
       }else{
         this.settings.value = "emissions"
-        this.settings.variable = "CO2eq_Total"
+        this.settings.variable = "CO2eq"
       }
     },
 
@@ -364,10 +416,22 @@ export default {
       }
     },
 
+    togglePledgesType(type){
+      if(type=="enhanced"){
+        this.settings.pledgesType = "enhanced"
+        this.settings.pledges = this.settings.enhancedPledges
+        this.settings.selectedPledges = ["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01"]
+      }else{
+        this.settings.pledgesType = "delayed"
+        this.settings.pledges = this.settings.delayedPledges
+        this.settings.selectedPledges = ["Low","High","NDC02","LTS04","LTS06"]
+      }
+    },
+
     updateChart () {
       this.updateData()
       this.chart.update()
-      if(this.settings.variable == "CO2eq_Total"){
+      if(this.settings.variable == "CO2eq"){
         this.chart.options.scales.yAxes[0].scaleLabel.labelString = "CO2eq"
       }else{
         this.chart.options.scales.yAxes[0].scaleLabel.labelString = "Global-mean temperature change relative to 1850-1900 (°C)"

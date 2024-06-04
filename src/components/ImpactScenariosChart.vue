@@ -252,7 +252,7 @@ export default {
               label: function(tooltipItem){
                 var value
                 if(self.settings.value == "emissions"){
-                  value = parseInt(tooltipItem["value"]).toLocaleString()+" tonnes CO2eq"
+                  value = parseInt(tooltipItem["value"]).toLocaleString()+"tons CO2eq"
                 }else{
                   value = parseFloat(tooltipItem["value"]).toLocaleString()+" °C"
                 }
@@ -316,7 +316,7 @@ export default {
       this.chart.update()
       console.log(this.settings.variable)
       if(this.settings.variable == "CO2eq_Non-LULUCF"){
-        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "tons CO2eq"
+        this.chart.options.scales.yAxes[0].scaleLabel.labelString = "CO2eq"
       }else{
         this.chart.options.scales.yAxes[0].scaleLabel.labelString = "Global-mean temperature change relative to 1850-1900 (°C)"
       }
