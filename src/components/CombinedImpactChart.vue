@@ -89,7 +89,7 @@
             </div>
               
             <div v-for="s,i in filtredPledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)"> 
-              <div class="tick" :style="settings.selectedPledges.includes(s)?{backgroundColor: colors[i+2]}:{backgroundColor:'#fff'}">
+              <div class="tick" :style="settings.selectedPledges.includes(s)?{backgroundColor: buttonsColors[i+2]}:{backgroundColor:'#fff'}">
                 <div class="tick_inner"></div>
               </div>
               <span class="tick_label">{{s}}</span>
@@ -135,8 +135,8 @@ export default {
         "enhancedPledges":["NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"],
         "pledgesType":"enhanced"
       },
-      colors:["rgba(1, 1, 1, 1)","rgba(1, 1, 1, 1)","rgba(134,18,134,1)","rgba(184,25,59,1)","rgba(252,100,58,1)","rgba(255,212,0,1)","rgba(217,3,104,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(93,162,206,1)","rgba(190,213,255,1)","rgba(93,183,113,1)","rgba(55,146,79,1)","rgba(0,111,48,1)"],
-      //colors:["rgba(146, 221, 248, 0)","rgba(246, 91, 68, 0)","rgba(134,18,134,0)","rgba(184,25,59,0)","rgba(252,100,58,0)","rgba(255,212,0,0)","rgba(217,3,104,0)","rgba(32,68,121,0)","rgba(46,115,179,0)","rgba(93,162,206,0)","rgba(190,213,255,0)","rgba(93,183,113,0)","rgba(55,146,79,0)","rgba(0,111,48,0)"],
+      buttonsColors:["rgba(1, 1, 1, 1)","rgba(1, 1, 1, 1)","rgba(134,18,134,1)","rgba(184,25,59,1)","rgba(252,100,58,1)","rgba(255,212,0,1)","rgba(217,3,104,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(93,162,206,1)","rgba(190,213,255,1)","rgba(93,183,113,1)","rgba(55,146,79,1)","rgba(0,111,48,1)"],
+      colors:["rgba(1, 1, 1, 1)","rgba(1, 1, 1, 1)","rgba(134,18,134,0)","rgba(184,25,59,0)","rgba(252,100,58,0)","rgba(255,212,0,0)","rgba(217,3,104,0)","rgba(32,68,121,0)","rgba(46,115,179,0)","rgba(93,162,206,0)","rgba(190,213,255,0)","rgba(93,183,113,0)","rgba(55,146,79,0)","rgba(0,111,48,0)"],
       bgColors:["rgba(146, 221, 248, 0.6)","rgba(246, 91, 68, 0.6)","rgba(134,18,134,0.6)","rgba(184,25,59,0.6)","rgba(252,100,58,0.6)","rgba(255,212,0,0.6)","rgba(217,3,104,0.6)","rgba(32,68,121,0.6)","rgba(46,115,179,0.6)","rgba(93,162,206,0.6)","rgba(190,213,255,0.6)","rgba(93,183,113,0.6)","rgba(55,146,79,0.6)","rgba(0,111,48,0.6)"],
     }
   },
@@ -317,7 +317,7 @@ export default {
               ticks: {
                 autoSkip: true,
                 maxTicksLimit: 15,
-                beginAtZero: true,
+                beginAtZero: false,
                 callback: function (value) {
                   var v
                   if(value>1000000||value<-1000000){
