@@ -381,7 +381,7 @@ export default {
       this.showDropdown = true;
     },
     selectOption(option) {
-      this.settings.data = option.toLowerCase();
+      this.settings.data = option;
       this.searchString = option
       this.showDropdown = false;
     },
