@@ -75,16 +75,16 @@ export default {
   }
   .chartComponent{
     width: 100%;
-    height:700px;
-    margin-bottom: 250px;
+    max-width: 1750px;
+    margin-bottom: 75px;
     position: relative;
     .componentSpace{
       position: relative;
       .chartSpace{
         position: relative;
         width: 70%;
-        height: 700px;
         display: inline-block;
+        height: 600px;
         #nodataModale{
           position: absolute;
           width: 30%;
@@ -106,14 +106,40 @@ export default {
       .controlsSpace{
         position: relative;
         width: 30%;
-        min-height: 700px;
         display: inline-block;
         box-sizing: border-box;
+        height: 600px;
         .controlsWrapper{
           position: absolute;
           width: 90%;
           left:50%;
           transform:translate(-50%,0);
+          .downloadBtn{
+            width: 30px;
+            height: 30px;
+            background-color: $deepBlue;
+            position: absolute;
+            top:0;
+            right: 0;
+            border-radius: 50%;
+            cursor: pointer;
+            &:hover{
+              background-color: $lightBlue;
+              svg{
+                fill:$deepBlue;
+                stroke:$deepBlue;
+              }
+            }
+            svg{
+              fill:#fff;
+              stroke:#fff;
+              position: absolute;
+              width: 15px;
+              top:50%;
+              left:50%;
+              transform:translate(-50%,-50%);
+            }
+          }
           .controls_box{
             width: 100%;
             display: block;
@@ -305,6 +331,20 @@ export default {
                     }
 
                   }
+                }
+              }
+            }
+            .controls_select_all_container{
+              display: flex;
+              margin-bottom: 15px;
+              .select_all_btn{
+                font-family: "DMSans-Regular";
+                font-size: 14px;
+                margin-right: 10px;
+                color:black;
+                cursor: pointer;
+                &:hover{
+                  color:$deepBlue;
                 }
               }
             }
@@ -537,18 +577,71 @@ export default {
     }
   }
 
-  @media (max-width: 728px) {
+  @media (max-width: 1280px) {
 
     .chartComponent{
+      &#currentEmissionsChart{
+        .chartSpace{
+          height: 600px;
+        }
+        .controlsSpace{
+          min-height: 600px;
+        }
+      }
+      .componentSpace{
+        .chartSpace{
+          width: 60%;
+          height: 500px;
+
+        }
+        .controlsSpace{
+          width: 40%;
+          height: 500px;
+        }
+      }
+    }
+
+  }
+
+  @media (max-width: 1024px) {
+
+    .chartComponent{
+      height: auto;
+      margin-bottom: 50px;
+      &#currentEmissionsChart{
+        .chartSpace{
+          height: 450px;
+
+        }
+        .controlsSpace{
+          min-height: 600px;
+        }
+      }
+      &#globalTemperatureChart{
+        .controlsSpace{
+          height: 200px;
+        }
+      }
+      &#impactScenariosChart{
+        .controlsSpace{
+          min-height: 400px;
+        }
+      }
+      &#combinedImpactChart{
+        .controlsSpace{
+          min-height: 400px;
+        }
+      }
       .componentSpace{
         .chartSpace{
           width: 100%;
           display: block;
-          
-          }
+          height: 450px;
+        }
         .controlsSpace{
           width: 100%;
           display: block;
+          margin-top:20px;
         }
       }
     }

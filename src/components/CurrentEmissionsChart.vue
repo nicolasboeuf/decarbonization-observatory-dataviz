@@ -10,7 +10,10 @@
         </div>
       </div>
       <div class="controlsSpace">
+
         <div class="controlsWrapper">
+
+          <a download :href="customUrl"><div class="downloadBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg></div></a>
 
           <div class="controls_box">
             <span class="controls_title">Country</span>
@@ -222,6 +225,9 @@ export default {
     },
     currentEmissionsData(){
       return store.state.currentEmissionsData
+    },
+    customUrl(){
+      return "https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/current_emissions/"+this.settings.data+".json"
     }
   },
   methods: {
@@ -307,6 +313,7 @@ export default {
           datasets: self.datasets
         },
         options: {
+          maintainAspectRatio: false,
           animation: {
             easing: 'easeInOutBack'
           },
@@ -428,7 +435,7 @@ export default {
       this.searchString=""
       this.showDropdown=true
       this.filtredCountry = this.countriesList
-    }
+    },
   },
 
   watch:{

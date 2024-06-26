@@ -9,6 +9,8 @@
       <div class="controlsSpace">
         <div class="controlsWrapper">
 
+          <a download :href="customUrl"><div class="downloadBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg></div></a>
+
         <div class="controls_box">
           <span class="controls_title">See the impact on</span>
 
@@ -78,6 +80,11 @@
         <div class="controls_box">
           
           <span class="controls_title">Select one or more pledge(s)</span>
+
+          <div class="controls_select_all_container">
+            <div class="select_all_btn" @click="selectAllPledges()">Select all</div>
+            <div class="select_all_btn" @click="selectNoPledges()">Select none</div>
+          </div>
 
           <div class="controls_multiple_tick_container sequential">
 
@@ -165,6 +172,9 @@ export default {
         }
       }
       return pledges
+    },
+    customUrl(){
+      return "https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/combined_impact/"+this.settings.data+".json"
     }
   },
   methods: {
@@ -281,6 +291,7 @@ export default {
           datasets: self.datasets
         },
         options: {
+          maintainAspectRatio: false,
           animation: {
             easing: 'easeInOutBack'
           },
@@ -381,7 +392,7 @@ export default {
       this.showDropdown = true;
     },
     selectOption(option) {
-      this.settings.data = option;
+      this.settings.data = (option=="World")?option.toLowerCase():option
       this.searchString = option
       this.showDropdown = false;
     },
@@ -431,6 +442,18 @@ export default {
         this.settings.pledges = this.settings.delayedPledges
         this.settings.selectedPledges = ["Low","High","NDC02","LTS04","LTS06"]
       }
+    },
+
+    selectAllPledges(){
+      if(this.settings.pledgesType == "enhanced"){
+        this.settings.selectedPledges = ["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01"]
+      }else{
+        this.settings.selectedPledges = ["Low","High","NDC02","LTS04","LTS06"]
+      }
+    },
+
+    selectNoPledges(){
+      this.settings.selectedPledges = ["Low","High"]
     },
 
     updateChart () {
