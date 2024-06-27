@@ -1,21 +1,21 @@
 {
 	"scenarios":{
-		"NDC01":{"color":"rgba(134,18,134,1)","desc":"bla blalablbalba"},
-		"NDC02":{"color":"rgba(252,43,157,1)","desc":"bla blalablbalba"},
-		"GMP01":{"color":"rgba(184,25,59,1)","desc":"bla blalablbalba"},
-		"GMP02":{"color":"rgba(252,100,58,1)","desc":"bla blalablbalba"},
-		"LTS01":{"color":"rgba(32,68,121,1)","desc":"bla blalablbalba"},
-		"LTS02":{"color":"rgba(46,115,179,1)","desc":"bla blalablbalba"},
-		"LTS03":{"color":"rgba(93,162,206,1)","desc":"bla blalablbalba"},
-		"LTS04":{"color":"rgba(150,174,237,1)","desc":"bla blalablbalba"},
-		"LTS05":{"color":"rgba(190,213,255,1)","desc":"bla blalablbalba"},
-		"LTS06":{"color":"rgba(110,178,223,1)","desc":"bla blalablbalba"},
-		"LUF01":{"color":"rgba(93,183,113,1)","desc":"bla blalablbalba"},
-		"LUF02":{"color":"rgba(55,146,79,1)","desc":"bla blalablbalba"},
-		"LUF03":{"color":"rgba(0,111,48,1)","desc":"bla blalablbalba"},
-		"N2O++":{"color":"rgba(217,3,104,1)","desc":"bla blalablbalba"},
-		"CH4++":{"color":"rgba(255,212,0,1)","desc":"bla blalablbalba"},
-		"NoGMP":{"color":"rgba(226,212,183,1)","desc":"bla blalablbalba"},
-		"selMIT":{"color":"rgba(238,99,82,1)","desc":"bla blalablbalba"}
+		"NDC01":{"color":"rgba(134,18,134,1)","desc":"Current levels of all higher reduction targets for 2030 are further increased by 10%"},
+		"NDC02":{"color":"rgba(252,43,157,1)","desc":"Current levels of all lower reduction targets for 2030 are further decreased by 10%"},
+		"GMP01":{"color":"rgba(184,25,59,1)","desc":"GMP is additional to the near-term reductions targets declared in NDCs"},
+		"GMP02":{"color":"rgba(252,100,58,1)","desc":"All countries continue to reduce CH4 emissions after 2030 to achieve a further 30% reduction by 2100 from 2030 levels"},
+		"LTS01":{"color":"rgba(32,68,121,1)","desc":"Countries currently having no long-term target reach net-zero in 2070"},
+		"LTS02":{"color":"rgba(46,115,179,1)","desc":"Countries currently having a net-zero target after 2050 reach net-zero in 2050"},
+		"LTS03":{"color":"rgba(93,162,206,1)","desc":"Countries with a 2050 net zero target year reach net-zero in 2040"},
+		"LTS04":{"color":"rgba(150,174,237,1)","desc":"Countries currently having a net-zero target delay it by 10 years"},
+		"LTS05":{"color":"rgba(190,213,255,1)","desc":"Countries currently with a net-zero target follow a net-zero GHG"},
+		"LTS06":{"color":"rgba(110,178,223,1)","desc":"Countries currently with a net-zero target follow a net-zero CO2 only"},
+		"LUF01":{"color":"rgba(93,183,113,1)","desc":"Stopping deforestation with reforestation continuing at current levels + 100% control of forest degradation"},
+		"LUF02":{"color":"rgba(55,146,79,1)","desc":"Partial control on current deforestation with reforestation continuing at current levels + 50% control of forest degradation"},
+		"LUF03":{"color":"rgba(0,111,48,1)","desc":"Continued deforestation at current levels but with increasing reforestation + 10% control of forest degradation"},
+		"N2O++":{"color":"rgba(217,3,104,1)","desc":"All countries reduce N2O emissions by 13% (relative to 2022) in 2030 and by 18% (relative to 2022) in 2035"},
+		"CH4++":{"color":"rgba(255,212,0,1)","desc":"Countries without GMP reduce CH4 emissions by 30% (relative to 2022) in 2030 and all countries reduce CH4 emissions by 40% (relative to 2022) in 2035"},
+		"NoGMP":{"color":"rgba(226,212,183,1)","desc":"Description to add"},
+		"selMIT":{"color":"rgba(238,99,82,1)","desc":"Description to add"}
 	}
 }

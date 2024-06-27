@@ -482,6 +482,7 @@ export default {
           .controls_tick_container{
             display: flex;
             cursor: pointer;
+            position: relative;
             &.disable{
               pointer-events: none;
               opacity: 0.4;
@@ -500,6 +501,46 @@ export default {
                 }
               }
             }
+            .info_btn{
+              display: block;
+              width: 15px;
+              height: 15px;
+              background-color: $lightBlue;
+              position: relative;
+              right: 0;
+              display: inline-block;
+              border-radius: 50%;
+              svg{
+                width: 8px;
+                fill:#fff;
+                position: absolute;
+                left:50%;
+                top:50%;
+                transform:translate(-50%,-50%);
+              }
+              &:hover{
+                .info_modale{
+                  display: block;
+                }
+              }
+              .info_modale{
+                display: none;
+                position: absolute;
+                left:50%;
+                top:20px;
+                transform:translate(-50%,0);
+                width: 150px;
+                height: auto;
+                background-color: $lightBlue;
+                z-index: 999;
+                padding: 10px;
+                border-radius: 5px;
+                font-family: "DMSans-Regular";
+                color:black;
+                pointer-events: none;
+              }
+            }
+
             &.controls_tick_container_yellow{
               .tick{
                 background-color: $yellow;
