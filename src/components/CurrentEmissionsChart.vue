@@ -220,6 +220,12 @@ export default {
   props: {
   },
   computed: {
+    config() {
+      return store.state.config
+    },
+    configEndImport() {
+      return store.state.configEndImport
+    },
     currentEmissionsDataEndImport() {
       return store.state.currentEmissionsDataEndImport
     },
@@ -445,6 +451,9 @@ export default {
       }else{
         this.createChart()
       }
+    },
+    configEndImport:function(){
+      
     },
     settings: {
       handler(){

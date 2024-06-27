@@ -68,8 +68,8 @@
 
           <div class="controls_multiple_tick_container">
               
-            <div v-for="s,i in settings.pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)">
-              <div class="tick" :style="settings.selectedPledges.includes(s)?{backgroundColor: colors[i]}:{backgroundColor:'#fff'}">
+            <div v-for="s in settings.pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)">
+              <div class="tick" :style="settings.selectedPledges.includes(s)&&config['scenarios']?{backgroundColor: config['scenarios'][s]['color']}:{backgroundColor:'#fff'}">
                 <div class="tick_inner"></div>
               </div>
               <span class="tick_label">{{s}}</span>
@@ -110,14 +110,15 @@ export default {
         "scenario":"Low",
         "pledges":["NDC01","NDC02","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","LTS05","LTS06","LUF01","LUF02","LUF03","N2O++","CH4++","NoGMP","selMIT"],
         "selectedPledges":["NDC01","NDC02","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","LTS05","LTS06","LUF01","LUF02","LUF03","N2O++","CH4++","NoGMP","selMIT"],
-      },
-      colors:["rgba(134,18,134,1)","rgba(252,43,157,1)","rgba(184,25,59,1)","rgba(252,100,58,1)","rgba(32,68,121,1)","rgba(46,115,179,1)","rgba(93,162,206,1)","rgba(150,174,237,1)","rgba(190,213,255,1)","rgba(110,178,223,1)","rgba(93,183,113,1)","rgba(55,146,79,1)","rgba(0,111,48,1)","rgba(217,3,104,1)","rgba(255,212,0,1)","rgba(226,212,183,1)","rgba(238,99,82,1)"],
-      bgColors:["rgba(134,18,134,0.6)","rgba(252,43,157,0.6)","rgba(184,25,59,0.6)","rgba(252,100,58,0.6)","rgba(32,68,121,0.6)","rgba(46,115,179,0.6)","rgba(93,162,206,0.6)","rgba(150,174,237,0.6)","rgba(190,213,255,0.6)","rgba(110,178,223,0.6)","rgba(93,183,113,0.6)","rgba(55,146,79,0.6)","rgba(0,111,48,0.6)","rgba(217,3,104,0.6)","rgba(255,212,0,0.6)","rgba(226,212,183,0.6)","rgba(238,99,82,0.6)"],
+      }
     }
   },
   props: {
   },
   computed: {
+    config(){
+      return store.state.config
+    },
     impactScenariosDataEndImport() {
       return store.state.impactScenariosDataEndImport
     },
@@ -149,18 +150,30 @@ export default {
 
           })
 
-        console.log(Object.keys(byVariable[self.settings.variable]))
+        // get Scenario from Data
+        //console.log(Object.keys(byVariable[self.settings.variable]))
 
         Object.keys(byVariable[self.settings.variable]).forEach(function(pledge){
 
           if(self.settings.selectedPledges.includes(pledge)){
 
+            var bgColor
+            var borderColor
+
+            if(self.config["scenarios"][pledge]){
+              borderColor = self.config["scenarios"][pledge]["color"]
+              bgColor = self.config["scenarios"][pledge]["color"].replace(",1)",",0.6)")
+            }else{
+              borderColor = "rgba(0,0,0,1)"
+              bgColor = "rgba(0,0,0,0)"
+            }
+
             var dataset =
               {
                 data: [],
                 type: 'line',
-                backgroundColor: self.bgColors[self.settings.pledges.indexOf(pledge)],
-                borderColor: self.colors[self.settings.pledges.indexOf(pledge)],
+                backgroundColor: bgColor,
+                borderColor: borderColor,
                 pointRadius: 15,
                 pointBackgroundColor: 'rgba(0, 0, 0, 0)',
                 pointBorderColor: 'rgba(0, 0, 0, 0)',
@@ -272,9 +285,15 @@ export default {
                 return(value)
               },
               labelColor: function(tooltipItem) {
+                var c
+                if(self.config["scenarios"][self.settings.selectedPledges[tooltipItem["datasetIndex"]]]){
+                  c = self.config["scenarios"][self.settings.selectedPledges[tooltipItem["datasetIndex"]]]["color"]
+                }else{
+                  c = "rgba(1,1,1,1)"
+                }
                 return {
-                  borderColor: self.colors[tooltipItem["datasetIndex"]],
-                  backgroundColor: self.colors[tooltipItem["datasetIndex"]],
+                  borderColor: c,
+                  backgroundColor: c,
                 }
               },
               afterTitle:function(tooltipItem){
@@ -353,6 +372,9 @@ export default {
         this.createChart()
       }
     },
+    /*configEndImport:function(){
+      this.updateChart()
+    },*/
     settings: {
        handler(){
           this.updateChart()

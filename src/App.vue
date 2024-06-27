@@ -15,6 +15,7 @@ import GlobalTemperatureChart from './components/GlobalTemperatureChart.vue'
 import ImpactScenariosChart from './components/ImpactScenariosChart.vue'
 import CombinedImpactChart from './components/CombinedImpactChart.vue'
 import store from '@/store'
+import { getConfig } from './import.js'
 import { getCurrentEmissionsData } from './import.js'
 import { getGlobalTempData } from './import.js'
 import { getImpactScenariosData } from './import.js'
@@ -38,11 +39,13 @@ export default {
   },
   
   created(){
+    getConfig(store)
     getCurrentEmissionsData(store,"world")
     getGlobalTempData(store)
     getImpactScenariosData(store,"world")
     getCombinedImpactData(store,"world")
   }
+
 }
 </script>
 
@@ -76,7 +79,7 @@ export default {
   .chartComponent{
     width: 100%;
     max-width: 1750px;
-    margin-bottom: 75px;
+    margin:0 auto 75px;
     position: relative;
     .componentSpace{
       position: relative;

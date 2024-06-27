@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    config:{},
+    configEndImport:0,
     currentEmissionsData:{},
     currentEmissionsDataEndImport:0,
     globalTempData:{},
@@ -15,6 +17,12 @@ export default new Vuex.Store({
     combinedImpactDataEndImport:0
   },
   mutations: {
+    initializeConfig (state,data) {
+      state.config = data.data
+    },
+    configEndImport(state){
+      state.configEndImport = 1
+    },
     initializeCurrentEmissionsData (state,data) {
       state.currentEmissionsData[data.param] = []
       state.currentEmissionsData[data.param] = data.data

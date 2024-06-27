@@ -1,0 +1,21 @@
+{
+	"scenarios":{
+		"NDC01":{"color":"rgba(134,18,134,1)","desc":"bla blalablbalba"},
+		"NDC02":{"color":"rgba(252,43,157,1)","desc":"bla blalablbalba"},
+		"GMP01":{"color":"rgba(184,25,59,1)","desc":"bla blalablbalba"},
+		"GMP02":{"color":"rgba(252,100,58,1)","desc":"bla blalablbalba"},
+		"LTS01":{"color":"rgba(32,68,121,1)","desc":"bla blalablbalba"},
+		"LTS02":{"color":"rgba(46,115,179,1)","desc":"bla blalablbalba"},
+		"LTS03":{"color":"rgba(93,162,206,1)","desc":"bla blalablbalba"},
+		"LTS04":{"color":"rgba(150,174,237,1)","desc":"bla blalablbalba"},
+		"LTS05":{"color":"rgba(190,213,255,1)","desc":"bla blalablbalba"},
+		"LTS06":{"color":"rgba(110,178,223,1)","desc":"bla blalablbalba"},
+		"LUF01":{"color":"rgba(93,183,113,1)","desc":"bla blalablbalba"},
+		"LUF02":{"color":"rgba(55,146,79,1)","desc":"bla blalablbalba"},
+		"LUF03":{"color":"rgba(0,111,48,1)","desc":"bla blalablbalba"},
+		"N2O++":{"color":"rgba(217,3,104,1)","desc":"bla blalablbalba"},
+		"CH4++":{"color":"rgba(255,212,0,1)","desc":"bla blalablbalba"},
+		"NoGMP":{"color":"rgba(226,212,183,1)","desc":"bla blalablbalba"},
+		"selMIT":{"color":"rgba(238,99,82,1)","desc":"bla blalablbalba"}
+	}
+}

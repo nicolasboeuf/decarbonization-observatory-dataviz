@@ -285,7 +285,7 @@ export default {
   },
 
   created(){
-    console.log("globalTemperatureChart created")
+    
   }
 
 }

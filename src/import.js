@@ -1,3 +1,11 @@
+export const getConfig = async function (store) {
+	const dataRequest = await fetch("data/config.json")
+	const data = await dataRequest.json()
+	store.commit('initializeConfig',{data:data})
+	store.commit("configEndImport")
+	return true
+}
+
 export const getCurrentEmissionsData = async function (store,param) {
 	const dataRequest = await fetch("https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/current_emissions/"+param+".json")
 	const data = await dataRequest.json()
