@@ -186,6 +186,16 @@
 
       </div>
     </div>
+    <div class="chart_legend">
+      <span class="chart_legend_txt">Global and country-level emissions projections based on country-specific emissions scenarios.</span>
+      <div class="chart_legend_btn" @click="toggleDrawer()">
+        <span v-if="openDrawer==false">Read more</span>
+        <span v-if="openDrawer==true">Read less</span>
+      </div>
+    </div>
+    <div :class="['chart_drawer',openDrawer?'open':'close']">
+      <span class="chart_drawer_text">Country-specific scenarios of the future evolution of emissions based on national climate pledges. Red dots represent national climate pledges of each country. A simple mathematical function was applied to extend emissions scenarios from the most recent emission level to the 2030 target level, mid-century net-zero target level and beyond.</span>
+    </div>
   </div>
 </template>
 
@@ -198,6 +208,7 @@ export default {
   name: 'CurrentEmissionsChart',
   data(){
     return {
+      openDrawer:false,
       datasets:[],
       datasetsLabel:[],
       labels:[],
@@ -442,6 +453,13 @@ export default {
       this.showDropdown=true
       this.filtredCountry = this.countriesList
     },
+    toggleDrawer(){
+      if(this.openDrawer == true){
+        this.openDrawer = false
+      }else{
+        this.openDrawer = true
+      }
+    }
   },
 
   watch:{

@@ -70,11 +70,13 @@ export default {
   h2{
     color:$mediumBlue;
     font-family: "barlow-bold";
-    font-size:17px;
+    font-size:20px;
+    margin-bottom: 0;
   }
   h3{
+    margin-top:5px;
     font-family: "DMSans-Regular";
-    font-size:11px;
+    font-size:15px;
   }
   .chartComponent{
     width: 100%;
@@ -83,6 +85,7 @@ export default {
     position: relative;
     .componentSpace{
       position: relative;
+      margin-top: 25px;
       .chartSpace{
         position: relative;
         width: 70%;
@@ -617,6 +620,40 @@ export default {
             }
           }
         }
+      }
+    }
+    .chart_legend{
+      .chart_legend_txt{
+        font-family: "DMSans-Regular";
+        font-size:15px;
+        display: block;
+      }
+      .chart_legend_btn{
+        display: inline-block;
+        width: auto;
+        background-color: $deepBlue;
+        padding:2px 7px 2px 7px;
+        border-radius: 3px;
+        color:white;
+        font-family: "DMSans-Regular";
+        font-size:12px;
+        cursor: pointer;
+        margin-top: 5px;
+      }
+    }
+    .chart_drawer{
+      width: 100%;
+      overflow: hidden;
+      margin-top: 5px;
+      &.close{
+        height:0;
+      }
+      &.open{
+        height: auto;
+      }
+      .chart_drawer_text{
+        font-family: "DMSans-Regular";
+        font-size:15px;
       }
     }
   }
