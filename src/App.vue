@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <h1>Decarbonization Observatory: target-based global and national scenarios</h1>
+    <CombinedImpactChart></CombinedImpactChart>
+    <ImpactScenariosChart></ImpactScenariosChart>
     <CurrentEmissionsChart></CurrentEmissionsChart>
     <GlobalTemperatureChart></GlobalTemperatureChart>
-    <ImpactScenariosChart></ImpactScenariosChart>
-    <CombinedImpactChart></CombinedImpactChart>
   </div>
 </template>
 

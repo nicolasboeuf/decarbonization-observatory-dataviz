@@ -5,6 +5,9 @@
     <div class="componentSpace">
       <div class="chartSpace">
         <canvas id="impactScenarios_chart"></canvas>
+        <div id="nodataModale" v-if="chart&&datasets.length===0">
+          <span>No vizualisation available with this data selection</span>
+        </div>
       </div>
       <div class="controlsSpace">
         <div class="controlsWrapper">
