@@ -97,6 +97,10 @@ export default {
           height: 30%;
           top:50%;
           left:50%;
+          -moz-transform:translate(-50%,-50%);
+          -o-transform:translate(-50%,-50%);
+          -ms-transform:translate(-50%,-50%);
+          -webkit-transform:translate(-50%,-50%);
           transform:translate(-50%,-50%);
           border:2px solid $deepBlue;
           background-color: white;
@@ -119,6 +123,10 @@ export default {
           position: absolute;
           width: 90%;
           left:50%;
+          -moz-transform:translate(-50%,0);
+          -o-transform:translate(-50%,0);
+          -ms-transform:translate(-50%,0);
+          -webkit-transform:translate(-50%,0);
           transform:translate(-50%,0);
           .downloadBtn{
             width: 30px;
@@ -143,6 +151,10 @@ export default {
               width: 15px;
               top:50%;
               left:50%;
+              -moz-transform:translate(-50%,-50%);
+              -o-transform:translate(-50%,-50%);
+              -ms-transform:translate(-50%,-50%);
+              -webkit-transform:translate(-50%,-50%);
               transform:translate(-50%,-50%);
             }
           }
@@ -165,6 +177,10 @@ export default {
                 position: absolute;
                 left:65%;
                 top: 50%;
+                -moz-transform:translate(0,-5px);
+                -o-transform:translate(0,-5px);
+                -ms-transform:translate(0,-5px);
+                -webkit-transform:translate(0,-5px);
                 transform:translate(0,-5px);
                 width: 0;
                 height: 0;
@@ -241,6 +257,10 @@ export default {
                   position: absolute;
                   left:50%;
                   top:50%;
+                  -moz-transform:translate(-50%,-50%);
+                  -o-transform:translate(-50%,-50%);
+                  -ms-transform:translate(-50%,-50%);
+                  -webkit-transform:translate(-50%,-50%);
                   transform:translate(-50%,-50%);
                 }
                 &.inactive{
@@ -290,7 +310,11 @@ export default {
                   border-radius: 15px;
                   position: absolute;
                   top:50%;
-                  transform: translate(0,-50%);
+                  -moz-transform:translate(0,-50%);
+                  -o-transform:translate(0,-50%);
+                  -ms-transform:translate(0,-50%);
+                  -webkit-transform:translate(0,-50%);
+                  transform:translate(0,-50%);
                   left:2px;
                   right:auto;
                   transition:all 0.3s ease-in-out;
@@ -333,7 +357,11 @@ export default {
                       position: absolute;
                       bottom:-11px;
                       left:50%;
-                      transform:translate(-50%,0);  
+                      -moz-transform:translate(-50%,0);
+                      -o-transform:translate(-50%,0);
+                      -ms-transform:translate(-50%,0);
+                      -webkit-transform:translate(-50%,0);
+                      transform:translate(-50%,0);
                     }
 
                   }
@@ -369,6 +397,10 @@ export default {
                   width: 20px;
                   left: 15px;
                   top:50%;
+                  -moz-transform:translate(0,-50%);
+                  -o-transform:translate(0,-50%);
+                  -ms-transform:translate(0,-50%);
+                  -webkit-transform:translate(0,-50%);
                   transform:translate(0,-50%);
                 }
                 .controls_box_header_title{
@@ -450,6 +482,10 @@ export default {
                 position: absolute;
                 left:50%;
                 top:50%;
+                -moz-transform:translate(-50%,-50%);
+                -o-transform:translate(-50%,-50%);
+                -ms-transform:translate(-50%,-50%);
+                -webkit-transform:translate(-50%,-50%);
                 transform:translate(-50%,-50%);
               }
             }
@@ -519,6 +555,10 @@ export default {
                 position: absolute;
                 left:50%;
                 top:50%;
+                -moz-transform:translate(-50%,-50%);
+                -o-transform:translate(-50%,-50%);
+                -ms-transform:translate(-50%,-50%);
+                -webkit-transform:translate(-50%,-50%);
                 transform:translate(-50%,-50%);
               }
               &:hover{
@@ -531,6 +571,10 @@ export default {
                 position: absolute;
                 left:50%;
                 top:20px;
+                -moz-transform:translate(-50%0);
+                -o-transform:translate(-50%,0);
+                -ms-transform:translate(-50%,0);
+                -webkit-transform:translate(-50%,0);
                 transform:translate(-50%,0);
                 width: 150px;
                 height: auto;
@@ -582,6 +626,10 @@ export default {
                   position: absolute;
                   left:50%;
                   top:50%;
+                  -moz-transform:translate(-50%,-50%) rotate(45deg);
+                  -o-transform:translate(-50%,-50%) rotate(45deg);
+                  -ms-transform:translate(-50%,-50%) rotate(45deg);
+                  -webkit-transform:translate(-50%,-50%) rotate(45deg);
                   transform:translate(-50%,-50%) rotate(45deg);
                 }
                 &:after{
@@ -592,6 +640,10 @@ export default {
                   position: absolute;
                   left:50%;
                   top:50%;
+                   -moz-transform:translate(-50%,-50%) rotate(-45deg);
+                  -o-transform:translate(-50%,-50%) rotate(-45deg);
+                  -ms-transform:translate(-50%,-50%) rotate(-45deg);
+                  -webkit-transform:translate(-50%,-50%) rotate(-45deg);
                   transform:translate(-50%,-50%) rotate(-45deg);
                 }
               }

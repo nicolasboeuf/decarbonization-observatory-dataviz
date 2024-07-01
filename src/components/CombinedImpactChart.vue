@@ -228,7 +228,7 @@ export default {
 
             if(self.config["scenarios"][p]){
               border = self.config["scenarios"][p]["color"]
-              background = self.config["scenarios"][p]["color"].replace(",1)",",0.6)")
+              background = self.config["scenarios"][p]["color"].replace(",1)",",1)")
             }else{
               border = 'rgba(999, 999, 999, 1)'
               background = 'rgba(999, 999, 999, 1)'
