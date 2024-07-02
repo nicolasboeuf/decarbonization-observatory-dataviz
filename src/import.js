@@ -1,7 +1,7 @@
 export const getConfig = async function (store) {
 	try{
-		const dataRequest = await fetch("data/config.json")
-		//const dataRequest = await fetch("https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/config.json")
+		//const dataRequest = await fetch("data/config.json")
+		const dataRequest = await fetch("https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/config.json")
 		if(dataRequest.ok){
 			const data = await dataRequest.json()	
 			store.commit('initializeConfig',{data:data})
