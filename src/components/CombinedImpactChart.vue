@@ -306,8 +306,6 @@ export default {
 
       const byVariable = Object.groupBy(self.combinedImpactData[self.settings["data"]], ({ Variable }) => Variable);
 
-      console.log(Object.keys(byVariable["CO2eq"][0]))
-
       Object.keys(byVariable["CO2eq"][0]).forEach(function(p){
         
         if(p != "Year" && p != "Low" && p != "High" && p != "Variable"){

@@ -71,7 +71,7 @@
 
           <div class="controls_multiple_tick_container">
               
-            <div v-for="s in settings.pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)">
+            <div v-for="s in pledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)">
               <div class="tick" :style="settings.selectedPledges.includes(s)&&config['scenarios']?{backgroundColor: config['scenarios'][s]['color']}:{backgroundColor:'#fff'}">
                 <div class="tick_inner"></div>
               </div>
@@ -124,12 +124,12 @@ export default {
       filtredCountry:[],
       showDropdown: false,
       searchString:'World',
+      pledges:[],
       settings:{
         "data":"world",
         "value":"emissions",
         "variable":"CO2eq_Non-LULUCF",
         "scenario":"Low",
-        "pledges":["NDC01","NDC02","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","LTS05","LTS06","LUF01","LUF02","LUF03","N2O++","CH4++","NoGMP","selMIT"],
         "selectedPledges":["NDC01","NDC02","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","LTS05","LTS06","LUF01","LUF02","LUF03","N2O++","CH4++","NoGMP","selMIT"],
       }
     }
@@ -162,6 +162,8 @@ export default {
 
       if(self.impactScenariosData[this.settings["data"]]){
 
+        self.updatePledges()
+
         const byVariable = Object.groupBy(self.impactScenariosData[self.settings["data"]], ({ Variable }) => Variable);
         
         Object.keys(byVariable).forEach(function(Variable){
@@ -170,9 +172,6 @@ export default {
             byVariable[Variable] = byScenario
 
           })
-
-        // get Scenario from Data
-        //console.log(Object.keys(byVariable[self.settings.variable]))
 
         Object.keys(byVariable[self.settings.variable]).forEach(function(pledge){
 
@@ -222,6 +221,19 @@ export default {
       }else{
         getImpactScenariosData(store,this.settings["data"])
       }
+
+    },
+
+    updatePledges(){
+      var self = this
+
+      this.pledges = []
+
+      const byVariable = Object.groupBy(self.impactScenariosData[self.settings["data"]], ({ Variable }) => Variable);
+
+      const byScenario = Object.groupBy(byVariable["CO2eq_Non-LULUCF"], ({ Scenario }) => Scenario);
+      this.pledges = Object.keys(byScenario)
+
 
     },
 
@@ -365,7 +377,7 @@ export default {
     },
 
     selectAllPledges(){
-      this.settings.selectedPledges = this.settings.pledges
+      this.settings.selectedPledges = this.pledges
     },
 
     selectNoPledges(){
