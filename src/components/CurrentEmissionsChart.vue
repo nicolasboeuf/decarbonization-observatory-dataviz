@@ -212,7 +212,6 @@ export default {
       datasets:[],
       datasetsLabel:[],
       labels:[],
-      countriesList:["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei Darussalam","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo","Congo_the Democratic Republic of the","Cook Islands","Costa Rica","Cote d'Ivoire","Cuba","Djibouti","Dominica","Dominican Republic","EU27","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Eswatini","Ethiopia","Fiji","Gabon","Gambia","Georgia","Ghana","Grenada","Guatemala","Guinea-Bissau","Guinea","Guyana","Haiti","Honduras","Iceland","India","Indonesia","Int. Aviation","Int. Shipping","Iran, Islamic Republic of","Iraq","Israel","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea, Democratic People's Republic of","Korea, Republic of","Kuwait","Kyrgyzstan","Lao People's Democratic Republic","Lebanon","Lesotho","Liberia","Libyan Arab Jamahiriya","Liechtenstein","Macedonia, the former Yugoslav Republic of","Madagascar","Malawi","Malaysia","Maldives","Mali","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia, Federated States of","Moldova, Republic of","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Qatar","Russian Federation","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Solomon Islands","Somalia","South Africa","South Sudan","Sri Lanka","Sudan","Suriname","Switzerland","Syrian Arab Republic","Tajikistan","Tanzania_United Republic of","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela","Viet Nam","World","Yemen","Zambia","Zimbabwe"],
       filtredCountry:[],
       showDropdown: false,
       searchString:'World',
@@ -438,7 +437,7 @@ export default {
     },
 
     filterOptions() {
-      this.filtredCountry = this.countriesList.filter(option => {
+      this.filtredCountry = this.config["countries"].filter(option => {
         return option.toLowerCase().includes(this.searchString.toLowerCase());
       });
       this.showDropdown = true;
@@ -451,7 +450,7 @@ export default {
     focusInput(){
       this.searchString=""
       this.showDropdown=true
-      this.filtredCountry = this.countriesList
+      this.filtredCountry = this.config["countries"]
     },
     toggleDrawer(){
       if(this.openDrawer == true){

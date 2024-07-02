@@ -147,19 +147,18 @@ export default {
       preservedDatasets:[],
       datasetsLabel:[],
       labels:[],
-      countriesList:["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei Darussalam","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo","Congo_the Democratic Republic of the","Cook Islands","Costa Rica","Cote d'Ivoire","Cuba","Djibouti","Dominica","Dominican Republic","EU27","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Eswatini","Ethiopia","Fiji","Gabon","Gambia","Georgia","Ghana","Grenada","Guatemala","Guinea-Bissau","Guinea","Guyana","Haiti","Honduras","Iceland","India","Indonesia","Int. Aviation","Int. Shipping","Iran, Islamic Republic of","Iraq","Israel","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea, Democratic People's Republic of","Korea, Republic of","Kuwait","Kyrgyzstan","Lao People's Democratic Republic","Lebanon","Lesotho","Liberia","Libyan Arab Jamahiriya","Liechtenstein","Macedonia, the former Yugoslav Republic of","Madagascar","Malawi","Malaysia","Maldives","Mali","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia, Federated States of","Moldova, Republic of","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Qatar","Russian Federation","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Solomon Islands","Somalia","South Africa","South Sudan","Sri Lanka","Sudan","Suriname","Switzerland","Syrian Arab Republic","Tajikistan","Tanzania_United Republic of","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela","Viet Nam","World","Yemen","Zambia","Zimbabwe"],
       filtredCountry:[],
       showDropdown: false,
       searchString:'World',
+      delayedPledges:[],
+      enhancedPledges:[],
+      pledges:[],
       settings:{
         "data":"world",
         "value":"emissions",
         "variable":"CO2eq",
         "scenario":"Low",
-        "pledges":["NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"],
-        "selectedPledges":["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01"],
-        "delayedPledges":["NDC02","LTS04","LTS06"],
-        "enhancedPledges":["NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01","LUF02","LUF03"],
+        "selectedPledges":[],
         "pledgesType":"enhanced"
       }
     }
@@ -178,20 +177,15 @@ export default {
     },
     filtredPledges(){
       var pledges
-      if(this.settings.data == "world"){
-        if(this.settings.pledgesType == "enhanced"){
-          pledges = this.settings.enhancedPledges
-        }else{
-          pledges = this.settings.delayedPledges
-        }
+      
+      if(this.settings.pledgesType == "enhanced"){
+        pledges = this.enhancedPledges
       }else{
-        if(this.settings.pledgesType == "enhanced"){
-          pledges = this.settings.pledges.filter(e => e !== 'LUF01').filter(e => e !== 'LUF02').filter(e => e !== 'LUF03')
-        }else{
-          pledges = this.settings.delayedPledges
-        }
+        pledges = this.delayedPledges
       }
+     
       return pledges
+
     },
     customUrl(){
       return "https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/combined_impact/"+this.settings.data+".json"
@@ -209,6 +203,8 @@ export default {
       var self = this
 
       if(self.combinedImpactData[this.settings["data"]]){
+
+        self.updatePledges()
 
         const byVariable = Object.groupBy(self.combinedImpactData[self.settings["data"]], ({ Variable }) => Variable);
 
@@ -301,10 +297,37 @@ export default {
 
     },
 
+    updatePledges(){
+      var self = this
+
+      this.pledges = []
+      this.delayedPledges = []
+      this.enhancedPledges = []
+
+      const byVariable = Object.groupBy(self.combinedImpactData[self.settings["data"]], ({ Variable }) => Variable);
+
+      Object.keys(byVariable["CO2eq"][0]).forEach(function(p){
+        
+        if(p != "Year" && p != "Low" && p != "High" && p != "Variable"){
+          if(self.config["scenarios"][p]["type"] == "enhanced"){
+            self.enhancedPledges.push(p)
+            self.pledges.push(p)
+          }else{
+            self.delayedPledges.push(p)
+          }
+          
+        }
+
+      })
+
+    },
+
     createChart(){
       var self = this
 
       this.updateData()
+
+      this.selectAllPledges()
 
       const ctx = document.getElementById("combinedImpact_chart").getContext('2d')
       this.chart = new Chart(ctx, {
@@ -414,7 +437,7 @@ export default {
     },
 
     filterOptions() {
-      this.filtredCountry = this.countriesList.filter(option => {
+      this.filtredCountry = this.config["countries"].filter(option => {
         return option.toLowerCase().includes(this.searchString.toLowerCase());
       });
       this.showDropdown = true;
@@ -427,22 +450,22 @@ export default {
     focusInput(){
       this.searchString=""
       this.showDropdown=true
-      this.filtredCountry = this.countriesList
+      this.filtredCountry = this.config["countries"]
     },
 
     togglePledge(s){
 
-      var index = this.settings.pledges.indexOf(s)
-      var l = this.settings.pledges.length
+      var index = this.pledges.indexOf(s)
+      var l = this.pledges.length
 
       if(this.settings.selectedPledges.includes(s)){
         for(var i = l;i>=index;i--){
-          this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== this.settings.pledges[i]);
+          this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== this.pledges[i]);
         }
       }else{
         for(var j = 0;j<=index;j++){
-          if(!this.settings.selectedPledges.includes(this.settings.pledges[j])){
-            this.settings.selectedPledges.push(this.settings.pledges[j]);
+          if(!this.settings.selectedPledges.includes(this.pledges[j])){
+            this.settings.selectedPledges.push(this.pledges[j]);
             if(s == "LUF01"){
               this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF02");
               this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF03");
@@ -463,20 +486,28 @@ export default {
     togglePledgesType(type){
       if(type=="enhanced"){
         this.settings.pledgesType = "enhanced"
-        this.settings.pledges = this.settings.enhancedPledges
-        this.settings.selectedPledges = ["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01"]
+        this.pledges = this.enhancedPledges
+        this.settings.selectedPledges = this.enhancedPledges
+        this.settings.selectedPledges.unshift("Low","High")
+        this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF02");
+        this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF03");
       }else{
         this.settings.pledgesType = "delayed"
-        this.settings.pledges = this.settings.delayedPledges
-        this.settings.selectedPledges = ["Low","High","NDC02","LTS04","LTS06"]
+        this.pledges = this.delayedPledges
+        this.settings.selectedPledges = this.delayedPledges
+        this.settings.selectedPledges.unshift("Low","High")
       }
     },
 
     selectAllPledges(){
       if(this.settings.pledgesType == "enhanced"){
-        this.settings.selectedPledges = ["Low","High","NDC01","GMP01","GMP02","CH4++","N2O++","LTS01","LTS02","LTS03","LTS05","LUF01"]
+        this.settings.selectedPledges = this.enhancedPledges
+        this.settings.selectedPledges.unshift("Low","High")
+        this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF02");
+        this.settings.selectedPledges = this.settings.selectedPledges.filter(e => e !== "LUF03");
       }else{
-        this.settings.selectedPledges = ["Low","High","NDC02","LTS04","LTS06"]
+        this.settings.selectedPledges = this.delayedPledges
+        this.settings.selectedPledges.unshift("Low","High")
       }
     },
 

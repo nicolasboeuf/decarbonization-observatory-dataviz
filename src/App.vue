@@ -31,19 +31,26 @@ export default {
   },
 
   computed: {
-    
+    combinedImpactDataEndImport() {
+      return store.state.configEndImport
+    },
   },
 
   watch:{
+
+    combinedImpactDataEndImport:function(){
+
+      getCurrentEmissionsData(store,"world")
+      getGlobalTempData(store)
+      getImpactScenariosData(store,"world")
+      getCombinedImpactData(store,"world")
+
+    }
 
   },
   
   created(){
     getConfig(store)
-    getCurrentEmissionsData(store,"world")
-    getGlobalTempData(store)
-    getImpactScenariosData(store,"world")
-    getCombinedImpactData(store,"world")
   }
 
 }
