@@ -40,10 +40,10 @@ export default {
 
     combinedImpactDataEndImport:function(){
 
-      getCurrentEmissionsData(store,"world")
+      getCurrentEmissionsData(store,"World")
       getGlobalTempData(store)
-      getImpactScenariosData(store,"world")
-      getCombinedImpactData(store,"world")
+      getImpactScenariosData(store,"World")
+      getCombinedImpactData(store,"World")
 
     }
 
@@ -172,6 +172,13 @@ export default {
             .controls_title{
               font-family: "barlow-semibold";
               font-size:17px;
+              margin-bottom: 10px;
+              display: block;
+            }
+            .controls_subtitle{
+              font-family: "barlow-regular";
+              font-size:13px;
+              margin-top: -10px;
               margin-bottom: 10px;
               display: block;
             }
@@ -337,6 +344,8 @@ export default {
             .controls_multiple_tick_container{
               display: flex;
               flex-wrap: wrap;
+              flex-direction: column;
+              max-height: 170px;
               .controls_tick_container{
                 flex: 1 0 26%;
                 margin: 0px;
@@ -346,7 +355,7 @@ export default {
               }
               &.sequential{
                 .controls_tick_container{
-                  &:nth-last-child(-n+3){
+                  &:nth-last-child(-n+1){
                     .tick{
                       &:after{
                         display: none;
@@ -360,7 +369,7 @@ export default {
                       content: "";
                       width: 2px;
                       height: 10px;
-                      background-color: $lightBlue;
+                      background-color: $deepBlue;
                       position: absolute;
                       bottom:-11px;
                       left:50%;
@@ -534,9 +543,10 @@ export default {
               opacity: 0.4;
             }
             &.non-selectable{
-              pointer-events: none;
+              //pointer-events: none;
               .tick{
                 background-color: #fff;
+                border:1px dashed $deepBlue;
                 .tick_inner{
                   &:before{
                     background-color: $deepBlue;

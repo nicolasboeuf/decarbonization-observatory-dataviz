@@ -216,7 +216,7 @@ export default {
       showDropdown: false,
       searchString:'World',
       settings:{
-        "data":"world",
+        "data":"World",
         "historical":true,
         "scenario":"Low",
         "greenhouse":{"LULUCF":true,"Non-LULUCF":true,"Total":true},
@@ -369,9 +369,9 @@ export default {
                 callback: function (value) {
                   var v
                   if(value>1000000||value<-1000000){
-                    v = value/1000000+" Gtons"
+                    v = value/1000000+" Gtons/year"
                   }else if(value>1000||value<-1000){
-                    v = value/1000+" Mtons"
+                    v = value/1000+" Mtons/year"
                   }else{
                     v = value
                   }
@@ -443,7 +443,7 @@ export default {
       this.showDropdown = true;
     },
     selectOption(option) {
-      this.settings.data = option.toLowerCase();
+      this.settings.data = option;
       this.searchString = option
       this.showDropdown = false;
     },

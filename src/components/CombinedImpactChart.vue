@@ -82,7 +82,8 @@
 
         <div class="controls_box">
           
-          <span class="controls_title">Select one or more pledge(s)</span>
+          <span class="controls_title">Add one or more pledge(s)</span>
+          <span class="controls_subtitle">LUF pledges can not be added at once</span>
 
           <div class="controls_select_all_container">
             <div class="select_all_btn" @click="selectAllPledges()">Select all</div>
@@ -91,11 +92,16 @@
 
           <div class="controls_multiple_tick_container sequential">
 
-            <div class="controls_tick_container non-selectable">
+            <div class="controls_tick_container">
               <div class="tick">
                 <div class="tick_inner"></div>
               </div>
-              <span class="tick_label">Reference</span>
+              <span class="tick_label">Reference
+                <div class="info_btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg>
+                  <div class="info_modale">Description to add</div>
+                </div>
+              </span>
             </div>
               
             <div v-for="s in filtredPledges" :key="s" :class="['controls_tick_container',settings.selectedPledges.includes(s)?'':'inactive']" @click="togglePledge(s)"> 
@@ -154,7 +160,7 @@ export default {
       enhancedPledges:[],
       pledges:[],
       settings:{
-        "data":"world",
+        "data":"World",
         "value":"emissions",
         "variable":"CO2eq",
         "scenario":"Low",
@@ -377,9 +383,9 @@ export default {
                 callback: function (value) {
                   var v
                   if(value>1000000||value<-1000000){
-                    v = value/1000000+" Gtons"
+                    v = value/1000000+" Gtons/year"
                   }else if(value>1000||value<-1000){
-                    v = value/1000+" Mtons"
+                    v = value/1000+" Mtons/year"
                   }else{
                     v = value
                   }
@@ -443,7 +449,7 @@ export default {
       this.showDropdown = true;
     },
     selectOption(option) {
-      this.settings.data = (option=="World")?option.toLowerCase():option
+      this.settings.data = option
       this.searchString = option
       this.showDropdown = false;
     },
