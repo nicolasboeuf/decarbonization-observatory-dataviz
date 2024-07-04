@@ -1,7 +1,7 @@
 <template>
   <div id="currentEmissionsChart" class="chartComponent">
-    <h2>Emissions under current pledges</h2>
-    <h3>Visualize global and country-level emissions projections under current pledges</h3>
+    <h2 v-if="config['texts']" v-html="config['texts']['current-emissions']['title']"></h2>
+    <h3 v-if="config['texts']" v-html="config['texts']['current-emissions']['subtitle']"></h3>
     <div class="componentSpace">
       <div class="chartSpace">
         <canvas id="currentEmissions_chart"></canvas>
@@ -187,14 +187,14 @@
       </div>
     </div>
     <div class="chart_legend">
-      <span class="chart_legend_txt">Global and country-level emissions projections based on country-specific emissions scenarios.</span>
+      <span class="chart_legend_txt" v-if="config['texts']" v-html="config['texts']['current-emissions']['legend-short']"></span>
       <div class="chart_legend_btn" @click="toggleDrawer()">
         <span v-if="openDrawer==false">Read more</span>
         <span v-if="openDrawer==true">Read less</span>
       </div>
     </div>
     <div :class="['chart_drawer',openDrawer?'open':'close']">
-      <span class="chart_drawer_text">Country-specific scenarios of the future evolution of emissions based on national climate pledges. Red dots represent national climate pledges of each country. A simple mathematical function was applied to extend emissions scenarios from the most recent emission level to the 2030 target level, mid-century net-zero target level and beyond.</span>
+      <span class="chart_drawer_text" v-if="config['texts']" v-html="config['texts']['current-emissions']['legend-long']"></span>
     </div>
   </div>
 </template>
@@ -219,7 +219,7 @@ export default {
         "data":"World",
         "historical":true,
         "scenario":"Low",
-        "greenhouse":{"LULUCF":true,"Non-LULUCF":true,"Total":true},
+        "greenhouse":{"LULUCF":false,"Non-LULUCF":false,"Total":true},
         "individual":{"CO2eq":true,"CO2":false,"CH4":false,"N2O":false}
       },
       colors:["rgba(0,76,109,1)","rgba(0,103,138,1)","rgba(0,131,166,1)","rgba(0,161,193,1)","rgba(0,192,216,1)","rgba(0,223,237,1)","rgba(0,255,255,1)"],
@@ -243,7 +243,7 @@ export default {
       return store.state.currentEmissionsData
     },
     customUrl(){
-      return "https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/current_emissions/"+this.settings.data+".json"
+      return "https://raw.githubusercontent.com/nicolasboeuf/decarbonization-observatory-data/master/current_emissions/"+this.settings.data+".json"
     }
   },
   methods: {

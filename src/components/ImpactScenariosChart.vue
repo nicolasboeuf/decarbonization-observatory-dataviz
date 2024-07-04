@@ -1,7 +1,7 @@
 <template>
   <div id="impactScenariosChart" class="chartComponent">
-    <h2>Individual impact of each enhanced and delayed pledge</h2>
-    <h3>Visualize the individual impact of each enhanced and delayed pledge</h3>
+    <h2 v-if="config['texts']" v-html="config['texts']['individual-impact']['title']"></h2>
+    <h3 v-if="config['texts']" v-html="config['texts']['individual-impact']['subtitle']"></h3>
     <div class="componentSpace">
       <div class="chartSpace">
         <canvas id="impactScenarios_chart"></canvas>
@@ -95,14 +95,14 @@
       </div>
     </div>
     <div class="chart_legend">
-      <span class="chart_legend_txt">Visualize the impact of enhanced or delayed scenarios comparing to base</span>
+      <span class="chart_legend_txt" v-if="config['texts']" v-html="config['texts']['individual-impact']['legend-short']"></span>
       <div class="chart_legend_btn" @click="toggleDrawer()">
         <span v-if="openDrawer==false">Read more</span>
         <span v-if="openDrawer==true">Read less</span>
       </div>
     </div>
     <div :class="['chart_drawer',openDrawer?'open':'close']">
-      <span class="chart_drawer_text">Country-specific scenarios of the future evolution of emissions based on national climate pledges. Red dots represent national climate pledges of each country. A simple mathematical function was applied to extend emissions scenarios from the most recent emission level to the 2030 target level, mid-century net-zero target level and beyond.</span>
+      <span class="chart_drawer_text" v-if="config['texts']" v-html="config['texts']['individual-impact']['legend-long']"></span>
     </div>
   </div>
 </template>
@@ -147,7 +147,7 @@ export default {
       return store.state.impactScenariosData
     },
     customUrl(){
-      return "https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/impact_scenarios/"+this.settings.data+".json"
+      return "https://raw.githubusercontent.com/nicolasboeuf/decarbonization-observatory-data/master/impact_scenarios/"+this.settings.data+".json"
     }
   },
   methods: {
@@ -312,7 +312,7 @@ export default {
               label: function(tooltipItem){
                 var value
                 if(self.settings.value == "emissions"){
-                  value = parseInt(tooltipItem["value"]).toLocaleString()+"tons CO2eq"
+                  value = parseInt(tooltipItem["value"]).toLocaleString()+" kilotonnes CO2eq"
                 }else{
                   value = parseFloat(tooltipItem["value"]).toLocaleString()+" °C"
                 }

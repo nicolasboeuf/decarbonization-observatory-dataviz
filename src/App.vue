@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <h1>Decarbonization Observatory: target-based global and national scenarios</h1>
+    <div id="intro">
+      <span v-if='config["texts"]' v-html='config["texts"]["intro"]["main"]'></span>
+    </div>
     <CombinedImpactChart></CombinedImpactChart>
     <ImpactScenariosChart></ImpactScenariosChart>
     <CurrentEmissionsChart></CurrentEmissionsChart>
@@ -34,6 +37,9 @@ export default {
     combinedImpactDataEndImport() {
       return store.state.configEndImport
     },
+    config(){
+      return store.state.config
+    }
   },
 
   watch:{
@@ -68,11 +74,27 @@ export default {
     font-family: "barlow-bold";
     font-size:21px;
     background:$semiGradientDark;
-    display: inline-block;
+    width: 80%;
+    max-width: 800px;
     padding: 5px 25px 5px 25px;
     box-sizing: border-box;
     color:white;
     border-radius: 15px;
+    position: relative;
+    margin:20px auto 0;
+    text-align: center;
+  }
+  #intro{
+    width: 80%;
+    max-width: 1080px;
+    margin: 25px auto 45px;
+    background-color: $lightBlue;
+    color:$deepBlue;
+    font-family: "DMSans-Regular";
+    font-size: 18px;
+    line-height: 26px;
+    padding: 15px;
+    border-radius: 5px;
   }
   h2{
     color:$mediumBlue;
@@ -388,12 +410,16 @@ export default {
               display: flex;
               margin-bottom: 15px;
               .select_all_btn{
-                font-family: "DMSans-Regular";
+                font-family: "DMSans-Medium";
                 font-size: 14px;
                 margin-right: 10px;
                 color:black;
                 cursor: pointer;
+                
+                text-decoration: underline;
+                text-decoration-style: dotted;
                 &:hover{
+                  text-decoration-style: solid;
                   color:$deepBlue;
                 }
               }

@@ -1,7 +1,7 @@
 <template>
   <div id="combinedImpactChart" class="chartComponent">
-    <h2>Combined impact of enhanced or delayed pledges</h2>
-    <h3>Visualize the impact of combined impact of enhanced or delayed pledges on the reference scenario</h3>
+    <h2 v-if="config['texts']" v-html="config['texts']['combined-impact']['title']"></h2>
+    <h3 v-if="config['texts']" v-html="config['texts']['combined-impact']['subtitle']"></h3>
     <div class="componentSpace">
       <div class="chartSpace">
         <canvas id="combinedImpact_chart"></canvas>
@@ -126,14 +126,14 @@
       </div>
     </div>
     <div class="chart_legend">
-      <span class="chart_legend_txt">Visualize the combined impact of enhanced or delayed scenarios comparing to base</span>
+      <span class="chart_legend_txt" v-if="config['texts']" v-html="config['texts']['combined-impact']['legend-short']"></span>
       <div class="chart_legend_btn" @click="toggleDrawer()">
         <span v-if="openDrawer==false">Read more</span>
         <span v-if="openDrawer==true">Read less</span>
       </div>
     </div>
     <div :class="['chart_drawer',openDrawer?'open':'close']">
-      <span class="chart_drawer_text">Country-specific scenarios of the future evolution of emissions based on national climate pledges. Red dots represent national climate pledges of each country. A simple mathematical function was applied to extend emissions scenarios from the most recent emission level to the 2030 target level, mid-century net-zero target level and beyond.</span>
+      <span class="chart_drawer_text" v-if="config['texts']" v-html="config['texts']['combined-impact']['legend-long']"></span>
     </div>
   </div>
 </template>
@@ -194,7 +194,7 @@ export default {
 
     },
     customUrl(){
-      return "https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/combined_impact/"+this.settings.data+".json"
+      return "https://raw.githubusercontent.com/nicolasboeuf/decarbonization-observatory-data/master/combined_impact/"+this.settings.data+".json"
     }
   },
   methods: {
@@ -387,7 +387,7 @@ export default {
                   }else if(value>1000||value<-1000){
                     v = value/1000+" Mtons/year"
                   }else{
-                    v = value
+                    v = value.toLocaleString()
                   }
                   return v
                 }
@@ -405,11 +405,16 @@ export default {
               label: function(tooltipItem){
                 var value
                 if(self.settings.value == "emissions"){
-                  value = parseInt(self.preservedDatasets[tooltipItem.datasetIndex].data[tooltipItem.index]).toLocaleString()+" tonnes CO2eq"
+                  value = parseInt(self.preservedDatasets[tooltipItem.datasetIndex].data[tooltipItem.index]).toLocaleString()+" kilotonnes CO2eq"
                 }else{
                   value = parseFloat(self.preservedDatasets[tooltipItem.datasetIndex].data[tooltipItem.index]).toLocaleString()+" °C"
                 }
-                return(value)
+                if(self.preservedDatasets[tooltipItem.datasetIndex].data[tooltipItem.index]){
+                  return value
+                }else{
+                  return false
+                }
+                  
               },
               labelColor: function(tooltipItem) {
                 var c

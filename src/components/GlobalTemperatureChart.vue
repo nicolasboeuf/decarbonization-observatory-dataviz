@@ -1,7 +1,7 @@
 <template>
   <div id="globalTemperatureChart" class="chartComponent">
-    <h2>Global temperature under current pledges</h2>
-    <h3>Visualize global temperature projections under current pledges</h3>
+    <h2 v-if="config['texts']" v-html="config['texts']['global-temperature']['title']"></h2>
+    <h3 v-if="config['texts']" v-html="config['texts']['global-temperature']['subtitle']"></h3>
     <div class="componentSpace">
       <div class="chartSpace">
         <canvas id="globalTemperature_chart"></canvas>
@@ -52,14 +52,14 @@
       </div>
     </div>
     <div class="chart_legend">
-      <span class="chart_legend_txt">Global temperature projections based on country-specific emissions scenarios.</span>
+      <span class="chart_legend_txt" v-if="config['texts']" v-html="config['texts']['global-temperature']['legend-short']"></span>
       <div class="chart_legend_btn" @click="toggleDrawer()">
         <span v-if="openDrawer==false">Read more</span>
         <span v-if="openDrawer==true">Read less</span>
       </div>
     </div>
     <div :class="['chart_drawer',openDrawer?'open':'close']">
-      <span class="chart_drawer_text">Country-specific scenarios of the future evolution of emissions based on national climate pledges. Red dots represent national climate pledges of each country. A simple mathematical function was applied to extend emissions scenarios from the most recent emission level to the 2030 target level, mid-century net-zero target level and beyond.</span>
+      <span class="chart_drawer_text" v-if="config['texts']" v-html="config['texts']['global-temperature']['legend-long']"></span>
     </div>
   </div>
 </template>
@@ -97,7 +97,10 @@ export default {
       return store.state.globalTempData
     },
     customUrl(){
-      return "https://raw.githubusercontent.com/nicolasboeuf/carbon-pledges/master/public/data/global_temp/global_temp.json"
+      return "https://raw.githubusercontent.com/nicolasboeuf/decarbonization-observatory-data/master/global_temp/global_temp.json"
+    },
+    config(){
+      return store.state.config
     }
   },
 
