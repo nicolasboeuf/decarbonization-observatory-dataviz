@@ -220,7 +220,7 @@ export default {
         "historical":true,
         "scenario":"Low",
         "greenhouse":{"LULUCF":true,"Non-LULUCF":true,"Total":true},
-        "individual":{"CO2eq":true,"CO2":true,"CH4":false,"N2O":false}
+        "individual":{"CO2eq":true,"CO2":false,"CH4":false,"N2O":false}
       },
       colors:["rgba(0,76,109,1)","rgba(0,103,138,1)","rgba(0,131,166,1)","rgba(0,161,193,1)","rgba(0,192,216,1)","rgba(0,223,237,1)","rgba(0,255,255,1)"],
       bgColors:["rgba(0,76,109,0.1)","rgba(0,103,138,0.1)","rgba(0,131,166,0.1)","rgba(0,161,193,0.1)","rgba(0,192,216,0.1)","rgba(0,223,237,0.1)","rgba(0,255,255,0.1)"],

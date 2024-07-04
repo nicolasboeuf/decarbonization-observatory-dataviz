@@ -130,7 +130,7 @@ export default {
         "value":"emissions",
         "variable":"CO2eq_Non-LULUCF",
         "scenario":"Low",
-        "selectedPledges":["NDC01","NDC02","GMP01","GMP02","LTS01","LTS02","LTS03","LTS04","LTS05","LTS06","LUF01","LUF02","LUF03","N2O++","CH4++","NoGMP","selMIT"],
+        "selectedPledges":["N2O++","CH4++"],
       }
     }
   },
@@ -173,7 +173,7 @@ export default {
 
           })
 
-        Object.keys(byVariable[self.settings.variable]).forEach(function(pledge){
+        Object.keys(byVariable[self.settings.variable]).forEach(function(pledge,j){
 
           if(self.settings.selectedPledges.includes(pledge)){
 
@@ -198,7 +198,8 @@ export default {
                 pointBackgroundColor: 'rgba(0, 0, 0, 0)',
                 pointBorderColor: 'rgba(0, 0, 0, 0)',
                 pointHoverRadius: 15,
-                fill:"origin"
+                fill:"origin",
+                order:-j
               }
 
             byVariable[self.settings.variable][pledge].forEach(function(item){
