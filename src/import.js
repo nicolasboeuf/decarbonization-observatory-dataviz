@@ -3,7 +3,7 @@ var baseurl = "https://raw.githubusercontent.com/nicolasboeuf/decarbonization-ob
 
 export const getConfig = async function (store) {
 	try{
-		//const dataRequest = await fetch("data/config.json")
+		// const dataRequest = await fetch("data/config.json")
 		const dataRequest = await fetch(baseurl+"config.json")
 		if(dataRequest.ok){
 			const data = await dataRequest.json()	

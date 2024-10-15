@@ -218,8 +218,8 @@ export default {
       settings:{
         "data":"World",
         "historical":true,
-        "scenario":"Low",
-        "greenhouse":{"LULUCF":false,"Non-LULUCF":false,"Total":true},
+        "scenario":"Unconditional",
+        "greenhouse":{"LULUCF":false,"Non-LULUCF":true,"Total":false},
         "individual":{"CO2eq":true,"CO2":false,"CH4":false,"N2O":false}
       },
       colors:["rgba(0,76,109,1)","rgba(0,103,138,1)","rgba(0,131,166,1)","rgba(0,161,193,1)","rgba(0,192,216,1)","rgba(0,223,237,1)","rgba(0,255,255,1)"],
@@ -295,11 +295,13 @@ export default {
                 }
 
               byCond[self.settings.scenario][Sector][Pollutant].forEach(function(item){
-                if (self.settings.historical == false && item["Year"]<2023){
-                  return false
-                }else{
-                  if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
-                  dataset["data"].push(parseFloat(item["Emissions"]))  
+                if(item["Bound"]=="UB"){
+                  if (self.settings.historical == false && item["Year"]<2023){
+                    return false
+                  }else{
+                    if(!self.labels.includes(item["Year"])){ self.labels.push(item["Year"]) }
+                    dataset["data"].push(parseFloat(item["Emissions"]))  
+                  }
                 }
                 
               })

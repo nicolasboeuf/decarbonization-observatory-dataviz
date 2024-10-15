@@ -9,7 +9,7 @@ module.exports = {
   },
   filenameHashing: false,
   productionSourceMap: false,
-  publicPath: '/carbon-pledges-preprod/',
+  //publicPath: '/carbon-pledges-preprod/',
   chainWebpack:
     config => {
       config.optimization.delete('splitChunks')
