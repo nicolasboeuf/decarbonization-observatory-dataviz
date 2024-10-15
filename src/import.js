@@ -1,4 +1,5 @@
-var baseurl = "https://raw.githubusercontent.com/nicolasboeuf/decarbonization-observatory-data/master/"
+//var baseurl = "https://raw.githubusercontent.com/nicolasboeuf/decarbonization-observatory-data/master/"
+var baseurl = "https://raw.githubusercontent.com/nicolasboeuf/decarbonization-observatory-data-preprod/master/"
 
 export const getConfig = async function (store) {
 	try{
