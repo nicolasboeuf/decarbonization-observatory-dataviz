@@ -50,18 +50,38 @@
 
             <span class="controls_title">Reference scenario</span>
 
-            <div :class="['controls_radio_container',settings.scenario=='High'?'inactive':'']" @click="settings.scenario='Low'">
+            <div :class="['controls_radio_container',settings.scenario=='Conditional'?'inactive':'']" @click="settings.scenario='Unconditional'">
               <div class="radio">
                 <div class="radio_inner"></div>
               </div>
               <span class="radio_label">Unconditional near-term targets and net-zero targets</span>
             </div>
 
-            <div :class="['controls_radio_container',settings.scenario=='Low'?'inactive':'']" @click="settings.scenario='High'">
+            <div :class="['controls_radio_container',settings.scenario=='Unconditional'?'inactive':'']" @click="settings.scenario='Conditional'">
               <div class="radio">
                 <div class="radio_inner"></div>
               </div>
               <span class="radio_label">Conditional near-term targets and net-zero targets</span>
+            </div>
+
+          </div>
+
+          <div class="controls_box">
+
+            <span class="controls_title">Bound</span>
+
+            <div :class="['controls_radio_container',settings.bound=='LB'?'inactive':'']" @click="settings.bound='UB'">
+              <div class="radio">
+                <div class="radio_inner"></div>
+              </div>
+              <span class="radio_label">Upper bound</span>
+            </div>
+
+            <div :class="['controls_radio_container',settings.bound=='UB'?'inactive':'']" @click="settings.bound='LB'">
+              <div class="radio">
+                <div class="radio_inner"></div>
+              </div>
+              <span class="radio_label">Lower bound</span>
             </div>
 
           </div>
@@ -219,6 +239,7 @@ export default {
         "data":"World",
         "historical":true,
         "scenario":"Unconditional",
+        "bound":"UB",
         "greenhouse":{"LULUCF":false,"Non-LULUCF":true,"Total":false},
         "individual":{"CO2eq":true,"CO2":false,"CH4":false,"N2O":false}
       },
@@ -295,7 +316,7 @@ export default {
                 }
 
               byCond[self.settings.scenario][Sector][Pollutant].forEach(function(item){
-                if(item["Bound"]=="UB"){
+                if(item["Bound"]==self.settings.bound){
                   if (self.settings.historical == false && item["Year"]<2023){
                     return false
                   }else{
